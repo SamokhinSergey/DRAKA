@@ -752,6 +752,13 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     /// </summary>
     public void AI_StopCrouch()
     {
+        // Do not force-exit crouch while an attack is being performed,
+        // otherwise attack visuals can be overridden by idle.
+        if (isAttacking)
+        {
+            return;
+        }
+
         if (!isCrouching)
         {
             return;
@@ -774,6 +781,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
 
         if (isCrouching)
         {
+            animator.SetBool("Crouch", true);
             StartCoroutine(PerformAttack(crouchAttackAnimation, "crouch"));
         }
         else
