@@ -36,6 +36,22 @@ public class DynamicCameraController : MonoBehaviour
     private float savedOrthoSize;
     private bool hasSavedState = false;
     private Coroutine cinematicRestoreCoroutine;
+    private Quaternion baseRotation;
+
+    [Header("Impact FX")]
+    public float impactShakeMagnitude = 0.14f;
+    public float impactShakeDuration = 0.22f;
+    public float impactGlitchMagnitude = 0.08f;
+    public float impactGlitchDuration = 0.14f;
+    public float impactRollDegrees = 1.2f;
+    public float impactSizeJitter = 0.04f;
+
+    private float impactShakeEndsAt = -1f;
+    private float impactGlitchEndsAt = -1f;
+    private float impactShakeMagRuntime = 0f;
+    private float impactGlitchMagRuntime = 0f;
+    private float impactRollRuntime = 0f;
+    private float impactSizeJitterRuntime = 0f;
 
     void Start()
     {
@@ -58,6 +74,20 @@ public class DynamicCameraController : MonoBehaviour
         {
             busController = FindAnyObjectByType<BusCornerRevealController>();
         }
+
+        baseRotation = transform.rotation;
+    }
+
+    public void TriggerImpact(float shakeScale = 1f, float glitchScale = 1f)
+    {
+        impactShakeMagRuntime = Mathf.Max(0f, impactShakeMagnitude * shakeScale);
+        impactGlitchMagRuntime = Mathf.Max(0f, impactGlitchMagnitude * glitchScale);
+        impactRollRuntime = Mathf.Max(0f, impactRollDegrees * glitchScale);
+        impactSizeJitterRuntime = Mathf.Max(0f, impactSizeJitter * glitchScale);
+
+        float now = Time.unscaledTime;
+        impactShakeEndsAt = now + impactShakeDuration;
+        impactGlitchEndsAt = now + impactGlitchDuration;
     }
 
     /// <summary>
@@ -138,8 +168,11 @@ public class DynamicCameraController : MonoBehaviour
             );
 
             float t = Mathf.Clamp01(Time.unscaledDeltaTime * cinematicLerpSpeed);
-            transform.position = Vector3.Lerp(transform.position, targetPos, t);
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, cinematicZoomSize, t);
+            Vector3 cinematicPos = Vector3.Lerp(transform.position, targetPos, t);
+            float cinematicSize = Mathf.Lerp(cam.orthographicSize, cinematicZoomSize, t);
+            ApplyImpactFx(ref cinematicPos, ref cinematicSize);
+            transform.position = cinematicPos;
+            cam.orthographicSize = cinematicSize;
             return;
         }
 
@@ -181,10 +214,13 @@ public class DynamicCameraController : MonoBehaviour
         float clampedY = Mathf.Clamp(middlePoint.y, bottomBound - extraHeight + targetSize, topBound + extraHeight - targetSize);
 
         // Set the camera position
-        transform.position = new Vector3(middlePoint.x, clampedY + clampedYcoef, transform.position.z);
+        Vector3 finalPos = new Vector3(middlePoint.x, clampedY + clampedYcoef, transform.position.z);
 
         // Smoothly adjust the camera size
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+        float finalSize = Mathf.Lerp(cam.orthographicSize, targetSize, Time.deltaTime * zoomSpeed);
+        ApplyImpactFx(ref finalPos, ref finalSize);
+        transform.position = finalPos;
+        cam.orthographicSize = finalSize;
     }
 
     private Bounds GetPlayerBounds(Transform player, BoxCollider collider)
@@ -262,5 +298,36 @@ public class DynamicCameraController : MonoBehaviour
         hasSavedState = false;
         cinematicActive = false;
         cinematicRestoreCoroutine = null;
+    }
+
+    private void ApplyImpactFx(ref Vector3 targetPos, ref float targetSize)
+    {
+        float now = Time.unscaledTime;
+        bool hasShake = now < impactShakeEndsAt;
+        bool hasGlitch = now < impactGlitchEndsAt;
+
+        if (hasShake)
+        {
+            float k = Mathf.Clamp01((impactShakeEndsAt - now) / Mathf.Max(0.0001f, impactShakeDuration));
+            float mag = impactShakeMagRuntime * k;
+            targetPos.x += Random.Range(-mag, mag);
+            targetPos.y += Random.Range(-mag, mag);
+        }
+
+        if (hasGlitch)
+        {
+            float k = Mathf.Clamp01((impactGlitchEndsAt - now) / Mathf.Max(0.0001f, impactGlitchDuration));
+            float g = impactGlitchMagRuntime * k;
+            targetPos.x += Random.Range(-g, g);
+            targetPos.y += Random.Range(-g, g);
+
+            targetSize = Mathf.Max(0.1f, targetSize + Random.Range(-impactSizeJitterRuntime, impactSizeJitterRuntime) * k);
+            float roll = Random.Range(-impactRollRuntime, impactRollRuntime) * k;
+            transform.rotation = baseRotation * Quaternion.Euler(0f, 0f, roll);
+        }
+        else
+        {
+            transform.rotation = baseRotation;
+        }
     }
 }
