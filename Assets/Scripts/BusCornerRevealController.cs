@@ -112,6 +112,7 @@ public class BusCornerRevealController : MonoBehaviour
     private GameObject arrowObject;
     private SpriteRenderer arrowRenderer;
     private Coroutine arrowBlinkRoutine;
+    private Transform forcedBoardRequester;
 
     private enum BusSide
     {
@@ -120,6 +121,8 @@ public class BusCornerRevealController : MonoBehaviour
     }
 
     private BusSide currentSide = BusSide.Left;
+
+    public bool IsTransportInProgress => flowState == BusFlowState.Transporting;
 
     private void Awake()
     {
@@ -138,6 +141,40 @@ public class BusCornerRevealController : MonoBehaviour
         SetBusX(hiddenLeftX);
         SetFacing(BusSide.Left);
         velocityX = 0f;
+    }
+
+    public bool AI_RequestBoarding(Transform requester)
+    {
+        if (requester == null)
+        {
+            return false;
+        }
+
+        if (flowState != BusFlowState.WaitingBoardInput)
+        {
+            return false;
+        }
+
+        Transform candidate = currentCorneredPlayer;
+        if (candidate == null)
+        {
+            if (currentCornerSide == BusSide.Left)
+            {
+                TryGetCorneredPlayerInLeftCorner(out candidate);
+            }
+            else
+            {
+                TryGetCorneredPlayerInRightCorner(out candidate);
+            }
+        }
+
+        if (candidate == null || requester != candidate)
+        {
+            return false;
+        }
+
+        forcedBoardRequester = requester;
+        return true;
     }
 
     private void Update()
@@ -221,6 +258,7 @@ public class BusCornerRevealController : MonoBehaviour
         if (!shouldReveal)
         {
             brakeFxPlayed = false;
+            forcedBoardRequester = null;
             if (brakeFxCoroutine != null)
             {
                 StopCoroutine(brakeFxCoroutine);
@@ -255,6 +293,7 @@ public class BusCornerRevealController : MonoBehaviour
         else if (flowState == BusFlowState.WaitingBoardInput)
         {
             flowState = BusFlowState.Idle;
+            forcedBoardRequester = null;
         }
 
         if (shouldReveal && reachedReveal && !brakeFxPlayed)
@@ -827,10 +866,18 @@ public class BusCornerRevealController : MonoBehaviour
 
         if (!TryConsumeBoardInput(candidate))
         {
+            if (forcedBoardRequester != null && forcedBoardRequester == candidate)
+            {
+                boardingPlayer = candidate;
+                forcedBoardRequester = null;
+                return true;
+            }
+
             return false;
         }
 
         boardingPlayer = candidate;
+        forcedBoardRequester = null;
         return true;
     }
 
@@ -838,6 +885,7 @@ public class BusCornerRevealController : MonoBehaviour
     {
         flowState = BusFlowState.Transporting;
         currentCorneredPlayer = null;
+        forcedBoardRequester = null;
         HideArrow();
 
         if (brakeFxCoroutine != null)

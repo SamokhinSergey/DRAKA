@@ -91,12 +91,32 @@ public class AIPlayerController : MonoBehaviour
     [Range(0f, 1f)]
     public float specialChance = 0.25f;
 
+    [Header("Bus Escape")]
+    [Tooltip("Enable AI usage of bus escape mechanic.")]
+    public bool allowBusEscape = true;
+    [Tooltip("Health percentage threshold to prefer bus usage.")]
+    [Range(0f, 1f)]
+    public float busLowHealthThreshold = 0.4f;
+    [Tooltip("Fatigue percentage threshold for Babushka to prefer bus usage.")]
+    [Range(0f, 1f)]
+    public float busHighFatigueThreshold = 0.75f;
+    [Tooltip("Random chance per check to use bus even without urgent condition.")]
+    [Range(0f, 1f)]
+    public float busRandomEscapeChance = 0.12f;
+    [Tooltip("How often AI evaluates bus usage while cornered (seconds).")]
+    public float busCheckInterval = 0.3f;
+    [Tooltip("Minimum seconds between successful/attempted bus requests.")]
+    public float busAttemptCooldown = 1.2f;
+
     private bool _isActing;
     private float _nextDecisionTime;
     private Vector2 _smoothedMove;
     private float _retreatUntilTime;
     private float _nextRetreatAllowedTime;
     private float _crouchUntilTime;
+    private BusCornerRevealController _busController;
+    private float _nextBusCheckTime;
+    private float _nextBusAttemptTime;
 
 private void Reset()
     {
@@ -188,6 +208,11 @@ private void Update()
             strategy.UpdateStrategy();
         }
 
+        if (allowBusEscape)
+        {
+            UpdateBusEscape();
+        }
+
         UpdateThreatResponses();
         UpdateMovement();
 
@@ -201,6 +226,114 @@ private void Update()
             _nextDecisionTime = Time.time + decisionCooldown;
             StartCoroutine(DecideAction());
         }
+    }
+
+    private void UpdateBusEscape()
+    {
+        if (Time.time < _nextBusCheckTime)
+        {
+            return;
+        }
+        _nextBusCheckTime = Time.time + Mathf.Max(0.05f, busCheckInterval);
+
+        if (_busController == null)
+        {
+            _busController = FindAnyObjectByType<BusCornerRevealController>();
+            if (_busController == null)
+            {
+                return;
+            }
+        }
+
+        if (_busController.IsTransportInProgress)
+        {
+            return;
+        }
+
+        if (Time.time < _nextBusAttemptTime)
+        {
+            return;
+        }
+
+        if (!IsSelfCorneredAndPressured())
+        {
+            return;
+        }
+
+        bool shouldUseBus = false;
+
+        float health01 = Mathf.Clamp01(self.GetHealth() / 100f);
+        if (health01 <= busLowHealthThreshold)
+        {
+            shouldUseBus = true;
+        }
+
+        if (self.isCursed)
+        {
+            shouldUseBus = true;
+        }
+
+        if (self.fatigueSystem != null && self.characterName.ToLower().Contains("babushka"))
+        {
+            float fatigue01 = self.fatigueSystem.maxFatigue > 0f
+                ? Mathf.Clamp01(self.fatigueSystem.currentFatigue / self.fatigueSystem.maxFatigue)
+                : 0f;
+            if (fatigue01 >= busHighFatigueThreshold)
+            {
+                shouldUseBus = true;
+            }
+        }
+
+        if (!shouldUseBus && Random.value < busRandomEscapeChance)
+        {
+            shouldUseBus = true;
+        }
+
+        if (!shouldUseBus)
+        {
+            return;
+        }
+
+        bool requested = _busController.AI_RequestBoarding(self.transform);
+        _nextBusAttemptTime = Time.time + Mathf.Max(0.1f, busAttemptCooldown);
+
+        if (requested)
+        {
+            // Stop conflicting action intent when boarding starts.
+            self.AI_StopMove();
+            self.AI_StopBlock();
+            _retreatUntilTime = 0f;
+        }
+    }
+
+    private bool IsSelfCorneredAndPressured()
+    {
+        Vector3 toOpponent = opponent.transform.position - self.transform.position;
+        toOpponent.y = 0f;
+        float distance = toOpponent.magnitude;
+        if (distance > 2.6f)
+        {
+            return false;
+        }
+
+        bool nearLeft = self.transform.position.x <= -9f;
+        bool nearRight = self.transform.position.x >= 9f;
+        if (!nearLeft && !nearRight)
+        {
+            return false;
+        }
+
+        if (nearLeft && opponent.transform.position.x <= self.transform.position.x)
+        {
+            return false;
+        }
+
+        if (nearRight && opponent.transform.position.x >= self.transform.position.x)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private void UpdateThreatResponses()
