@@ -117,6 +117,8 @@ public class AIPlayerController : MonoBehaviour
     private BusCornerRevealController _busController;
     private float _nextBusCheckTime;
     private float _nextBusAttemptTime;
+    private Vector3 _lastSelfPos;
+    private float _postBusReorientUntil;
 
 private void Reset()
     {
@@ -193,6 +195,8 @@ private void Update()
             self.AI_StopMove();
             return;
         }
+
+        DetectBusRelocationAndResetIntent();
 
         // Initialize strategy if not done yet
         if (strategy != null && (strategy.aiController == null || strategy.self == null))
@@ -387,7 +391,21 @@ private void UpdateMovement()
         Vector2 desiredMove = Vector2.zero;
         Vector3 dir3 = distance > 0.0001f ? (toOpponent / distance) : Vector3.zero;
 
+        // Immediately after bus drop-off, re-orient by approaching opponent
+        // and cancel any stale retreat intent from pre-transport state.
+        if (Time.time < _postBusReorientUntil)
+        {
+            if (distance > 0.0001f)
+            {
+                desiredMove = new Vector2(dir3.x, dir3.z);
+            }
+            else
+            {
+                desiredMove = Vector2.zero;
+            }
+        }
         // If crouching to dodge projectile, don't move.
+        else
         if (self.isCrouching)
         {
             desiredMove = Vector2.zero;
@@ -424,6 +442,35 @@ private void UpdateMovement()
         float t = 1f - Mathf.Exp(-moveSmoothing * Time.deltaTime);
         _smoothedMove = Vector2.Lerp(_smoothedMove, desiredMove, t);
         self.AI_SetMove(_smoothedMove);
+    }
+
+    private void DetectBusRelocationAndResetIntent()
+    {
+        if (self == null)
+        {
+            return;
+        }
+
+        if (_lastSelfPos == Vector3.zero)
+        {
+            _lastSelfPos = self.transform.position;
+            return;
+        }
+
+        // Bus transfer causes a large position jump in one frame.
+        float deltaX = Mathf.Abs(self.transform.position.x - _lastSelfPos.x);
+        if (deltaX >= 4.0f)
+        {
+            _retreatUntilTime = 0f;
+            _nextRetreatAllowedTime = Time.time + 0.7f;
+            _crouchUntilTime = 0f;
+            _smoothedMove = Vector2.zero;
+            _postBusReorientUntil = Time.time + 0.8f;
+            self.AI_StopBlock();
+            self.AI_StopCrouch();
+        }
+
+        _lastSelfPos = self.transform.position;
     }
 
 private IEnumerator DecideAction()

@@ -799,7 +799,17 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
             return;
         }
 
-        StartCoroutine(PerformAttack(lowerAttackAnimation, "lower"));
+        AnimationClip clipToUse = lowerAttackAnimation;
+        if (!CanPlayClipOnAnimator(clipToUse))
+        {
+            // Fallback when dedicated lower-attack state is missing.
+            clipToUse = CanPlayClipOnAnimator(upperAttackAnimation) ? upperAttackAnimation : clipToUse;
+        }
+
+        if (clipToUse != null)
+        {
+            StartCoroutine(PerformAttack(clipToUse, "lower"));
+        }
     }
 
     private IEnumerator AI_PerformCrouchAttack()
