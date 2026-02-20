@@ -1401,8 +1401,11 @@ MonoBehaviour:
   attackRadius: 1.3
   animator: {fileID: 450557142}
   highKickSound: {fileID: 8300000, guid: d3872977b75b2bf4ebfbd300271a84aa, type: 3}
+  glitchImpactSound: {fileID: 8300000, guid: 6527995baf69eee469ed39e2253e16ed, type: 3}
   highKickVolume: 1
+  glitchImpactVolume: 0.82
   highKickPitch: 1.08
+  glitchImpactPitch: 1.28
   highKickDistortion: 0.86
   highKickDistortionDuration: 0.22
   impactShakeScale: 1.8
@@ -2533,6 +2536,12 @@ MonoBehaviour:
   impactGlitchDuration: 2.1
   impactRollDegrees: 7
   impactSizeJitter: 0.18
+  impactNoiseMaxAlpha: 0.62
+  impactNoiseResolution: 96
+  impactStarCount: 24
+  impactStarBurstRadius: 320
+  impactStarLifeMin: 0.8
+  impactStarLifeMax: 1.7
 --- !u!1 &555431871
 GameObject:
   m_ObjectHideFlags: 0

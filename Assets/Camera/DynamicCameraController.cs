@@ -2,6 +2,8 @@
 // This was created with the help of Assistant, a Unity Artificial Intelligence product.
 
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class DynamicCameraController : MonoBehaviour
 {
@@ -52,6 +54,20 @@ public class DynamicCameraController : MonoBehaviour
     private float impactGlitchMagRuntime = 0f;
     private float impactRollRuntime = 0f;
     private float impactSizeJitterRuntime = 0f;
+    private Coroutine impactOverlayCoroutine;
+    private Canvas impactCanvas;
+    private RawImage impactNoiseImage;
+    private RectTransform impactStarRoot;
+    private Texture2D impactNoiseTexture;
+    private Sprite impactStarSprite;
+
+    [Header("Impact Overlay FX")]
+    public float impactNoiseMaxAlpha = 0.45f;
+    public int impactNoiseResolution = 64;
+    public int impactStarCount = 16;
+    public float impactStarBurstRadius = 260f;
+    public float impactStarLifeMin = 0.65f;
+    public float impactStarLifeMax = 1.35f;
 
     void Start()
     {
@@ -88,6 +104,12 @@ public class DynamicCameraController : MonoBehaviour
         float now = Time.unscaledTime;
         impactShakeEndsAt = now + impactShakeDuration;
         impactGlitchEndsAt = now + impactGlitchDuration;
+
+        if (impactOverlayCoroutine != null)
+        {
+            StopCoroutine(impactOverlayCoroutine);
+        }
+        impactOverlayCoroutine = StartCoroutine(PlayImpactOverlayFx(Mathf.Max(impactShakeDuration, impactGlitchDuration)));
     }
 
     /// <summary>
@@ -328,6 +350,183 @@ public class DynamicCameraController : MonoBehaviour
         else
         {
             transform.rotation = baseRotation;
+        }
+    }
+
+    private IEnumerator PlayImpactOverlayFx(float totalDuration)
+    {
+        EnsureImpactOverlay();
+        if (impactNoiseImage == null || impactStarRoot == null)
+        {
+            yield break;
+        }
+
+        SpawnImpactStars();
+
+        float elapsed = 0f;
+        float duration = Mathf.Max(0.1f, totalDuration);
+        float noiseTick = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = 1f - (elapsed / duration);
+            float flicker = Random.Range(0.55f, 1f);
+            impactNoiseImage.color = new Color(1f, 1f, 1f, impactNoiseMaxAlpha * t * flicker);
+
+            noiseTick += Time.unscaledDeltaTime;
+            if (noiseTick >= 0.03f)
+            {
+                noiseTick = 0f;
+                RefreshNoiseTexture();
+            }
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        impactNoiseImage.color = new Color(1f, 1f, 1f, 0f);
+        impactOverlayCoroutine = null;
+    }
+
+    private void EnsureImpactOverlay()
+    {
+        if (impactCanvas != null && impactNoiseImage != null && impactStarRoot != null)
+        {
+            return;
+        }
+
+        GameObject canvasGo = new GameObject("ImpactOverlayCanvas");
+        impactCanvas = canvasGo.AddComponent<Canvas>();
+        impactCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        impactCanvas.sortingOrder = 5000;
+        canvasGo.AddComponent<CanvasScaler>();
+        canvasGo.AddComponent<GraphicRaycaster>();
+        DontDestroyOnLoad(canvasGo);
+
+        GameObject noiseGo = new GameObject("ImpactNoise");
+        noiseGo.transform.SetParent(canvasGo.transform, false);
+        impactNoiseImage = noiseGo.AddComponent<RawImage>();
+        impactNoiseImage.raycastTarget = false;
+        RectTransform noiseRt = impactNoiseImage.rectTransform;
+        noiseRt.anchorMin = Vector2.zero;
+        noiseRt.anchorMax = Vector2.one;
+        noiseRt.offsetMin = Vector2.zero;
+        noiseRt.offsetMax = Vector2.zero;
+
+        impactStarRoot = new GameObject("ImpactStars").AddComponent<RectTransform>();
+        impactStarRoot.SetParent(canvasGo.transform, false);
+        impactStarRoot.anchorMin = Vector2.zero;
+        impactStarRoot.anchorMax = Vector2.one;
+        impactStarRoot.offsetMin = Vector2.zero;
+        impactStarRoot.offsetMax = Vector2.zero;
+
+        CreateNoiseTexture();
+        CreateStarSprite();
+    }
+
+    private void CreateNoiseTexture()
+    {
+        int size = Mathf.Clamp(impactNoiseResolution, 16, 256);
+        impactNoiseTexture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        impactNoiseTexture.filterMode = FilterMode.Point;
+        impactNoiseTexture.wrapMode = TextureWrapMode.Repeat;
+        impactNoiseImage.texture = impactNoiseTexture;
+        RefreshNoiseTexture();
+    }
+
+    private void RefreshNoiseTexture()
+    {
+        if (impactNoiseTexture == null)
+        {
+            return;
+        }
+
+        int w = impactNoiseTexture.width;
+        int h = impactNoiseTexture.height;
+        Color32[] pixels = new Color32[w * h];
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            byte v = (byte)Random.Range(35, 255);
+            pixels[i] = new Color32(v, v, v, 255);
+        }
+        impactNoiseTexture.SetPixels32(pixels);
+        impactNoiseTexture.Apply(false, false);
+    }
+
+    private void CreateStarSprite()
+    {
+        const int size = 16;
+        Texture2D tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        tex.filterMode = FilterMode.Bilinear;
+        tex.wrapMode = TextureWrapMode.Clamp;
+
+        Vector2 c = new Vector2((size - 1) * 0.5f, (size - 1) * 0.5f);
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                float dx = Mathf.Abs(x - c.x);
+                float dy = Mathf.Abs(y - c.y);
+                float cross = Mathf.Max(1f - (dx / 1.8f), 1f - (dy / 1.8f));
+                float diag = Mathf.Max(1f - (Mathf.Abs(dx - dy) / 1.5f), 0f) * 0.65f;
+                float a = Mathf.Clamp01(Mathf.Max(cross, diag) - Mathf.Max(dx, dy) * 0.06f);
+                tex.SetPixel(x, y, new Color(1f, 0.98f, 0.7f, a));
+            }
+        }
+        tex.Apply(false, false);
+        impactStarSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+    }
+
+    private void SpawnImpactStars()
+    {
+        if (impactStarRoot == null || impactStarSprite == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < impactStarCount; i++)
+        {
+            GameObject starGo = new GameObject($"ImpactStar_{i}");
+            starGo.transform.SetParent(impactStarRoot, false);
+            Image img = starGo.AddComponent<Image>();
+            img.raycastTarget = false;
+            img.sprite = impactStarSprite;
+
+            RectTransform rt = img.rectTransform;
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = Random.insideUnitCircle * (impactStarBurstRadius * 0.35f);
+            float size = Random.Range(22f, 44f);
+            rt.sizeDelta = new Vector2(size, size);
+            rt.localRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+
+            Vector2 drift = Random.insideUnitCircle.normalized * Random.Range(70f, impactStarBurstRadius);
+            float life = Random.Range(impactStarLifeMin, impactStarLifeMax);
+            StartCoroutine(AnimateImpactStar(rt, img, drift, life));
+        }
+    }
+
+    private IEnumerator AnimateImpactStar(RectTransform rt, Image img, Vector2 drift, float life)
+    {
+        float elapsed = 0f;
+        Vector2 start = rt.anchoredPosition;
+        Color c = img.color;
+
+        while (elapsed < life)
+        {
+            float t = elapsed / life;
+            float ease = 1f - Mathf.Pow(1f - t, 2f);
+            rt.anchoredPosition = start + drift * ease;
+            float scale = Mathf.Lerp(1.25f, 0.2f, t);
+            rt.localScale = new Vector3(scale, scale, 1f);
+            img.color = new Color(c.r, c.g, c.b, 1f - t);
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (rt != null)
+        {
+            Destroy(rt.gameObject);
         }
     }
 }
