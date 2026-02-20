@@ -8,6 +8,7 @@ TagManager:
   - damage_obect
   - damage_object
   - wall
+  - Transport
   layers:
   - Default
   - TransparentFX
