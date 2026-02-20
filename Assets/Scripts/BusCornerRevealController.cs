@@ -816,48 +816,40 @@ public class BusCornerRevealController : MonoBehaviour
             return false;
         }
 
-        // Prefer players that are physically at the active corner.
-        for (int i = 0; i < players.Length; i++)
+        // Strict rule: only the currently cornered player may board.
+        Transform candidate = currentCorneredPlayer;
+        if (candidate == null)
         {
-            Transform p = players[i];
-            if (p == null)
+            if (currentCornerSide == BusSide.Left)
             {
-                continue;
+                TryGetCorneredPlayerInLeftCorner(out candidate);
             }
-
-            bool nearActiveCorner = currentCornerSide == BusSide.Left
-                ? p.position.x <= leftCornerXThreshold
-                : p.position.x >= rightCornerXThreshold;
-
-            if (!nearActiveCorner)
+            else
             {
-                continue;
-            }
-
-            if (TryConsumeBoardInput(p))
-            {
-                boardingPlayer = p;
-                return true;
+                TryGetCorneredPlayerInRightCorner(out candidate);
             }
         }
 
-        // Fallback: if thresholds are noisy, allow any player's explicit up press.
-        for (int i = 0; i < players.Length; i++)
+        if (candidate == null)
         {
-            Transform p = players[i];
-            if (p == null)
-            {
-                continue;
-            }
-
-            if (TryConsumeBoardInput(p))
-            {
-                boardingPlayer = p;
-                return true;
-            }
+            return false;
         }
 
-        return false;
+        bool stillAtActiveCorner = currentCornerSide == BusSide.Left
+            ? candidate.position.x <= leftCornerXThreshold
+            : candidate.position.x >= rightCornerXThreshold;
+        if (!stillAtActiveCorner)
+        {
+            return false;
+        }
+
+        if (!TryConsumeBoardInput(candidate))
+        {
+            return false;
+        }
+
+        boardingPlayer = candidate;
+        return true;
     }
 
     private IEnumerator TransportPassengerRoutine(Transform passenger, BusSide fromSide)
