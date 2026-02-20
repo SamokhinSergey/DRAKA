@@ -50,6 +50,14 @@ public class BusCornerRevealController : MonoBehaviour
     [Header("Door Sprites")]
     [SerializeField] private Sprite doorsClosedSprite;
     [SerializeField] private Sprite doorsOpenSprite;
+    [SerializeField] private Sprite arrowSprite;
+
+    [Header("Arrow")]
+    [SerializeField] private float arrowYOffset = 0.55f;
+    [SerializeField] private float arrowScale = 0.12f;
+    [SerializeField] private float arrowBlinkPeriod = 0.35f;
+    [SerializeField] private int arrowSortingOrder = 120;
+    [SerializeField] private float arrowZOffset = -0.35f;
 
     [Header("Transport")]
     [SerializeField] private float leftTransportStopX = -12.71f;
@@ -101,6 +109,9 @@ public class BusCornerRevealController : MonoBehaviour
     private PassengerSnapshot passengerSnapshot;
     private bool playedStartSfxForHideReturn;
     private bool applicationIsQuitting;
+    private GameObject arrowObject;
+    private SpriteRenderer arrowRenderer;
+    private Coroutine arrowBlinkRoutine;
 
     private enum BusSide
     {
@@ -117,6 +128,7 @@ public class BusCornerRevealController : MonoBehaviour
         TryAutoAssignDoorSpritesInEditor();
 #endif
         EnsureAudioSources();
+        EnsureArrowObject();
         CacheReferences();
         RecalculatePositions();
     }
@@ -216,6 +228,8 @@ public class BusCornerRevealController : MonoBehaviour
             }
         }
 
+        // Keep bus nose aligned with actual movement direction on regular reveal/hide motion.
+        SetFacingForDirection(targetX - transform.position.x);
         MoveTowardsTarget(targetX);
 
         float revealX = currentSide == BusSide.Left ? revealLeftX : revealRightX;
@@ -223,6 +237,7 @@ public class BusCornerRevealController : MonoBehaviour
         bool movingNow = Mathf.Abs(velocityX) > 0.08f || Mathf.Abs(transform.position.x - targetX) > 0.03f;
         bool shouldShowOpenDoors = shouldReveal && reachedReveal && !movingNow;
         ApplyDoorSprite(shouldShowOpenDoors);
+        UpdateArrowVisual(shouldShowOpenDoors);
 
         if (shouldShowOpenDoors)
         {
@@ -257,6 +272,7 @@ public class BusCornerRevealController : MonoBehaviour
         }
 
         StopStayingLoopImmediate();
+        HideArrow();
     }
 
     private void OnApplicationQuit()
@@ -553,6 +569,131 @@ public class BusCornerRevealController : MonoBehaviour
         }
     }
 
+    private void EnsureArrowObject()
+    {
+        if (arrowObject == null)
+        {
+            Transform existing = transform.Find("BoardArrow");
+            arrowObject = existing != null ? existing.gameObject : new GameObject("BoardArrow");
+            if (existing == null)
+            {
+                arrowObject.transform.SetParent(transform, false);
+            }
+        }
+
+        arrowRenderer = arrowObject.GetComponent<SpriteRenderer>();
+        if (arrowRenderer == null)
+        {
+            arrowRenderer = arrowObject.AddComponent<SpriteRenderer>();
+        }
+
+        arrowRenderer.sortingOrder = arrowSortingOrder;
+        arrowRenderer.enabled = false;
+        arrowObject.SetActive(false);
+    }
+
+    private void UpdateArrowVisual(bool shouldShowOpenDoors)
+    {
+        if (!shouldShowOpenDoors || flowState == BusFlowState.Transporting)
+        {
+            HideArrow();
+            return;
+        }
+
+        Transform target = currentCorneredPlayer;
+        if (target == null && players != null)
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                Transform p = players[i];
+                if (p == null) continue;
+                bool nearActiveCorner = currentCornerSide == BusSide.Left
+                    ? p.position.x <= leftCornerXThreshold
+                    : p.position.x >= rightCornerXThreshold;
+                if (nearActiveCorner)
+                {
+                    target = p;
+                    break;
+                }
+            }
+        }
+
+        if (target == null || arrowRenderer == null)
+        {
+            HideArrow();
+            return;
+        }
+
+        if (arrowSprite == null)
+        {
+            return;
+        }
+
+        bool wasHidden = !arrowObject.activeSelf;
+        arrowRenderer.sprite = arrowSprite;
+        arrowObject.SetActive(true);
+        if (wasHidden)
+        {
+            arrowRenderer.enabled = true;
+        }
+        arrowObject.transform.localScale = Vector3.one * Mathf.Max(0.01f, arrowScale);
+
+        float headY = target.position.y;
+        Renderer targetRenderer = target.GetComponentInChildren<Renderer>();
+        if (targetRenderer != null)
+        {
+            headY = targetRenderer.bounds.max.y;
+        }
+
+        arrowObject.transform.position = new Vector3(
+            target.position.x,
+            headY + arrowYOffset,
+            target.position.z + arrowZOffset
+        );
+
+        if (arrowBlinkRoutine == null)
+        {
+            arrowBlinkRoutine = StartCoroutine(BlinkArrowRoutine());
+        }
+    }
+
+    private IEnumerator BlinkArrowRoutine()
+    {
+        float half = Mathf.Max(0.05f, arrowBlinkPeriod * 0.5f);
+        bool visible = true;
+
+        while (arrowObject != null && arrowObject.activeSelf)
+        {
+            visible = !visible;
+            if (arrowRenderer != null)
+            {
+                arrowRenderer.enabled = visible;
+            }
+            yield return new WaitForSeconds(half);
+        }
+
+        arrowBlinkRoutine = null;
+    }
+
+    private void HideArrow()
+    {
+        if (arrowBlinkRoutine != null)
+        {
+            StopCoroutine(arrowBlinkRoutine);
+            arrowBlinkRoutine = null;
+        }
+
+        if (arrowRenderer != null)
+        {
+            arrowRenderer.enabled = false;
+        }
+
+        if (arrowObject != null)
+        {
+            arrowObject.SetActive(false);
+        }
+    }
+
     private bool TryConsumeBoardInput(Transform passenger)
     {
         if (passenger == null)
@@ -723,6 +864,7 @@ public class BusCornerRevealController : MonoBehaviour
     {
         flowState = BusFlowState.Transporting;
         currentCorneredPlayer = null;
+        HideArrow();
 
         if (brakeFxCoroutine != null)
         {
@@ -1002,6 +1144,25 @@ public class BusCornerRevealController : MonoBehaviour
         if (doorsOpenSprite == null)
         {
             doorsOpenSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Textures/Bus/Bus_doors_open.png");
+        }
+
+        if (arrowSprite == null)
+        {
+            UnityEngine.Object[] all = UnityEditor.AssetDatabase.LoadAllAssetsAtPath("Assets/Textures/Bus/arrow.png");
+            float bestArea = -1f;
+            Sprite best = null;
+            for (int i = 0; i < all.Length; i++)
+            {
+                Sprite s = all[i] as Sprite;
+                if (s == null) continue;
+                float area = s.rect.width * s.rect.height;
+                if (area > bestArea)
+                {
+                    bestArea = area;
+                    best = s;
+                }
+            }
+            arrowSprite = best;
         }
 
         if (busStayingClip == null)
