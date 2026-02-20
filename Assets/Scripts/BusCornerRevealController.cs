@@ -719,26 +719,8 @@ public class BusCornerRevealController : MonoBehaviour
             }
         }
 
-        if (Keyboard.current != null &&
-            (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame))
-        {
-            return true;
-        }
-
-        for (int i = 0; i < Gamepad.all.Count; i++)
-        {
-            Gamepad gp = Gamepad.all[i];
-            if (gp == null)
-            {
-                continue;
-            }
-
-            if (gp.dpad.up.wasPressedThisFrame || gp.leftStick.ReadValue().y >= 0.85f)
-            {
-                return true;
-            }
-        }
-
+        // Strict ownership: no global fallback input.
+        // Boarding should only react to the passenger's own PlayerInput.
         return false;
     }
 
