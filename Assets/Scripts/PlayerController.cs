@@ -781,8 +781,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
 
         if (isCrouching)
         {
-            animator.SetBool("Crouch", true);
-            StartCoroutine(PerformAttack(crouchAttackAnimation, "crouch"));
+            StartCoroutine(AI_PerformCrouchAttack());
         }
         else
         {
@@ -801,6 +800,42 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         }
 
         StartCoroutine(PerformAttack(lowerAttackAnimation, "lower"));
+    }
+
+    private IEnumerator AI_PerformCrouchAttack()
+    {
+        if (isDead || isTakingDamage || isBlocking)
+        {
+            yield break;
+        }
+
+        // Ensure crouch pose is active for at least one frame before attack.
+        isCrouching = true;
+        animator.SetBool("Crouch", true);
+        PlayAnimation(crouchAnimation);
+        yield return null;
+
+        AnimationClip clipToUse = crouchAttackAnimation;
+        if (!CanPlayClipOnAnimator(clipToUse))
+        {
+            // Fallback if dedicated crouch-attack state is absent in Animator.
+            clipToUse = lowerAttackAnimation != null ? lowerAttackAnimation : upperAttackAnimation;
+        }
+
+        if (clipToUse != null)
+        {
+            yield return StartCoroutine(PerformAttack(clipToUse, "crouch"));
+        }
+    }
+
+    private bool CanPlayClipOnAnimator(AnimationClip clip)
+    {
+        if (animator == null || clip == null)
+        {
+            return false;
+        }
+
+        return animator.HasState(0, Animator.StringToHash(clip.name));
     }
 
     /// <summary>

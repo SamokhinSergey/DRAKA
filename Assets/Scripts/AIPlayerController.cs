@@ -102,11 +102,11 @@ public class AIPlayerController : MonoBehaviour
     public float busHighFatigueThreshold = 0.75f;
     [Tooltip("Random chance per check to use bus even without urgent condition.")]
     [Range(0f, 1f)]
-    public float busRandomEscapeChance = 0.12f;
+    public float busRandomEscapeChance = 0.28f;
     [Tooltip("How often AI evaluates bus usage while cornered (seconds).")]
-    public float busCheckInterval = 0.3f;
+    public float busCheckInterval = 0.2f;
     [Tooltip("Minimum seconds between successful/attempted bus requests.")]
-    public float busAttemptCooldown = 1.2f;
+    public float busAttemptCooldown = 0.35f;
 
     private bool _isActing;
     private float _nextDecisionTime;
@@ -261,16 +261,19 @@ private void Update()
         }
 
         bool shouldUseBus = false;
+        bool urgentCondition = false;
 
         float health01 = Mathf.Clamp01(self.GetHealth() / 100f);
         if (health01 <= busLowHealthThreshold)
         {
             shouldUseBus = true;
+            urgentCondition = true;
         }
 
         if (self.isCursed)
         {
             shouldUseBus = true;
+            urgentCondition = true;
         }
 
         if (self.fatigueSystem != null && self.characterName.ToLower().Contains("babushka"))
@@ -281,6 +284,7 @@ private void Update()
             if (fatigue01 >= busHighFatigueThreshold)
             {
                 shouldUseBus = true;
+                urgentCondition = true;
             }
         }
 
@@ -295,7 +299,8 @@ private void Update()
         }
 
         bool requested = _busController.AI_RequestBoarding(self.transform);
-        _nextBusAttemptTime = Time.time + Mathf.Max(0.1f, busAttemptCooldown);
+        float cooldown = urgentCondition ? 0.1f : Mathf.Max(0.1f, busAttemptCooldown);
+        _nextBusAttemptTime = Time.time + cooldown;
 
         if (requested)
         {
@@ -311,13 +316,13 @@ private void Update()
         Vector3 toOpponent = opponent.transform.position - self.transform.position;
         toOpponent.y = 0f;
         float distance = toOpponent.magnitude;
-        if (distance > 2.6f)
+        if (distance > 3.2f)
         {
             return false;
         }
 
-        bool nearLeft = self.transform.position.x <= -9f;
-        bool nearRight = self.transform.position.x >= 9f;
+        bool nearLeft = self.transform.position.x <= -8.5f;
+        bool nearRight = self.transform.position.x >= 8.5f;
         if (!nearLeft && !nearRight)
         {
             return false;
