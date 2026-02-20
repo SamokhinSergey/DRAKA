@@ -1,0 +1,11 @@
+{
+    "asset": "20777fdea9283f940896afa965a2b21d",
+    "fileName": "019a745a-5d7c-789f-860c-4a54be649b63.pose.json",
+    "prompt": "Blocking upper atack IDLE!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 614641906,
+    "w3CTraceId": "be74d041aa56bd488d7b686737985831",
+    "isTrimmed": false
+}

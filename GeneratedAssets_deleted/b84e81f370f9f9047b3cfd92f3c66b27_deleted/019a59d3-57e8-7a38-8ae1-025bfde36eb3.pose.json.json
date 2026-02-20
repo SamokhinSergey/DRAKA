@@ -1,0 +1,11 @@
+{
+    "asset": "b84e81f370f9f9047b3cfd92f3c66b27",
+    "fileName": "019a59d3-57e8-7a38-8ae1-025bfde36eb3.pose.json",
+    "prompt": "very old granmother slowly wailk",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1689866979,
+    "w3CTraceId": "8c87afb80239097ffe796efcc47b8273",
+    "isTrimmed": false
+}

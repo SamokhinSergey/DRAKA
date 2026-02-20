@@ -1,0 +1,11 @@
+{
+    "asset": "4c123bdbf82b6324191b47c07be059aa",
+    "fileName": "019a6c68-0c27-7489-a576-a5401d3d85e0.pose.json",
+    "prompt": "A very old and sick hunched over grandmother",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 814136783,
+    "w3CTraceId": "d4458bb1edf1c7dc37d40fabd8651da3",
+    "isTrimmed": false
+}

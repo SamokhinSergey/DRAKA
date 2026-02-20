@@ -1,0 +1,11 @@
+{
+    "asset": "ed55dc87729bd8346a541e227982fee3",
+    "fileName": "019a73ec-490b-76de-8e76-7204a5c7ac74.pose.json",
+    "prompt": "croch block ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1395091385,
+    "w3CTraceId": "90a421ef1a06acb0d3e863f26834e0f1",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "d0a981eade1c3104e84a1cdc4a921ffb",
+    "fileName": "019a6d83-4524-7cd9-9f0d-bebacac8bcdd.pose.json",
+    "prompt": "Elderly Grandma idle Squat Position. loop",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1258279967,
+    "w3CTraceId": "895e47f93bf086ff1365fc29162189a0",
+    "isTrimmed": false
+}

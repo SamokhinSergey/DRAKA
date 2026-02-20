@@ -1,0 +1,11 @@
+{
+    "asset": "b84e81f370f9f9047b3cfd92f3c66b27",
+    "fileName": "019a6d66-699b-725e-a2da-b3882eac0fc7.pose.json",
+    "prompt": "Right-hand attack on an elderly grandmother",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1933722199,
+    "w3CTraceId": "355011bad1a2a812f4296fb1b01febb1",
+    "isTrimmed": false
+}

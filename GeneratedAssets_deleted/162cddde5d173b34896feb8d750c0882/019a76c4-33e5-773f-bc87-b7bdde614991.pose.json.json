@@ -1,0 +1,11 @@
+{
+    "asset": "162cddde5d173b34896feb8d750c0882",
+    "fileName": "019a76c4-33e5-773f-bc87-b7bdde614991.pose.json",
+    "prompt": "An elderly grandmother gets hit in the nose, her head falls back",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 706832156,
+    "w3CTraceId": "de8619631c2c96732fc230b198de2f90",
+    "isTrimmed": false
+}

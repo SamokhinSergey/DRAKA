@@ -1,0 +1,11 @@
+{
+    "asset": "20777fdea9283f940896afa965a2b21d",
+    "fileName": "019a745d-9a98-7c17-9b63-30720ae3dd2b.pose.json",
+    "prompt": "Blocking upper atack \r\nblocks the blow by extending both hands forward and shaking IDLE! SIDE VIEW 2D!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1859175292,
+    "w3CTraceId": "9c093ce7b6a56efbdcefb9720d8d2d94",
+    "isTrimmed": false
+}

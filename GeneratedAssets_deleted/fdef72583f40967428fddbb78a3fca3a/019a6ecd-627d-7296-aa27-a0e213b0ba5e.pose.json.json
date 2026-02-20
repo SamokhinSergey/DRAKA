@@ -1,0 +1,11 @@
+{
+    "asset": "fdef72583f40967428fddbb78a3fca3a",
+    "fileName": "019a6ecd-627d-7296-aa27-a0e213b0ba5e.pose.json",
+    "prompt": "grandmother sit in a chrotch pose and strike from right hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1475888711,
+    "w3CTraceId": "f4c87c33c2e06fd3c1ea92dfb62ea552",
+    "isTrimmed": false
+}

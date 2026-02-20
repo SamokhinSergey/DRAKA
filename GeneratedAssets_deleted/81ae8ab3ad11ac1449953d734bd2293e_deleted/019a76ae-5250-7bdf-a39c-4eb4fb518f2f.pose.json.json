@@ -1,0 +1,11 @@
+{
+    "asset": "81ae8ab3ad11ac1449953d734bd2293e",
+    "fileName": "019a76ae-5250-7bdf-a39c-4eb4fb518f2f.pose.json",
+    "prompt": "Arms extended forward as far as possible, palms coming together, IDLE",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 553848661,
+    "w3CTraceId": "8d7b8dd056b5479294c350be3af98dac",
+    "isTrimmed": false
+}

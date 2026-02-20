@@ -1,0 +1,11 @@
+{
+    "asset": "776aaa4664fdc1247bf1e4b7342e2a2d",
+    "fileName": "019a6996-4cfe-7c43-9fca-2ae04dee0707.pose.json",
+    "prompt": "An old granny hits with her left hand in the most inept way possible.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1260108736,
+    "w3CTraceId": "9d02b8724fb03b6bfca9ed18f700a104",
+    "isTrimmed": false
+}

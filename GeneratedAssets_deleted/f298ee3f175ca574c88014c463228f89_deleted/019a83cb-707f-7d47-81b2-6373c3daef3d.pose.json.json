@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83cb-707f-7d47-81b2-6373c3daef3d.pose.json",
+    "prompt": "The policeman delivers a strong blow with his hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 439835563,
+    "w3CTraceId": "8767a9db371b8158c0a9684f4913012e",
+    "isTrimmed": false
+}

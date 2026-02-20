@@ -1,0 +1,11 @@
+{
+    "asset": "098b82b669ae9364694d8a5c68e3e66d",
+    "fileName": "019a6cbd-cf0d-7583-9a63-e6a2736b7df5.pose.json",
+    "prompt": "Animation of a very old and sick babushka walking slowly with a limp in 2D side view, ensuring the legs do not float in the air along the Z-axis. Only forward movement!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1931710540,
+    "w3CTraceId": "0b85f7c3240b8ad59ca302266fca89f7",
+    "isTrimmed": false
+}

@@ -1,0 +1,13 @@
+{
+    "asset": "479697b370fbfef40ab5d42d7fa34286",
+    "fileName": "019ac44b-0b36-7b1b-820b-38dec216e1e1.wav",
+    "prompt": "say \"DRAKA\" like in figting game ",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "238271f4d3b951ca926a7184d0ae3519",
+    "duration": 1.4500000476837159,
+    "autoTrim": true,
+    "hasReference": false
+}

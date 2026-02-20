@@ -1,0 +1,11 @@
+{
+    "asset": "f9b87755aec51ec42966a10e86e62b62",
+    "fileName": "019ae4eb-5005-75d6-ae7c-c24ba181fc11.pose.json",
+    "prompt": "Create a spinning kick animation where the character performs a full-body rotation before delivering a powerful kick. The movement should start with the character shifting weight onto the supporting leg, then turning the upper body and hips to initiate the spin. During the rotation, the kicking leg swings around in a wide arc, finishing with a strong extended kick at head height. The motion should be smooth, dynamic, and well-balanced, with natural follow-through as the character regains stance after the kick",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1345790990,
+    "w3CTraceId": "2a2af0e76b30fd802eeadc2b5c690fd7",
+    "isTrimmed": false
+}

@@ -1,0 +1,13 @@
+{
+    "asset": "479697b370fbfef40ab5d42d7fa34286",
+    "fileName": "019ac45d-3403-7326-8649-05594fa94430.wav",
+    "prompt": "say \"ROUND TWO\" like in figting game ",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "60bba95051d0e1b05f04656db5324b60",
+    "duration": 1.4500000476837159,
+    "autoTrim": true,
+    "hasReference": false
+}

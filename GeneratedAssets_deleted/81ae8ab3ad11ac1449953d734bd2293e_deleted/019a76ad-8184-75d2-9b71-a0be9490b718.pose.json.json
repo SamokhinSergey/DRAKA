@@ -1,0 +1,11 @@
+{
+    "asset": "81ae8ab3ad11ac1449953d734bd2293e",
+    "fileName": "019a76ad-8184-75d2-9b71-a0be9490b718.pose.json",
+    "prompt": "Arms extended forward to the limit, completely straight, IDLE",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 787683407,
+    "w3CTraceId": "4f905400a56273fb6fcb270e1776ee86",
+    "isTrimmed": false
+}

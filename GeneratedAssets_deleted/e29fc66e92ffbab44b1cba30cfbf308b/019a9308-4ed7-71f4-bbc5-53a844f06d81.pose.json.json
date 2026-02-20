@@ -1,0 +1,11 @@
+{
+    "asset": "e29fc66e92ffbab44b1cba30cfbf308b",
+    "fileName": "019a9308-4ed7-71f4-bbc5-53a844f06d81.pose.json",
+    "prompt": "Old grandmother falls down",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 700603184,
+    "w3CTraceId": "339fb9904ec7927b044a2c6b2a0c61ac",
+    "isTrimmed": false
+}

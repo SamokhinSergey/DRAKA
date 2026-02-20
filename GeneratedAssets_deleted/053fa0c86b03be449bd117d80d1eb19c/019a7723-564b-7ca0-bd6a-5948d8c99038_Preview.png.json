@@ -1,0 +1,11 @@
+{
+    "asset": "053fa0c86b03be449bd117d80d1eb19c",
+    "fileName": "019a7723-564b-7ca0-bd6a-5948d8c99038_Preview.png",
+    "prompt": "Broken asphalt",
+    "negativePrompt": "",
+    "model": "44ec3749-963a-44b1-aa54-dc19f6ed8ab2",
+    "modelName": "Unity Texture2D",
+    "customSeed": 391152165,
+    "w3CTraceId": "9434fb6f824580e798e677519aeca83e",
+    "refinementMode": "Generation"
+}

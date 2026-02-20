@@ -1,0 +1,13 @@
+{
+    "asset": "941444ed6b44bae45b3c27fa98e3ae74",
+    "fileName": "019ac450-59ca-7676-8c01-40f88b019be0.wav",
+    "prompt": "background music for funny russian fighting game",
+    "negativePrompt": "",
+    "model": "6ab5371b-d771-4e55-b856-fb0296eaf50c",
+    "modelName": "Beatoven Music Generation",
+    "customSeed": -1,
+    "w3CTraceId": "8b841a0bb7488d9d4b3397d9905dbd10",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "7726d8396828fba45b1f7dbcc422a3c5",
+    "fileName": "019a6ca4-6c8d-794b-b63a-9fb7795f9276.pose.json",
+    "prompt": "A very old and sick grandmother walks slowly. A looped animation is needed for a side-view game so that the legs don't anated along the Z axis",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 436100242,
+    "w3CTraceId": "3435205eb1df61e82251a425e4cb0164",
+    "isTrimmed": false
+}

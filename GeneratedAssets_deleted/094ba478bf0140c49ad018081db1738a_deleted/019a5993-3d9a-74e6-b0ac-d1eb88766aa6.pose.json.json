@@ -1,0 +1,11 @@
+{
+    "asset": "094ba478bf0140c49ad018081db1738a",
+    "fileName": "019a5993-3d9a-74e6-b0ac-d1eb88766aa6.pose.json",
+    "prompt": "old wooman idle",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1617119499,
+    "w3CTraceId": "edaa5da46f657e28c7b3ff84dafd4710",
+    "isTrimmed": false
+}

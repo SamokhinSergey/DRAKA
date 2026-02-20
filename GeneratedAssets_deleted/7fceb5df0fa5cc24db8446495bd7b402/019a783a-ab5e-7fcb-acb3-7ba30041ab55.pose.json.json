@@ -1,0 +1,11 @@
+{
+    "asset": "dae73bd0d4d26b44fbd63a31533073a6",
+    "fileName": "019a783a-ab5e-7fcb-acb3-7ba30041ab55.pose.json",
+    "prompt": "Grandma gets hit in the head and falls down",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1683992950,
+    "w3CTraceId": "06ae01732e69a47583101b4e6b4c6cbf",
+    "isTrimmed": false
+}

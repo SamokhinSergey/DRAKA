@@ -1,0 +1,11 @@
+{
+    "asset": "9647c102c2ab40245a94446bfea76d08",
+    "fileName": "019a6ed7-24c8-7ad7-bd32-3f102d5e377f.pose.json",
+    "prompt": "Punch from crotch pose",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1615075923,
+    "w3CTraceId": "c071ea5dfd780ee78fe71a2ddd700510",
+    "isTrimmed": false
+}

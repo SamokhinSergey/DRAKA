@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7d55-0192-7827-af56-a5641dd13b53.pose.json",
+    "prompt": "Death animation - the character falls dead",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 930967321,
+    "w3CTraceId": "317cc24f9282cb9a8859b7045dd12ad7",
+    "isTrimmed": false
+}

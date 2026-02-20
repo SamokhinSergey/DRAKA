@@ -1,0 +1,11 @@
+{
+    "asset": "20777fdea9283f940896afa965a2b21d",
+    "fileName": "019a745e-60d8-7b89-8f66-3bc54d594438.pose.json",
+    "prompt": " blocks the blow by extending both hands forward and shaking IDLE! SIDE VIEW 2D!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1884871917,
+    "w3CTraceId": "fd0429005a13c2fe8b7cec0df562f2ce",
+    "isTrimmed": false
+}

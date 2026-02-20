@@ -1,0 +1,13 @@
+{
+    "asset": "a37fd558826eef240b52aab7d39a623b",
+    "fileName": "019ac14f-81fb-7eb0-b840-07456af052d5.wav",
+    "prompt": "an elderly woman is punched in the stomach",
+    "negativePrompt": "",
+    "model": "6ab5371b-d771-4e55-b856-fb0296eaf50c",
+    "modelName": "Beatoven Music Generation",
+    "customSeed": -1,
+    "w3CTraceId": "c80199f20dc61ac038bf11f1a4dbc86c",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "25e31c5653dbe2640a6190e140ac67f6",
+    "fileName": "019a83bb-db50-70ee-81c2-d85c2d9a5701.pose.json",
+    "prompt": "A police officer is hit in the head",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1688366131,
+    "w3CTraceId": "240bba5c6285b249f670e6997aeeb069",
+    "isTrimmed": false
+}

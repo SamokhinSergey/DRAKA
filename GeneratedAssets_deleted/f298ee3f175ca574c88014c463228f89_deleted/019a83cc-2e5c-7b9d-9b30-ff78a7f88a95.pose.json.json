@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83cc-2e5c-7b9d-9b30-ff78a7f88a95.pose.json",
+    "prompt": "A police officer delivers a powerful blow to the head with his hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1245401475,
+    "w3CTraceId": "f70ceecfd95a5acf09520876a256b309",
+    "isTrimmed": false
+}

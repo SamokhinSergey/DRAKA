@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7420-0c8f-77f4-bf5a-cdff1653ae92.pose.json",
+    "prompt": "Animation for a 2D fighting game. A grandmother STAY IDLE! a protective pose and covers her head.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 706641297,
+    "w3CTraceId": "144273811894fd7d9c2b3471516a463c",
+    "isTrimmed": false
+}

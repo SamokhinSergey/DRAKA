@@ -1,0 +1,11 @@
+{
+    "asset": "2d631788104525f479e8b7ad1c87a3fa",
+    "fileName": "019a9ca2-03a8-7751-8810-98299f655e7b.pose.json",
+    "prompt": "Create a static blocking animation where hero  stands with his arms outstretched in a defensive stance, holding the block position firmly. His legs should be slightly bent for stability, and his torso should be slightly tilted back to show a strong, grounded stance. The animation should convey a sense of tension, as if he’s ready to absorb incoming attacks. His facial expression should be stern and focused, reflecting his role as a disciplined, tough police officer.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2033626576,
+    "w3CTraceId": "5aa17c065947eb55ec2e2fb6c3cfc2f3",
+    "isTrimmed": false
+}

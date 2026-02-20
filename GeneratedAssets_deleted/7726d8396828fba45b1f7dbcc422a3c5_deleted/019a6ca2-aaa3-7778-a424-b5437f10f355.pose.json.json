@@ -1,0 +1,11 @@
+{
+    "asset": "7726d8396828fba45b1f7dbcc422a3c5",
+    "fileName": "019a6ca2-aaa3-7778-a424-b5437f10f355.pose.json",
+    "prompt": "Очень старая и больная  бабушка медленная ходьба.Нужна зацикленная анимация для игры с видом сбоку что бы ноги не ходили по оси З ТОЛЬКО ОСЬ Х",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 296915724,
+    "w3CTraceId": "e6a99bc349802e8c88f1adf55a3f6617",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "9647c102c2ab40245a94446bfea76d08",
+    "fileName": "019a6ed7-f76b-7244-806f-5ffaa69fa37c.pose.json",
+    "prompt": "Punch from this position. The body remains in a squatting position.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1608903448,
+    "w3CTraceId": "1a978bb572b4fac600afebc42a19c127",
+    "isTrimmed": false
+}

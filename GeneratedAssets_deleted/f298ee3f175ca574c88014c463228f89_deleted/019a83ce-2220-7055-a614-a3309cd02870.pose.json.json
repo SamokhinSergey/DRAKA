@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83ce-2220-7055-a614-a3309cd02870.pose.json",
+    "prompt": "Powerful punch with the RIGHT HAND",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 188031384,
+    "w3CTraceId": "cb43c75a0e6564425b6c974f76890625",
+    "isTrimmed": false
+}

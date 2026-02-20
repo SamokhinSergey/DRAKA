@@ -1,0 +1,11 @@
+{
+    "asset": "83f905339d6bbc1419a83a6719acfcfe",
+    "fileName": "019a7402-81c2-7e9a-85e4-4347fc5f6f79.pose.json",
+    "prompt": "Animation for a 2D fighting game. Grandma sits in a CROCH!  position and covers her head with both hands.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 396317040,
+    "w3CTraceId": "e9c7edb78e7b3ff808ee8f8f61168e2f",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "8d42c549e8eb05343a133c877fe82a9b",
+    "fileName": "019abb27-fc04-73da-b46c-1dc74e571be9.pose.json",
+    "prompt": "block pose with protect head  looped animation",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 5061555,
+    "w3CTraceId": "d1acfbb64f6eaee8c63a1a981c7267ab",
+    "isTrimmed": false
+}

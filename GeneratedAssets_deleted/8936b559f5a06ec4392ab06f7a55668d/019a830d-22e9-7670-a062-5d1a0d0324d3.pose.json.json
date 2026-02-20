@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a830d-22e9-7670-a062-5d1a0d0324d3.pose.json",
+    "prompt": "IDLE for russian policeman, looped",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 435775897,
+    "w3CTraceId": "7a40bf63ff5ca122cd0ab59a7009e2b3",
+    "isTrimmed": false
+}

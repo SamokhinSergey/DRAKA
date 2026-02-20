@@ -1,0 +1,11 @@
+{
+    "asset": "162cddde5d173b34896feb8d750c0882",
+    "fileName": "019a76c3-162f-7f62-8292-6fc24a51ebb4.pose.json",
+    "prompt": "An elderly grandmother gets hit in the head.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1939826526,
+    "w3CTraceId": "d5a8d90404e26c498e6427e7d0e7020c",
+    "isTrimmed": false
+}

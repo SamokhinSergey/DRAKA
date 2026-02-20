@@ -1,0 +1,13 @@
+{
+    "asset": "edf01d4ccad85c04a9086f3be524848c",
+    "fileName": "019ac140-557e-706b-8fa9-d845e320431d.wav",
+    "prompt": "an elderly woman gets hit in the head",
+    "negativePrompt": "",
+    "model": "ee31b223-3fe1-4ae6-bf54-d8a80bb4b0e1",
+    "modelName": "",
+    "customSeed": -1,
+    "w3CTraceId": "1617714662766840577a63ae1e3ffc9f",
+    "duration": 1.090000033378601,
+    "autoTrim": true,
+    "hasReference": false
+}

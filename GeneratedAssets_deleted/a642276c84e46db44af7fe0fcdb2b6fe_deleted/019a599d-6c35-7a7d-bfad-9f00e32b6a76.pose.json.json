@@ -1,0 +1,11 @@
+{
+    "asset": "a642276c84e46db44af7fe0fcdb2b6fe",
+    "fileName": "019a599d-6c35-7a7d-bfad-9f00e32b6a76.pose.json",
+    "prompt": "non proffeional funy left hand hit",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 242772008,
+    "w3CTraceId": "9424a90fe655383c936c9e964b9572e4",
+    "isTrimmed": false
+}

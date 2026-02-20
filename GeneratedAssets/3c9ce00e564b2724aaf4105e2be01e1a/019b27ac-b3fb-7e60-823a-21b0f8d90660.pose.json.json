@@ -1,0 +1,11 @@
+{
+    "asset": "3c9ce00e564b2724aaf4105e2be01e1a",
+    "fileName": "019b27ac-b3fb-7e60-823a-21b0f8d90660.pose.json",
+    "prompt": "Create a hit reaction animation where the character is struck by a powerful spinning kick and is violently launched backward. The impact should snap the torso and head backward first, followed by the entire body being thrown through the air toward the wall behind them. The arms and legs should flail naturally from the force of the hit. The character should lose balance completely, with a clear airborne phase before preparing to collide with the wall or fall down. The motion should feel strong, exaggerated, and dramatic, emphasizing the overwhelming power of the attack\nKeep the spine and head aligned during the launch to avoid unnatural forward bending.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 252293500,
+    "w3CTraceId": "40bf3270883bcc073f7138a9ac623e00",
+    "isTrimmed": false
+}

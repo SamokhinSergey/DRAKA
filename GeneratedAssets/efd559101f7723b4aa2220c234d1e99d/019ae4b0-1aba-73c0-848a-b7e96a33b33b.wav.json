@@ -1,0 +1,13 @@
+{
+    "asset": "efd559101f7723b4aa2220c234d1e99d",
+    "fileName": "019ae4b0-1aba-73c0-848a-b7e96a33b33b.wav",
+    "prompt": "SAY \"SOMNITELNO. BUT K.O\" LIKE IN THE FIGHTIBG GAME",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "f1a32d770c14ab2a5014922a61e87828",
+    "duration": 3.049999952316284,
+    "autoTrim": true,
+    "hasReference": false
+}

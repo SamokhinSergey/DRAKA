@@ -1,0 +1,11 @@
+{
+    "asset": "2d631788104525f479e8b7ad1c87a3fa",
+    "fileName": "019a9ca3-cc13-7ec6-83dd-a047f5b70f5d.pose.json",
+    "prompt": "Create a blocking animation where the character stands with both arms stretched forward and crossed in front of the chest in a defensive stance. His legs should be slightly bent for stability, and the body should be slightly leaned back for a strong, grounded position. The character’s facial expression should convey focus and determination. The hands should be positioned as if ready to absorb or block an incoming attack, with the arms locked in place for maximum defense",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 837141624,
+    "w3CTraceId": "bbdb71def1a35c03a70558b07476d3c1",
+    "isTrimmed": false
+}

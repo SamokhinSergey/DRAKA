@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a6cb1-9f4c-72f8-87f9-adbe692833e0.pose.json",
+    "prompt": "Animation for a 2D fighting game, viewed from the side. A very old and sick grandmother walks slowly.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 680065222,
+    "w3CTraceId": "34cb74c25a21a6835e0224b4e43d0227",
+    "isTrimmed": false
+}

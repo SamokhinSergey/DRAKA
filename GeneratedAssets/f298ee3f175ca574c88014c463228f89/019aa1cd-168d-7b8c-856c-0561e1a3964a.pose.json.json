@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019aa1cd-168d-7b8c-856c-0561e1a3964a.pose.json",
+    "prompt": "Create a blocking animation where the character stands with both arms fully extended straight upward, raised high above the head as if preparing to block a strike from above. The arms should be locked and straight, with the wrists aligned and forming a strong, defensive position. The legs should be slightly bent for stability, and the body should be upright, with the character bracing themselves for the incoming attack. The facial expression should convey focus and readiness, as if the character is anticipating a powerful overhead strik",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1179444985,
+    "w3CTraceId": "f355d62111ac85b2fd952735323982be",
+    "isTrimmed": false
+}

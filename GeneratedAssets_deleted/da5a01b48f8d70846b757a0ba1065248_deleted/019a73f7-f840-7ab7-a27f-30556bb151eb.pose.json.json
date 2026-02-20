@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a73f7-f840-7ab7-a27f-30556bb151eb.pose.json",
+    "prompt": "Block from squat pose",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 333195819,
+    "w3CTraceId": "b561c314fefb49c7bcfd8ed900ecc51f",
+    "isTrimmed": false
+}

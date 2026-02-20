@@ -1,0 +1,11 @@
+{
+    "asset": "8d42c549e8eb05343a133c877fe82a9b",
+    "fileName": "019abb1d-c273-701d-86f7-e6fbae1c299d.pose.json",
+    "prompt": "block pose looped animation",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 781493063,
+    "w3CTraceId": "620d4c57174fd4f8f80da952a3750105",
+    "isTrimmed": false
+}

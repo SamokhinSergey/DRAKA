@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019adfef-f2d9-748e-9d67-b4887a2b275c.wav",
+    "prompt": "Say \"MYCOP WINS\" like from fighting game",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "258a9f22d520d8be05f3d78dfc35feee",
+    "duration": 2.069999933242798,
+    "autoTrim": true,
+    "hasReference": false
+}

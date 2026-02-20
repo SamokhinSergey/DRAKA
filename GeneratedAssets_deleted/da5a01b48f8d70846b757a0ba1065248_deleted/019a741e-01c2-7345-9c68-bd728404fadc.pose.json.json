@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a741e-01c2-7345-9c68-bd728404fadc.pose.json",
+    "prompt": "Animation for a 2D fighting game. A grandmother strikes a protective pose and covers her head.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 447840022,
+    "w3CTraceId": "f5e69f93dd9c31830d4f4fe17ba4587a",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "17edfeb033a2e35408fca8fdb7097ce0",
+    "fileName": "019a96de-3dbc-7378-beaa-686fab754d96.pose.json",
+    "prompt": "Policeman crouch IDLE LOOPED POSE",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1800577280,
+    "w3CTraceId": "20dd04ac13bb009fbec745755c5238e2",
+    "isTrimmed": false
+}

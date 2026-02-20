@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019adfea-b3db-7770-9c13-bcf6dd75d5ca.wav",
+    "prompt": "Say charecter name \"BABUSHKA WINS\" like from fighting game",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "c158594f7492099cba4dd851938b90a3",
+    "duration": 1.7999999523162842,
+    "autoTrim": true,
+    "hasReference": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "33846e7ee00cdbc40ac9c4fb5ab111d4",
+    "fileName": "019a83a7-feef-7b3b-b8b9-f47556f17d74.pose.json",
+    "prompt": "Russin policeman walk don't move from place",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1102182119,
+    "w3CTraceId": "17bfbbe0c6aeea4413ff10d402885e34",
+    "isTrimmed": false
+}

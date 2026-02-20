@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019aa1c0-727e-7d94-9185-cb58402e7aba.pose.json",
+    "prompt": "Create a blocking animation where the character stands with their back arched, leaning slightly backward as if trying to avoid an incoming attack. Both arms should be fully extended forward and crossed at the wrists in front of the chest. The legs should be slightly bent for stability, and the body should be tilted backward with a strong, grounded stance. The facial expression should show focus and determination, as if the character is preparing to block an attack while bracing themselves in a defensive posture",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 113027005,
+    "w3CTraceId": "a660ecc1eee916b7c8a1f191e34e33d3",
+    "isTrimmed": false
+}

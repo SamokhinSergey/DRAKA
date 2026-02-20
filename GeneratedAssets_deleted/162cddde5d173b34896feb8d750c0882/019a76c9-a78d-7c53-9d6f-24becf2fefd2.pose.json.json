@@ -1,0 +1,11 @@
+{
+    "asset": "162cddde5d173b34896feb8d750c0882",
+    "fileName": "019a76c9-a78d-7c53-9d6f-24becf2fefd2.pose.json",
+    "prompt": "Animation of taking heavy damage to the groin area and arching in pain",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1816567990,
+    "w3CTraceId": "4273d6b2025dbc7dd3a53e7d18f69a6b",
+    "isTrimmed": false
+}

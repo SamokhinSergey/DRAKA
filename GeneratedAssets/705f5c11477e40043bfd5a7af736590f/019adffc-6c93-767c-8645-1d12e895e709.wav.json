@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019adffc-6c93-767c-8645-1d12e895e709.wav",
+    "prompt": "Say \"DRONEWATCHER WINS\" for FIGHTING GAME",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "c6d4b11e73c2927a5da9d61eea6350e5",
+    "duration": 2.069999933242798,
+    "autoTrim": true,
+    "hasReference": false
+}

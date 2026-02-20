@@ -1,0 +1,11 @@
+{
+    "asset": "fdef72583f40967428fddbb78a3fca3a",
+    "fileName": "019a6ed4-c75a-78d6-87d2-b07df9a33ed2.pose.json",
+    "prompt": "A side-view fighting game animation for a character featuring an elderly grandmother.\r\n1. The grandmother assumes a chrotch pose.\r\n2. The grandmother quickly extends her arm straight out to strike the enemy in a a chrotch",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2056593258,
+    "w3CTraceId": "348ec02701f30a1f39e1618766522312",
+    "isTrimmed": false
+}

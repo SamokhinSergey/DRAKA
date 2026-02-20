@@ -1,0 +1,11 @@
+{
+    "asset": "11c35b53afc79874496d2f72e7e70e19",
+    "fileName": "019a771b-c348-7f00-a4ab-431eb624be43.pose.json",
+    "prompt": "Generate an animation of a humanoid character receiving heavy damage to the head. The character should react with a sudden backward motion, holding their head in pain",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 944613427,
+    "w3CTraceId": "65c6f5f59ec7ffcdabdbb58fbfe0c8a0",
+    "isTrimmed": false
+}

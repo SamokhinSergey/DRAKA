@@ -1,0 +1,13 @@
+{
+    "asset": "479697b370fbfef40ab5d42d7fa34286",
+    "fileName": "019ac448-9c89-7d43-93d2-b2b340e5a9cf.wav",
+    "prompt": "say \"ROUND 1\" like in figting game ",
+    "negativePrompt": "",
+    "model": "6be7790d-b2f4-4fe0-8ca2-76ddaaf94361",
+    "modelName": "ElevenLabs Multilingual V2",
+    "customSeed": -1,
+    "w3CTraceId": "083612083cb89e0014922e4bd0d78706",
+    "duration": 1.4500000476837159,
+    "autoTrim": true,
+    "hasReference": false
+}

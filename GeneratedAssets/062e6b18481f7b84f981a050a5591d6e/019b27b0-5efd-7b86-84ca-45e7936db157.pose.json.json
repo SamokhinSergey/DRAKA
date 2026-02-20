@@ -1,0 +1,11 @@
+{
+    "asset": "32dccd3e21b19ef4d8c7eb01bed1eca0",
+    "fileName": "019b27b0-5efd-7b86-84ca-45e7936db157.pose.json",
+    "prompt": "Create a recovery animation where the character gets up after being violently knocked back. The character starts lying on the ground, slightly stunned. First, they slowly move an arm and leg, showing disorientation, then roll partially onto their side and push themselves up to a kneeling position. After a brief pause to regain balance, the character stands up unsteadily, wobbling slightly before fully recovering into a neutral fighting stance. The motion should feel heavy, delayed, and tired, clearly showing the impact of the previous powerful attack",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1079360237,
+    "w3CTraceId": "6b565f50e882c14ef6e2f617374774dc",
+    "isTrimmed": false
+}

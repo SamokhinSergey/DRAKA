@@ -1,0 +1,11 @@
+{
+    "asset": "17edfeb033a2e35408fca8fdb7097ce0",
+    "fileName": "019a96df-006d-7d1d-9a97-62338047fe52.pose.json",
+    "prompt": "Policeman down crouch pose",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 834918709,
+    "w3CTraceId": "90dc447347641ae4049c3c4f980b6e7b",
+    "isTrimmed": false
+}

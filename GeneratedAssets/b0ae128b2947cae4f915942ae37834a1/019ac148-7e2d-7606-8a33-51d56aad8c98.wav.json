@@ -1,0 +1,13 @@
+{
+    "asset": "b0ae128b2947cae4f915942ae37834a1",
+    "fileName": "019ac148-7e2d-7606-8a33-51d56aad8c98.wav",
+    "prompt": "an elderly woman is punched in the stomach",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "537d8c65536fb9adb907a311806cc1b6",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

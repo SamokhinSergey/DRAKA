@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mc_DynamicColliderAdjustment
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: bc0fe98167196a74b856df7ec9ad6b6e, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: Assembly-CSharp::DynamicColliderAdjustment
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].stateName
+    value: Blocking
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderCenter.x
+    value: -0.007693454
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderCenter.y
+    value: 0.5226861
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderCenter.z
+    value: -0.0007071654
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderSize.x
+    value: 0.1212118
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderSize.y
+    value: 0.2066475
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[0].colliderSize.z
+    value: 0.127779
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].stateName
+    value: Crouching
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderCenter.x
+    value: -0.02569987
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderCenter.y
+    value: 0.4767837
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderCenter.z
+    value: 0.1053656
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderSize.x
+    value: 1.0514
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderSize.y
+    value: 0.9251859
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: colliderStates.Array.data[1].colliderSize.z
+    value: 1.210732
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

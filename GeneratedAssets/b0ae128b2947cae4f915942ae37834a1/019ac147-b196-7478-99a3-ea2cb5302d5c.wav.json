@@ -1,0 +1,13 @@
+{
+    "asset": "b0ae128b2947cae4f915942ae37834a1",
+    "fileName": "019ac147-b196-7478-99a3-ea2cb5302d5c.wav",
+    "prompt": "an elderly woman is punched in the stomach",
+    "negativePrompt": "",
+    "model": "7df9b85a-1695-49f7-89bf-988208d5a3bc",
+    "modelName": "Meta MusicGen",
+    "customSeed": -1,
+    "w3CTraceId": "625752a8139ffa62f813e66b9666169d",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

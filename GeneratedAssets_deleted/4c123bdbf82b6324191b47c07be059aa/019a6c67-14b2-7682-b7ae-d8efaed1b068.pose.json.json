@@ -1,0 +1,11 @@
+{
+    "asset": "4c123bdbf82b6324191b47c07be059aa",
+    "fileName": "019a6c67-14b2-7682-b7ae-d8efaed1b068.pose.json",
+    "prompt": "Idle for A very old and sick grandmother",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 158714334,
+    "w3CTraceId": "eefdc4508ba456167c8b3790636b1051",
+    "isTrimmed": false
+}

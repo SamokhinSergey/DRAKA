@@ -1,0 +1,13 @@
+{
+    "asset": "a37fd558826eef240b52aab7d39a623b",
+    "fileName": "019ac156-0fc2-73f6-bdf4-b34c48d666ac.wav",
+    "prompt": "an elderly woman cry",
+    "negativePrompt": "music, noise",
+    "model": "7df9b85a-1695-49f7-89bf-988208d5a3bc",
+    "modelName": "Meta MusicGen",
+    "customSeed": -1,
+    "w3CTraceId": "59303ced720c7ec27b28fb3cc395c637",
+    "duration": 1.3600000143051148,
+    "autoTrim": true,
+    "hasReference": false
+}

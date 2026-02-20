@@ -1,0 +1,11 @@
+{
+    "asset": "162cddde5d173b34896feb8d750c0882",
+    "fileName": "019a76c8-2251-72d4-81b8-9723568150e9.pose.json",
+    "prompt": "Animation of receiving heavy damage to the groin area",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 518983751,
+    "w3CTraceId": "68eb51402b6aa76a9b14571b05b94be1",
+    "isTrimmed": false
+}

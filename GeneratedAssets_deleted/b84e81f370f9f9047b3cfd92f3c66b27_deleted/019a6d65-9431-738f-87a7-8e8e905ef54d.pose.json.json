@@ -1,0 +1,11 @@
+{
+    "asset": "b84e81f370f9f9047b3cfd92f3c66b27",
+    "fileName": "019a6d65-9431-738f-87a7-8e8e905ef54d.pose.json",
+    "prompt": "An elderly grandmother strikes with her right hand in the most clumsy way possible, extending it fully forward.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 170401426,
+    "w3CTraceId": "64a870e9a7da530e3f0fd26e88c88e3c",
+    "isTrimmed": false
+}

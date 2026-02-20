@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83c6-99f0-764a-b369-d8f56d5f009c.pose.json",
+    "prompt": "A man hits his opponent in the head with his right hand very hard.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1555140009,
+    "w3CTraceId": "1857e20e4cb141a90d4d059ef070dc08",
+    "isTrimmed": false
+}

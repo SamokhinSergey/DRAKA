@@ -1,0 +1,11 @@
+{
+    "asset": "a642276c84e46db44af7fe0fcdb2b6fe",
+    "fileName": "019a599d-eb04-7d60-b239-8a4288558f61.pose.json",
+    "prompt": "non proffeional funy left hand fighting hit\n",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1502648710,
+    "w3CTraceId": "06399510dea9cd071b0bb13645292e3e",
+    "isTrimmed": false
+}

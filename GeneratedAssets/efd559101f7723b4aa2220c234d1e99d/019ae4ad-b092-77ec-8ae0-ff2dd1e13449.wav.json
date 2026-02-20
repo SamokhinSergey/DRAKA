@@ -1,0 +1,13 @@
+{
+    "asset": "efd559101f7723b4aa2220c234d1e99d",
+    "fileName": "019ae4ad-b092-77ec-8ae0-ff2dd1e13449.wav",
+    "prompt": "SAY \"K.O\" LIKE IN THE FIGHTIBG GAME",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "4bd12d7dec6597d213f9d7f02b93d551",
+    "duration": 1.5299999713897706,
+    "autoTrim": true,
+    "hasReference": false
+}

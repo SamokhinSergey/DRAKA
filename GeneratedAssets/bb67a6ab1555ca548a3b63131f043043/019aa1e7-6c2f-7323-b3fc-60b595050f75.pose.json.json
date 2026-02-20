@@ -1,0 +1,11 @@
+{
+    "asset": "bb67a6ab1555ca548a3b63131f043043",
+    "fileName": "019aa1e7-6c2f-7323-b3fc-60b595050f75.pose.json",
+    "prompt": "Create a blocking animation where the character tilts their head strongly downward, while both arms are fully extended forward, crossing at the wrists in front of the head to form a protective barrier. The arms should be straight and locked in place, with the wrists crossed in front of the face, as if shielding the head from an incoming attack. The body should remain upright but braced, with the legs slightly bent for stability. The facial expression should convey focus and determination, as the character prepares to block the attack while protecting their head with their arms",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 177959417,
+    "w3CTraceId": "51cb50c70b783586d5ec89a2985f6fd8",
+    "isTrimmed": false
+}

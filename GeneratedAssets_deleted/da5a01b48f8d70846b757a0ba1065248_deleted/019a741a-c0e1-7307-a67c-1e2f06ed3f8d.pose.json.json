@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a741a-c0e1-7307-a67c-1e2f06ed3f8d.pose.json",
+    "prompt": "Animation for a 2D fighting game. Grandma DOING UPPER BLOCK",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1412597309,
+    "w3CTraceId": "7aefc4f0f4d614c7a262840afea2b9de",
+    "isTrimmed": false
+}

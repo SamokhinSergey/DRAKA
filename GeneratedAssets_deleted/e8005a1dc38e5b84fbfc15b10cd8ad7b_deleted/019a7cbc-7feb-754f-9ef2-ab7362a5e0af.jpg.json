@@ -1,0 +1,20 @@
+{
+    "asset": "e8005a1dc38e5b84fbfc15b10cd8ad7b",
+    "fileName": "019a7cbc-7feb-754f-9ef2-ab7362a5e0af.jpg",
+    "prompt": "heathbar for fighting game\n",
+    "negativePrompt": "",
+    "model": "7ba3403f-c85f-4ca5-9d95-8f4da44ecba2",
+    "modelName": "Game UI",
+    "customSeed": -1,
+    "w3CTraceId": "12e86963bc99d44c256856ccc04ac72f",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "17edfeb033a2e35408fca8fdb7097ce0",
+    "fileName": "019a96e1-f0a6-7d3b-bcfe-0608ed6c101a.pose.json",
+    "prompt": "A policeman is squatting",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1367515544,
+    "w3CTraceId": "2161abf8ff4d2d3130a3387be1863d37",
+    "isTrimmed": false
+}

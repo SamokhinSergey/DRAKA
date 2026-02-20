@@ -1,0 +1,11 @@
+{
+    "asset": "d0a981eade1c3104e84a1cdc4a921ffb",
+    "fileName": "019a6d81-c83d-7b78-b85b-e69ad442bad7.pose.json",
+    "prompt": "Elderly Grandma looped IDLE for Squat Position. FOR THE GAME WITH SIDE 2D VIEW",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1196501046,
+    "w3CTraceId": "3a763c2aae19e70a819d92b5c2d5e653",
+    "isTrimmed": false
+}

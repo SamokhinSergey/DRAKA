@@ -1,0 +1,11 @@
+{
+    "asset": "fdef72583f40967428fddbb78a3fca3a",
+    "fileName": "019a6ece-25b3-788f-9ad6-98fc3221bd1f.pose.json",
+    "prompt": "grandmother sit in a chrotch pose and hits with his right hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 54808169,
+    "w3CTraceId": "34907f8fb77a199b03188e0a75304b67",
+    "isTrimmed": false
+}

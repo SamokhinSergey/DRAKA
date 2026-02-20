@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83c1-b781-74e2-943a-de281c067845.pose.json",
+    "prompt": "A Russian policeman HARD  punches his opponent in the head with his right hand.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1579515607,
+    "w3CTraceId": "db61acfe1f142e5e0fc7d18c72b2ae66",
+    "isTrimmed": false
+}

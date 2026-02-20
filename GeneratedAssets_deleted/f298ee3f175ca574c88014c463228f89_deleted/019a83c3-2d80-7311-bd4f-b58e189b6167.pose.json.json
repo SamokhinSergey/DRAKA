@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83c3-2d80-7311-bd4f-b58e189b6167.pose.json",
+    "prompt": "A Russian policeman lands a powerful  hand punch to his opponent's head.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1982109898,
+    "w3CTraceId": "b3de6ff575bedb595b126fbc0197852c",
+    "isTrimmed": false
+}

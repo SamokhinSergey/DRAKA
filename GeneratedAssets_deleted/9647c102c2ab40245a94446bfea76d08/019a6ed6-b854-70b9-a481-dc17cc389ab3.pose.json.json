@@ -1,0 +1,11 @@
+{
+    "asset": "9647c102c2ab40245a94446bfea76d08",
+    "fileName": "019a6ed6-b854-70b9-a481-dc17cc389ab3.pose.json",
+    "prompt": "Punch from this pose",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1015352768,
+    "w3CTraceId": "1a2baffa99fd8e3bd47c537c654ef97f",
+    "isTrimmed": false
+}

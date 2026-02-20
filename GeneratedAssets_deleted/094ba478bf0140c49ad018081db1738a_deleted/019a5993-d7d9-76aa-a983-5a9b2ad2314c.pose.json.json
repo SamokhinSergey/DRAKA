@@ -1,0 +1,11 @@
+{
+    "asset": "094ba478bf0140c49ad018081db1738a",
+    "fileName": "019a5993-d7d9-76aa-a983-5a9b2ad2314c.pose.json",
+    "prompt": "IDLE of very old grandmother",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1350867594,
+    "w3CTraceId": "ec8269cd1373c2c3d846eda340e1a406",
+    "isTrimmed": false
+}

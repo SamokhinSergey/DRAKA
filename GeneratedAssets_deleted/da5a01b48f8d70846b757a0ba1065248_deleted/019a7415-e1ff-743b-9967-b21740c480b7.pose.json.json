@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7415-e1ff-743b-9967-b21740c480b7.pose.json",
+    "prompt": "Animation for a 2D fighting game. The grandmother puts her hands behind her head to protect herself. BLOCK IDLE!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1104597279,
+    "w3CTraceId": "dcff1ad310f84c41bd379caca281947e",
+    "isTrimmed": false
+}

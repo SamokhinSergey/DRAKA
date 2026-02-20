@@ -1,0 +1,11 @@
+{
+    "asset": "2d631788104525f479e8b7ad1c87a3fa",
+    "fileName": "019a9ca6-aade-76a1-85c1-b381ba14af78.pose.json",
+    "prompt": "Create a blocking animation where the character throws their head back slightly, while both arms are fully extended forward and crossed at the wrists in front of the chest. The arms should be straight and locked, forming a strong defensive barrier. The legs should be slightly bent for stability, and the body should be leaned back to convey a grounded and determined stance. The facial expression should show focus and intensity, as if the character is bracing for an incoming attack",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 331395897,
+    "w3CTraceId": "eed20834529e0f70dd87bd0e21e68843",
+    "isTrimmed": false
+}

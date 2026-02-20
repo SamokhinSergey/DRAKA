@@ -1,0 +1,11 @@
+{
+    "asset": "d0a981eade1c3104e84a1cdc4a921ffb",
+    "fileName": "019a6d84-2bc1-7f70-8a92-bacff5f14b62.pose.json",
+    "prompt": "idle Squat Position. looped ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1991395793,
+    "w3CTraceId": "2cdd8819f15562846f503643fabd2fa0",
+    "isTrimmed": false
+}

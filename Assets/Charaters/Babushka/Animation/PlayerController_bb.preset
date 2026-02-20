@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerController_bb
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: cee5c4296e5c6224d84d97bcbd4e9b3b, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: Assembly-CSharp::PlayerController
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: health
+    value: 100
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: attackDamage
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: groinDamage
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: headDamage
+    value: 50
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: moveSpeed
+    value: 1.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: jumpForce
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: animator
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: walkAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 6e889b26f3175d140aeb66eef7cc5855, type: 2}
+  - target: {fileID: 0}
+    propertyPath: jumpAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 6e889b26f3175d140aeb66eef7cc5855, type: 2}
+  - target: {fileID: 0}
+    propertyPath: crouchAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: dc32b50ea0d757540a96cb13f6ab5038, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upperAttackAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 18db7b1636255384d9618938b45a42ce, type: 2}
+  - target: {fileID: 0}
+    propertyPath: lowerAttackAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: b4c6937258c6d714091680655a73c1df, type: 2}
+  - target: {fileID: 0}
+    propertyPath: crouchAttackAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: b4c6937258c6d714091680655a73c1df, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upperBlockAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 0a065478d9fb17147b23b9eca68953ee, type: 2}
+  - target: {fileID: 0}
+    propertyPath: lowerBlockAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 007d7ad5039f3a64084a229924f376bd, type: 2}
+  - target: {fileID: 0}
+    propertyPath: groinShotAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 2d2afbabc5cc3e741af4d7a449c0028e, type: 2}
+  - target: {fileID: 0}
+    propertyPath: headShotAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: 9d125774a1aa5874bbeb73963edb826e, type: 2}
+  - target: {fileID: 0}
+    propertyPath: fallAnimation
+    value: 
+    objectReference: {fileID: 7400000, guid: e29fc66e92ffbab44b1cba30cfbf308b, type: 2}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

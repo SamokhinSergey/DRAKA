@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a6cb4-06e5-7c9c-bc1a-d4fddc389e0a.pose.json",
+    "prompt": "Walk Animation for a 2D fighting game from a side view. A very old and sick grandmother walks slowly with a limp. LEGS MUST BE ANIMATED FORWARD ONLY WITHOUT USING THE Z-AXIS. GAME IS FROM A SIDE VIEW.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 322707239,
+    "w3CTraceId": "254b9dd9705fe95be3a00540b89aae76",
+    "isTrimmed": false
+}

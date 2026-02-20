@@ -1,0 +1,13 @@
+{
+    "asset": "3097670d7b45dc94a9fbab1fd8a3a538",
+    "fileName": "019ae477-08c6-7bd6-bea4-62f078f9b53e.wav",
+    "prompt": "Create a short, absurd and meme-style victory theme for a comedic fighting game. The music should feel chaotic, over-the-top, and intentionally ridiculous. Use exaggerated orchestral hits mixed with goofy sound effects (like cartoon whooshes, slide whistles, kazoo, squeaky toys, or distorted vocal grunts). Add an upbeat, Slavic-inspired melody played on balalaika or accordion, but make it comically fast and slightly off-kilter. The track should feel like a mix of heroic fanfare and internet meme chaos — energetic, funny, and instantly recognizable as a joke victory theme",
+    "negativePrompt": "",
+    "model": "6ab5371b-d771-4e55-b856-fb0296eaf50c",
+    "modelName": "Beatoven Music Generation",
+    "customSeed": -1,
+    "w3CTraceId": "6649eb762bcb8946070f4c22487320a9",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

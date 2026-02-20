@@ -1,0 +1,13 @@
+{
+    "asset": "ca7f815c13bab8f43b267ecef28dd960",
+    "fileName": "019ac162-4262-7670-abc9-8fa756342754.wav",
+    "prompt": "Sound effect for a character receiving damage",
+    "negativePrompt": "",
+    "model": "7df9b85a-1695-49f7-89bf-988208d5a3bc",
+    "modelName": "Meta MusicGen",
+    "customSeed": -1,
+    "w3CTraceId": "df31f7bb5174ecff480a306036c5101f",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

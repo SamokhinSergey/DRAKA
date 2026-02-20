@@ -1,0 +1,20 @@
+{
+    "asset": "6827d0881727f8a4b9596978fe8b2df8",
+    "fileName": "019ac477-c17e-7515-ad44-d9f0b674941c.jpg",
+    "prompt": "USSR medal ",
+    "negativePrompt": "",
+    "model": "cad83eae-99e7-409d-a28c-0c84537b3787",
+    "modelName": "Card Frames",
+    "customSeed": -1,
+    "w3CTraceId": "809a19ba4ef52dd49a61234f68df28d6",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

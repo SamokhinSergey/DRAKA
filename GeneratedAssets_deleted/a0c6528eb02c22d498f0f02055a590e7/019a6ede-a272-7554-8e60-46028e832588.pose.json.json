@@ -1,0 +1,11 @@
+{
+    "asset": "a0c6528eb02c22d498f0f02055a590e7",
+    "fileName": "019a6ede-a272-7554-8e60-46028e832588.pose.json",
+    "prompt": "A right hand strike from a squatting position, sitting in a squat, WITHOUT STANDING OR SITTING OUT",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 887832728,
+    "w3CTraceId": "da9d0b519ed9355fae2a8fbb9497ba6f",
+    "isTrimmed": false
+}

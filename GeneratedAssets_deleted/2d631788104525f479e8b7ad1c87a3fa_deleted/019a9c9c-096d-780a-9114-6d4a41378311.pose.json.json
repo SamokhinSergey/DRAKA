@@ -1,0 +1,11 @@
+{
+    "asset": "2d631788104525f479e8b7ad1c87a3fa",
+    "fileName": "019a9c9c-096d-780a-9114-6d4a41378311.pose.json",
+    "prompt": "Policeman upper block pose IDLE ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1195679186,
+    "w3CTraceId": "d46ee4c97e6332c16a36fde9628b1d5b",
+    "isTrimmed": false
+}

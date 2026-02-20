@@ -1,0 +1,11 @@
+{
+    "asset": "6042a2cfdc5330e47beecabbe6e91cc0",
+    "fileName": "019a5998-204c-7482-ad62-aad486c0697a.pose.json",
+    "prompt": "very old grandmother slowely walk",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1299655139,
+    "w3CTraceId": "b9233f899323dad39ecf96794c15218c",
+    "isTrimmed": false
+}

@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019adfee-839b-7ebc-a511-e5ccb13807e5.wav",
+    "prompt": "Say win replic \"MYCOP WINS\" like from fighting game",
+    "negativePrompt": "",
+    "model": "63463307-7362-4155-a628-25deab99fd57",
+    "modelName": "Beatoven Sound Effect",
+    "customSeed": -1,
+    "w3CTraceId": "38100ea7946d42bdd6c8f2c413a13ec9",
+    "duration": 2.069999933242798,
+    "autoTrim": true,
+    "hasReference": false
+}

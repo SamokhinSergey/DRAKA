@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7d52-9d09-745c-9585-cf2177fab9d2.pose.json",
+    "prompt": "Animation of dead figting game",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1674798366,
+    "w3CTraceId": "d98048ea85e23300c71498a20e6e2b05",
+    "isTrimmed": false
+}

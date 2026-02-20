@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83ac-4f51-7a13-a7aa-769dbeb1af13.pose.json",
+    "prompt": "Russian police walking animation. The head should not move along the Z-axis LOPPED",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1607367242,
+    "w3CTraceId": "521cb4e058407672af25e5d321548574",
+    "isTrimmed": false
+}

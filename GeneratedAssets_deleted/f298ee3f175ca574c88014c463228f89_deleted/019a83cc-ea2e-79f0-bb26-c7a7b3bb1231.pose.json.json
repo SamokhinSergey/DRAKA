@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a83cc-ea2e-79f0-bb26-c7a7b3bb1231.pose.json",
+    "prompt": "right hand attack",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1822223548,
+    "w3CTraceId": "d5f14d12609d82bd50fa562566f23911",
+    "isTrimmed": false
+}

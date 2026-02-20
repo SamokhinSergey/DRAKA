@@ -1,0 +1,11 @@
+{
+    "asset": "f298ee3f175ca574c88014c463228f89",
+    "fileName": "019a96e9-e0a1-7f14-aac3-32b8eeba19f8.pose.json",
+    "prompt": "\r\nThe police officer is in a crouching position",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 854298883,
+    "w3CTraceId": "82a51eb7440683f0894eef28ed6ab133",
+    "isTrimmed": false
+}

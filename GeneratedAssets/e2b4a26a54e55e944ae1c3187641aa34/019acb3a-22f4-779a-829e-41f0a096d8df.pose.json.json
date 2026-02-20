@@ -1,0 +1,11 @@
+{
+    "asset": "a5f60b220845bf84bb61c0b498a9156c",
+    "fileName": "019acb3a-22f4-779a-829e-41f0a096d8df.pose.json",
+    "prompt": "Create an animation where the character leans their upper body strongly backward first, arching the spine as if preparing for a powerful spit. After a brief anticipation pause, the character quickly snaps forward with force, thrusting the head and shoulders forward in a sharp motion, performing a strong, exaggerated spit. The gesture should look angry and expressive. The arms should react naturally to the motion, slightly swinging back when leaning and moving forward during the spit. The legs remain planted, providing stability for the dramatic movement.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1520229006,
+    "w3CTraceId": "66eacdafe0a331eef446a40289f8c7a8",
+    "isTrimmed": false
+}

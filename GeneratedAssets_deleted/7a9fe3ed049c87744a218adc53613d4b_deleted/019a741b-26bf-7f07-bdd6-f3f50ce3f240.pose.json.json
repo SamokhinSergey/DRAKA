@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a741b-26bf-7f07-bdd6-f3f50ce3f240.pose.json",
+    "prompt": "Animation for a 2D fighting game. Grandma PUTS HER HANDS BEFORE HER HEAD to defend herself.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 156520951,
+    "w3CTraceId": "c789b796c7f03affdd4c5e88e6cdaafd",
+    "isTrimmed": false
+}

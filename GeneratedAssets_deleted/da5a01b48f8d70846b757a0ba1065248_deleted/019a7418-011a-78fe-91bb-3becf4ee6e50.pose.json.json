@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7418-011a-78fe-91bb-3becf4ee6e50.pose.json",
+    "prompt": "Анимация для 2D-файтинга. Бабушка ВЫСТАВЛЯЕТ РУКИ ВПЕРЕД ГОЛОВЫ, чтобы защититься. БЛОКИРОВКА!",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 592118562,
+    "w3CTraceId": "50145e39aeb0d8b5722a2c8a4b484064",
+    "isTrimmed": false
+}

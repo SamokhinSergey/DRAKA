@@ -1,0 +1,11 @@
+{
+    "asset": "2d2afbabc5cc3e741af4d7a449c0028e",
+    "fileName": "019a76d0-42a0-7301-896a-2932dbcb7be9.pose.json",
+    "prompt": "groinshot animation for receiving damage in the groin area",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 919922793,
+    "w3CTraceId": "7dd7e129e02f1e1aec37f92f5c3b55b5",
+    "isTrimmed": false
+}

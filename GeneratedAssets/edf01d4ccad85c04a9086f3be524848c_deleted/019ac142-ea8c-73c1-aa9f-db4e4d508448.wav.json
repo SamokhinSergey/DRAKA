@@ -1,0 +1,13 @@
+{
+    "asset": "edf01d4ccad85c04a9086f3be524848c",
+    "fileName": "019ac142-ea8c-73c1-aa9f-db4e4d508448.wav",
+    "prompt": "an elderly woman gets hit in the head",
+    "negativePrompt": "",
+    "model": "63463307-7362-4155-a628-25deab99fd57",
+    "modelName": "Beatoven Sound Effect",
+    "customSeed": -1,
+    "w3CTraceId": "c166c10b7b1785bea8907853a41a80a3",
+    "duration": 1.090000033378601,
+    "autoTrim": true,
+    "hasReference": false
+}

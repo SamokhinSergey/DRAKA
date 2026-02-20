@@ -1,0 +1,11 @@
+{
+    "asset": "a0c6528eb02c22d498f0f02055a590e7",
+    "fileName": "019a6edc-51d2-79c3-b167-afb962a3f17d.pose.json",
+    "prompt": "Right hand strike from a crouching position",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 959401288,
+    "w3CTraceId": "09cd3d0ff1e6fb5e538abe9ee3f8ac5b",
+    "isTrimmed": false
+}

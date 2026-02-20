@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019ae026-d4e9-7a82-a457-8b992c70fce4.wav",
+    "prompt": "Say \"OFICEKING  WINS\" for FIGHTING GAME",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "32bc394898e486c17818d66f1816804e",
+    "duration": 2.069999933242798,
+    "autoTrim": true,
+    "hasReference": false
+}

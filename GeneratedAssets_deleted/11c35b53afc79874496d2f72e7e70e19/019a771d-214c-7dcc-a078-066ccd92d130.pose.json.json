@@ -1,0 +1,11 @@
+{
+    "asset": "11c35b53afc79874496d2f72e7e70e19",
+    "fileName": "019a771d-214c-7dcc-a078-066ccd92d130.pose.json",
+    "prompt": "gets hit hard in the head with a fist, his head falls back, his whole body shakes",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 353017848,
+    "w3CTraceId": "99be1c81b2f160e4946702fe1346d96b",
+    "isTrimmed": false
+}

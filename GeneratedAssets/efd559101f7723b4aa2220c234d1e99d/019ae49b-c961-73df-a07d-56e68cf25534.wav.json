@@ -1,0 +1,13 @@
+{
+    "asset": "efd559101f7723b4aa2220c234d1e99d",
+    "fileName": "019ae49b-c961-73df-a07d-56e68cf25534.wav",
+    "prompt": "SAY \"SOMNITELNO BUT K.O\" LIKE IN THE FIGHTIBG GAME",
+    "negativePrompt": "",
+    "model": "63463307-7362-4155-a628-25deab99fd57",
+    "modelName": "Beatoven Sound Effect",
+    "customSeed": -1,
+    "w3CTraceId": "0805b514464a35576b20458535bc62a2",
+    "duration": 1.5299999713897706,
+    "autoTrim": true,
+    "hasReference": false
+}

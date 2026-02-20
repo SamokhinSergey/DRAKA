@@ -1,0 +1,13 @@
+{
+    "asset": "a37fd558826eef240b52aab7d39a623b",
+    "fileName": "019ac153-5360-7cae-91dd-bb2ff930b15c.wav",
+    "prompt": "an elderly woman cry",
+    "negativePrompt": "music, noise",
+    "model": "6ab5371b-d771-4e55-b856-fb0296eaf50c",
+    "modelName": "Beatoven Music Generation",
+    "customSeed": -1,
+    "w3CTraceId": "aa4d4a0ef21bc3dcf9207246fca1e175",
+    "duration": 1.3600000143051148,
+    "autoTrim": true,
+    "hasReference": false
+}

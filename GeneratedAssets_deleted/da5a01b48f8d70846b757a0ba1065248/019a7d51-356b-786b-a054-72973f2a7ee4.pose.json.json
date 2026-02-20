@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a7d51-356b-786b-a054-72973f2a7ee4.pose.json",
+    "prompt": "Animation of a woman running out of health: an elderly woman comically falls and never gets up again.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 837822348,
+    "w3CTraceId": "d0c8eb1a3492b7616cfd023365e77f40",
+    "isTrimmed": false
+}

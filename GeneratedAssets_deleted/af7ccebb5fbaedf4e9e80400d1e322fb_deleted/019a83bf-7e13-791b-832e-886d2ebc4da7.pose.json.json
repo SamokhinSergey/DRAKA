@@ -1,0 +1,11 @@
+{
+    "asset": "af7ccebb5fbaedf4e9e80400d1e322fb",
+    "fileName": "019a83bf-7e13-791b-832e-886d2ebc4da7.pose.json",
+    "prompt": "A Russian policeman punches his opponent in the head with his right hand.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1041524591,
+    "w3CTraceId": "97f8b7ad41eda8497ab998a1693f0194",
+    "isTrimmed": false
+}

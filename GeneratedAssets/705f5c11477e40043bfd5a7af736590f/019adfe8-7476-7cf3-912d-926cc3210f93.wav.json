@@ -1,0 +1,13 @@
+{
+    "asset": "705f5c11477e40043bfd5a7af736590f",
+    "fileName": "019adfe8-7476-7cf3-912d-926cc3210f93.wav",
+    "prompt": "Say charecter name \"BABUSHKA WINS\" like from fighting game",
+    "negativePrompt": "",
+    "model": "63463307-7362-4155-a628-25deab99fd57",
+    "modelName": "Beatoven Sound Effect",
+    "customSeed": -1,
+    "w3CTraceId": "e25b9dd31adfe269664e0488e9d2ea1f",
+    "duration": 1.7999999523162842,
+    "autoTrim": true,
+    "hasReference": false
+}

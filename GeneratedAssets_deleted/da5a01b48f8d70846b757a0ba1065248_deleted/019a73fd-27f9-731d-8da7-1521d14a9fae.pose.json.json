@@ -1,0 +1,11 @@
+{
+    "asset": "da5a01b48f8d70846b757a0ba1065248",
+    "fileName": "019a73fd-27f9-731d-8da7-1521d14a9fae.pose.json",
+    "prompt": "Block crouch!  IDLE pose from crouch! pose for 2D side view game",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1708781667,
+    "w3CTraceId": "ce8fa60ad78d85743a970254987cbd26",
+    "isTrimmed": false
+}

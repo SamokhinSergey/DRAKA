@@ -1,0 +1,11 @@
+{
+    "asset": "fdef72583f40967428fddbb78a3fca3a",
+    "fileName": "019a6ecf-2ab1-7f0f-9b26-d5ae849e2af5.pose.json",
+    "prompt": "grandmother sit in a chrotch pose and her with his right hand. Animation for 2D side view parody fighting ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 947882218,
+    "w3CTraceId": "edc52f502c2eb0af7af867aa0224e594",
+    "isTrimmed": false
+}

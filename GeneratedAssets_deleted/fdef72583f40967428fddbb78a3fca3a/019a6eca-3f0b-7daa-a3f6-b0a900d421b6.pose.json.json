@@ -1,0 +1,11 @@
+{
+    "asset": "fdef72583f40967428fddbb78a3fca3a",
+    "fileName": "019a6eca-3f0b-7daa-a3f6-b0a900d421b6.pose.json",
+    "prompt": "right hand strike from a chrotch  position for a side-view game",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 569067751,
+    "w3CTraceId": "205a4842b9f3c7030f1308d468d6b2f4",
+    "isTrimmed": false
+}
