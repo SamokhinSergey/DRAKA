@@ -13,11 +13,8 @@ public class MyCopSpecialAbility : SpecialAbilityBase
 
     [Header("Impact Feedback")]
     public AudioClip highKickSound;
-    public AudioClip glitchImpactSound;
     [Range(0f, 1f)] public float highKickVolume = 1f;
-    [Range(0f, 1f)] public float glitchImpactVolume = 0.8f;
     [Range(0.75f, 1.5f)] public float highKickPitch = 1.08f;
-    [Range(0.75f, 1.8f)] public float glitchImpactPitch = 1.22f;
     [Range(0f, 1f)] public float highKickDistortion = 0.86f;
     public float highKickDistortionDuration = 0.22f;
     public float impactShakeScale = 1f;
@@ -25,7 +22,6 @@ public class MyCopSpecialAbility : SpecialAbilityBase
 
     private const string TakeBigDamageParam = "TakeBigDamage";
     private const string HighKickAssetPath = "Assets/Sounds/high_kick.mp3";
-    private const string GlitchImpactAssetPath = "Assets/Sounds/cursed_short.mp3";
 
     private DynamicCameraController cameraController;
     private AudioSource impactAudioSource;
@@ -59,10 +55,6 @@ public class MyCopSpecialAbility : SpecialAbilityBase
         if (highKickSound == null)
         {
             highKickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>(HighKickAssetPath);
-        }
-        if (glitchImpactSound == null)
-        {
-            glitchImpactSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>(GlitchImpactAssetPath);
         }
 #endif
     }
@@ -219,12 +211,6 @@ public class MyCopSpecialAbility : SpecialAbilityBase
         {
             impactAudioSource.pitch = highKickPitch;
             impactAudioSource.PlayOneShot(highKickSound, highKickVolume);
-        }
-
-        if (impactAudioSource != null && glitchImpactSound != null)
-        {
-            impactAudioSource.pitch = glitchImpactPitch;
-            impactAudioSource.PlayOneShot(glitchImpactSound, glitchImpactVolume);
         }
 
         if (impactDistortionFilter != null)
