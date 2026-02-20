@@ -27,9 +27,12 @@ public class MyCopSpecialAbility : SpecialAbilityBase
     private AudioSource impactAudioSource;
     private AudioDistortionFilter impactDistortionFilter;
     private Coroutine resetDistortionCoroutine;
+    private PlayerController selfPlayerController;
 
     private void Awake()
     {
+        selfPlayerController = GetComponent<PlayerController>();
+
         Camera cam = Camera.main;
         if (cam != null)
         {
@@ -95,7 +98,7 @@ public class MyCopSpecialAbility : SpecialAbilityBase
 
             StartCoroutine(SpinAndRecover(rb, pc, anim, lockedZ, dir));
 
-            ReduceHealth(pc);
+            pc.ApplyDamage("head", "special", selfPlayerController);
             hitApplied = true;
         }
 
@@ -169,13 +172,6 @@ public class MyCopSpecialAbility : SpecialAbilityBase
             if (p.type == AnimatorControllerParameterType.Bool && p.name == name)
                 return true;
         return false;
-    }
-
-    private static void ReduceHealth(PlayerController pc)
-    {
-        pc.health /= 2;
-        if (pc.health < 0.5f) pc.health = 0f;
-        Debug.Log($"[MyCop] Здоровье после удара: {pc.health}");
     }
 
     private void PlayImpactFeedback()

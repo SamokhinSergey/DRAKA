@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public float attackDamage = 25f;
     public float groinDamage = 20f;
     public float headDamage = 50f;
+    [Tooltip("Multiplier for special attacks.")]
+    public float specialAttackMultiplier = 3f;
 
 
     [Header("Movement Settings")]
@@ -440,24 +442,43 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
                 {
                     if (attackType == "upper")
                     {
-                        otherPlayer.ApplyDamage("head", "upper");
+                        otherPlayer.ApplyDamage("head", "upper", this);
                     }
                     else if (attackType == "lower" || attackType == "crouch")
                     {
-                        otherPlayer.ApplyDamage("groin", attackType);
+                        otherPlayer.ApplyDamage("groin", attackType, this);
                     }
                 }
             }
         }
     }
 
-    public void ApplyDamage(string hitArea, string attackType)
+    public float GetDamageForAttack(string attackType, string hitArea)
     {
-        float specialAttackCoef = 1f;
-        if (attackType == "special")
+        switch (attackType)
         {
-            specialAttackCoef = 3f;
+            case "upper":
+                return headDamage;
+            case "lower":
+            case "crouch":
+                return groinDamage;
+            case "special":
+            {
+                float baseDamage = hitArea == "head" ? headDamage : groinDamage;
+                return baseDamage * specialAttackMultiplier;
+            }
+            default:
+                return attackDamage;
         }
+    }
+
+    public void ApplyDamage(string hitArea, string attackType, PlayerController attacker = null, float damageOverride = -1f)
+    {
+        float incomingDamage = damageOverride >= 0f
+            ? damageOverride
+            : (attacker != null
+                ? attacker.GetDamageForAttack(attackType, hitArea)
+                : GetDamageForAttack(attackType, hitArea));
 
         if (isTakingDamage || isDead) return;
 
@@ -492,13 +513,13 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
 
         if (hitArea == "groin")
         {
-            health -= groinDamage * specialAttackCoef;
+            health -= incomingDamage;
             animator.SetBool("GroinShot", true);
             StartCoroutine(PlayDamageAnimation(groinShotAnimation, "GroinShot"));
         }
         else if (hitArea == "head")
         {
-            health -= headDamage * specialAttackCoef;
+            health -= incomingDamage;
             animator.SetBool("HeadShot", true);
             StartCoroutine(PlayDamageAnimation(headShotAnimation, "HeadShot"));
         }
@@ -600,15 +621,16 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     {
         // Determine the hit area based on the collision position
         Vector3 hitPosition = damageObject.transform.position;
+        string hitArea = hitPosition.y > transform.position.y + 1f ? "head" : "groin";
 
-        if (hitPosition.y > transform.position.y + 1f) // Adjust the threshold for "head" hit
+        PlayerController attacker = null;
+        SalivaProjectile salivaProjectile = damageObject.GetComponent<SalivaProjectile>();
+        if (salivaProjectile != null && salivaProjectile.owner != null)
         {
-            ApplyDamage("head", "special");
+            attacker = salivaProjectile.owner.GetComponent<PlayerController>();
         }
-        else
-        {
-            ApplyDamage("groin", "special");
-        }
+
+        ApplyDamage(hitArea, "special", attacker);
 
         // Destroy the damage object after collision
         Destroy(damageObject);
