@@ -11,6 +11,13 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Reaction after attacking")]
     public int attack_delay;
+    [Header("Kick Timing")]
+    [Tooltip("Normalized kick contact point (0..1 of kick animation).")]
+    public float kickHitNormalized = 0.45f;
+    [Tooltip("Fallback seconds from kick start to damage application when normalized timing is disabled.")]
+    public float kickHitDelay = 0.2f;
+    [Tooltip("Maximum kick attack duration in seconds.")]
+    public float kickMaxDuration = 0.65f;
 
     [Header("Character name")]
     public string characterName;
@@ -43,6 +50,7 @@ public class PlayerController : MonoBehaviour
     public AnimationClip upperAttackAnimation;
     public AnimationClip lowerAttackAnimation;
     public AnimationClip crouchAttackAnimation;
+    public AnimationClip kickAttackAnimation;
     public AnimationClip upperBlockAnimation;
     public AnimationClip lowerBlockAnimation;
     public AnimationClip groinShotAnimation;
@@ -97,6 +105,7 @@ public class PlayerController : MonoBehaviour
     private Transform _opponentTransform;
     private float _yawFacingRight;
     private float _yawFacingLeft;
+    private PlayerInput _playerInput;
 
 
     private bool hasTakeBigDamageParameter = false;
@@ -108,6 +117,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody component is missing! Please add a Rigidbody to the Player GameObject.");
@@ -165,6 +175,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        HandleKickInput();
         HandleMovement();
         UpdateFacingDirection();
 
@@ -328,6 +339,14 @@ private void HandleMovement()
         }
     }
 
+    public void OnKickAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            TryKickAttack();
+        }
+    }
+
     public void OnBlock(InputAction.CallbackContext context)
     {
         if (context.started && !IsActionRestricted())
@@ -385,9 +404,61 @@ private void HandleMovement()
         isAttacking = false; // Reset attacking state
     }
 
+    private void HandleKickInput()
+    {
+        if (!CanStartKickAttack())
+        {
+            return;
+        }
+
+        if (kickAttackAnimation == null)
+        {
+            return;
+        }
+
+        // Ignore raw device input for inactive PlayerInput owners (e.g. AI-controlled players).
+        if (_playerInput != null && !_playerInput.inputIsActive)
+        {
+            return;
+        }
+
+        bool isPlayer1 = gameObject.name == "Player1";
+        bool isPlayer2 = gameObject.name == "Player2";
+
+        // Input ownership split to avoid cross-triggering on shared devices:
+        // Player1 kick -> Gamepad A, Player2 kick -> Right Ctrl.
+        bool keyboardKick = isPlayer2 && Keyboard.current != null && Keyboard.current.rightCtrlKey.wasPressedThisFrame;
+        bool gamepadKick = isPlayer1 && Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame;
+
+        if (keyboardKick || gamepadKick)
+        {
+            TryKickAttack();
+        }
+    }
+
+    private bool CanStartKickAttack()
+    {
+        return !isAttacking && !isBlocking && !isCrouching && !isTakingDamage && !isDead;
+    }
+
+    private void TryKickAttack()
+    {
+        if (!CanStartKickAttack())
+        {
+            return;
+        }
+
+        AnimationClip clipToUse = kickAttackAnimation != null ? kickAttackAnimation : lowerAttackAnimation;
+        StartCoroutine(PerformAttack(clipToUse, "kick"));
+    }
+
 private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     {
-        animator.SetBool("Attack", true);
+        bool usesAttackBool = attackType != "kick";
+        if (usesAttackBool)
+        {
+            animator.SetBool("Attack", true);
+        }
         isAttacking = true;
         
         // IMPORTANT: If this is a crouch attack, ensure Crouch bool stays true
@@ -414,11 +485,30 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         PlaySound(attackSound);
 
         // Ждём момента удара: clip.length / attack_delay при ТЕКУЩЕЙ скорости аниматора.
-        float hitThreshold = 1f / attack_delay;
+        float effectiveDuration = clip.length;
+        float hitThreshold;
+        if (attackType == "kick")
+        {
+            effectiveDuration = Mathf.Min(clip.length, Mathf.Max(0.1f, kickMaxDuration));
+            float kickHitTime;
+            if (kickHitNormalized > 0f)
+            {
+                kickHitTime = Mathf.Clamp01(kickHitNormalized) * effectiveDuration;
+            }
+            else
+            {
+                kickHitTime = Mathf.Clamp(kickHitDelay, 0f, effectiveDuration);
+            }
+            hitThreshold = Mathf.Clamp01(kickHitTime / effectiveDuration);
+        }
+        else
+        {
+            hitThreshold = 1f / attack_delay;
+        }
         float normalizedTime = 0f;
         while (normalizedTime < hitThreshold)
         {
-            normalizedTime += Time.deltaTime * (animator != null && animator.speed > 0f ? animator.speed : 1f) / clip.length;
+            normalizedTime += Time.deltaTime * (animator != null && animator.speed > 0f ? animator.speed : 1f) / effectiveDuration;
             yield return null;
         }
         ApplyAttackDamage(attackType);
@@ -426,12 +516,15 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         // Ждём окончания анимации
         while (normalizedTime < 1f)
         {
-            normalizedTime += Time.deltaTime * (animator != null && animator.speed > 0f ? animator.speed : 1f) / clip.length;
+            normalizedTime += Time.deltaTime * (animator != null && animator.speed > 0f ? animator.speed : 1f) / effectiveDuration;
             yield return null;
         }
 
         isAttacking = false;
-        animator.SetBool("Attack", false);
+        if (usesAttackBool)
+        {
+            animator.SetBool("Attack", false);
+        }
         
         // After attack finishes, restore crouch state if we were crouching
         if (wasCrouchingBeforeAttack && isCrouching)
@@ -455,7 +548,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
                     {
                         otherPlayer.ApplyDamage("head", "upper", this);
                     }
-                    else if (attackType == "lower" || attackType == "crouch")
+                    else if (attackType == "lower" || attackType == "crouch" || attackType == "kick")
                     {
                         otherPlayer.ApplyDamage("groin", attackType, this);
                     }
@@ -473,6 +566,8 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
             case "lower":
             case "crouch":
                 return groinDamage;
+            case "kick":
+                return attackDamage;
             case "special":
             {
                 float baseDamage = hitArea == "head" ? headDamage : groinDamage;
@@ -498,7 +593,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
 
         if (isBlocking)
         {
-            if (isCrouching && (attackType == "lower" || attackType == "crouch"))
+            if (isCrouching && (attackType == "lower" || attackType == "crouch" || attackType == "kick"))
             {
                 Debug.Log("Lower or crouch attack bypasses upper block.");
             }

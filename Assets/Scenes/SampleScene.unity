@@ -1257,6 +1257,7 @@ MonoBehaviour:
   upperAttackAnimation: {fileID: 7400000, guid: 74f802d2f3e203b4486fac7248ff5493, type: 2}
   lowerAttackAnimation: {fileID: 7400000, guid: 22c64238bf91e8943be6d36029e6ea55, type: 2}
   crouchAttackAnimation: {fileID: 7400000, guid: d361aee0193676e42b7cdacfab6d70e9, type: 2}
+  kickAttackAnimation: {fileID: 7400000, guid: 813df2a82da023f4390192392eb14c9f, type: 2}
   upperBlockAnimation: {fileID: 7400000, guid: 4ca68a50315d0004695198f86ecb02b5, type: 2}
   lowerBlockAnimation: {fileID: 7400000, guid: 0dbe2577324ce844986e38cef401ff6a, type: 2}
   groinShotAnimation: {fileID: 7400000, guid: 834d35341fc96ac42bbb5b515d02d2c9, type: 2}
@@ -1879,6 +1880,7 @@ MonoBehaviour:
   upperAttackAnimation: {fileID: 7400000, guid: 18db7b1636255384d9618938b45a42ce, type: 2}
   lowerAttackAnimation: {fileID: 7400000, guid: b4c6937258c6d714091680655a73c1df, type: 2}
   crouchAttackAnimation: {fileID: 7400000, guid: b4c6937258c6d714091680655a73c1df, type: 2}
+  kickAttackAnimation: {fileID: 7400000, guid: 85a964c51f52d2142b950133ca4f0cd8, type: 2}
   upperBlockAnimation: {fileID: 7400000, guid: 0a065478d9fb17147b23b9eca68953ee, type: 2}
   lowerBlockAnimation: {fileID: 7400000, guid: 007d7ad5039f3a64084a229924f376bd, type: 2}
   groinShotAnimation: {fileID: 7400000, guid: 2d2afbabc5cc3e741af4d7a449c0028e, type: 2}
