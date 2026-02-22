@@ -389,6 +389,13 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     {
         animator.SetBool("Attack", true);
         isAttacking = true;
+        
+        // IMPORTANT: If this is a crouch attack, ensure Crouch bool stays true
+        bool wasCrouchingBeforeAttack = isCrouching;
+        if (attackType == "crouch")
+        {
+            animator.SetBool("Crouch", true);
+        }
 
         if (clip == null)
         {
@@ -407,10 +414,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         PlaySound(attackSound);
 
         // Ждём момента удара: clip.length / attack_delay при ТЕКУЩЕЙ скорости аниматора.
-        // Читаем speed каждый кадр через WaitUntil чтобы не фиксировать значение заранее.
-        // Накапливаем «нормализованное» время: каждый кадр прибавляем (Time.deltaTime * animator.speed / clip.length)
-        // и ждём пока не достигнем порога 1f/attack_delay (т.е. нужной доли анимации).
-        float hitThreshold = 1f / attack_delay;   // доля анимации, в которой наносится удар
+        float hitThreshold = 1f / attack_delay;
         float normalizedTime = 0f;
         while (normalizedTime < hitThreshold)
         {
@@ -419,7 +423,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         }
         ApplyAttackDamage(attackType);
 
-        // Ждём окончания анимации (оставшееся время до normalizedTime == 1)
+        // Ждём окончания анимации
         while (normalizedTime < 1f)
         {
             normalizedTime += Time.deltaTime * (animator != null && animator.speed > 0f ? animator.speed : 1f) / clip.length;
@@ -428,6 +432,13 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
 
         isAttacking = false;
         animator.SetBool("Attack", false);
+        
+        // After attack finishes, restore crouch state if we were crouching
+        if (wasCrouchingBeforeAttack && isCrouching)
+        {
+            animator.SetBool("Crouch", true);
+            PlayAnimation(crouchAnimation);
+        }
     }
 
     private void ApplyAttackDamage(string attackType)
