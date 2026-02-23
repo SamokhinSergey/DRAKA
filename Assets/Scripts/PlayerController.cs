@@ -1016,6 +1016,8 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     {
         if (isCursed || isDead) return;
 
+        ScreenNotificationSystem.ShowForPlayer(this, "CURSE");
+
         if (_curseCoroutine != null)
             StopCoroutine(_curseCoroutine);
 
