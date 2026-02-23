@@ -18,8 +18,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [Header("Throw Animation")]
     [SerializeField] private float spinSpeedStart = 2600f;
     [SerializeField] private float spinSpeedEnd = 140f;
-    [SerializeField] private float shakeStrength = 22f;
-    [SerializeField] private float bounceScale = 0.22f;
+    [SerializeField] private float shakeStrength = 28f;
 
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
@@ -45,7 +44,9 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
         if (timerText == null)
         {
-            Transform timer = transform.Find("DiceTimerText");
+            Transform timer = transform.parent != null ? transform.parent.Find("MyCopDebuffTimerText") : null;
+            if (timer == null)
+                timer = transform.Find("DiceTimerText");
             if (timer != null) timerText = timer.GetComponent<TextMeshProUGUI>();
         }
 
@@ -53,7 +54,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             diceImage = GetComponent<Image>();
 
         if (timerText == null)
-            timerText = CreateTimerText();
+            Debug.LogWarning("[MyCopDebuffDiceUI] Timer text is not assigned. Assign MyCopDebuffTimerText in scene.");
     }
 
     private void Start()
@@ -104,7 +105,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             float t = elapsed / rollAnimationSeconds;
             float damp = 1f - t;
             float spinSpeed = Mathf.Lerp(spinSpeedStart, spinSpeedEnd, t);
-            transform.localRotation *= Quaternion.Euler(0f, 0f, spinSpeed * Time.deltaTime);
+            transform.localRotation *= Quaternion.Euler(spinSpeed * Time.deltaTime, 0f, 0f);
 
             float shake = shakeStrength * damp;
             if (rectTransform != null)
@@ -113,9 +114,6 @@ public class MyCopDebuffDiceUI : MonoBehaviour
                 float sy = Random.Range(-shake, shake) * 0.6f;
                 rectTransform.anchoredPosition = baseAnchoredPosition + new Vector2(sx, sy);
             }
-
-            float bounce = 1f + Mathf.Sin(t * Mathf.PI * 5f) * bounceScale * damp;
-            transform.localScale = baseScale * bounce;
 
             elapsed += Time.deltaTime;
             yield return null;
@@ -162,37 +160,4 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         timerText.text = $"{minutes}:{secs:00}";
     }
 
-    private TextMeshProUGUI CreateTimerText()
-    {
-        GameObject go = new GameObject("DiceTimerText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
-        go.transform.SetParent(transform, false);
-
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 0.5f);
-        rt.anchorMax = new Vector2(0.5f, 0.5f);
-        rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.anchoredPosition = new Vector2(0f, -78f);
-        rt.sizeDelta = new Vector2(120f, 36f);
-
-        TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
-        if (diceValueText != null)
-        {
-            tmp.font = diceValueText.font;
-            tmp.fontSize = diceValueText.fontSize;
-            tmp.fontStyle = diceValueText.fontStyle;
-            tmp.color = diceValueText.color;
-            tmp.outlineWidth = diceValueText.outlineWidth;
-            tmp.alignment = diceValueText.alignment;
-            tmp.fontMaterial = diceValueText.fontMaterial;
-        }
-        else
-        {
-            tmp.fontSize = 30f;
-            tmp.alignment = TextAlignmentOptions.Center;
-            tmp.color = Color.white;
-        }
-
-        tmp.text = "0:10";
-        return tmp;
-    }
 }
