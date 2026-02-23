@@ -15,6 +15,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private float rollAnimationSeconds = 1.5f;
     [SerializeField] private int diceSides = 20;
 
+    [Header("Throw Animation")]
+    [SerializeField] private float spinSpeedStart = 2600f;
+    [SerializeField] private float spinSpeedEnd = 140f;
+    [SerializeField] private float shakeStrength = 22f;
+    [SerializeField] private float bounceScale = 0.22f;
+
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color critColor = new Color(1f, 0.85f, 0.1f, 1f);
@@ -22,9 +28,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
     private float countdown;
     private bool isRolling;
+    private bool queuedRoll;
     private Vector3 baseScale;
     private Quaternion baseRotation;
+    private Vector2 baseAnchoredPosition;
     private int lastShownSeconds = -1;
+    private RectTransform rectTransform;
 
     private void Awake()
     {
@@ -49,45 +58,67 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
     private void Start()
     {
+        rectTransform = transform as RectTransform;
         countdown = rollIntervalSeconds;
         baseScale = transform.localScale;
         baseRotation = transform.localRotation;
+        if (rectTransform != null)
+            baseAnchoredPosition = rectTransform.anchoredPosition;
 
-        SetDiceValue(Random.Range(1, diceSides + 1), normalColor);
+        if (diceValueText != null)
+            diceValueText.text = string.Empty;
+        if (diceImage != null)
+            diceImage.color = normalColor;
+
         lastShownSeconds = -1;
         UpdateTimerText(force: true);
     }
 
     private void Update()
     {
-        if (isRolling)
-            return;
-
         countdown -= Time.deltaTime;
+        if (countdown <= 0f)
+        {
+            countdown += rollIntervalSeconds;
+            queuedRoll = true;
+        }
+
         UpdateTimerText();
 
-        if (countdown <= 0f)
+        if (queuedRoll && !isRolling)
+        {
+            queuedRoll = false;
             StartCoroutine(RollRoutine());
+        }
     }
 
     private IEnumerator RollRoutine()
     {
         isRolling = true;
-
-        float flickerStep = 0.08f;
-        int flickerCount = Mathf.Max(1, Mathf.RoundToInt(rollAnimationSeconds / flickerStep));
-
-        for (int i = 0; i < flickerCount; i++)
+        float elapsed = 0f;
+        while (elapsed < rollAnimationSeconds)
         {
             int flickerValue = Random.Range(1, diceSides + 1);
             SetDiceValue(flickerValue, normalColor);
 
-            float t = (float)i / flickerCount;
-            float pulse = 1f + Mathf.Sin(t * Mathf.PI) * 0.2f;
-            transform.localScale = baseScale * pulse;
-            transform.localRotation = baseRotation * Quaternion.Euler(0f, 0f, i * (720f / flickerCount));
+            float t = elapsed / rollAnimationSeconds;
+            float damp = 1f - t;
+            float spinSpeed = Mathf.Lerp(spinSpeedStart, spinSpeedEnd, t);
+            transform.localRotation *= Quaternion.Euler(0f, 0f, spinSpeed * Time.deltaTime);
 
-            yield return new WaitForSeconds(rollAnimationSeconds / flickerCount);
+            float shake = shakeStrength * damp;
+            if (rectTransform != null)
+            {
+                float sx = Random.Range(-shake, shake);
+                float sy = Random.Range(-shake, shake) * 0.6f;
+                rectTransform.anchoredPosition = baseAnchoredPosition + new Vector2(sx, sy);
+            }
+
+            float bounce = 1f + Mathf.Sin(t * Mathf.PI * 5f) * bounceScale * damp;
+            transform.localScale = baseScale * bounce;
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
 
         int finalValue = Random.Range(1, diceSides + 1);
@@ -98,10 +129,9 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         SetDiceValue(finalValue, resultColor);
         transform.localScale = baseScale;
         transform.localRotation = baseRotation;
+        if (rectTransform != null)
+            rectTransform.anchoredPosition = baseAnchoredPosition;
 
-        countdown = rollIntervalSeconds;
-        lastShownSeconds = -1;
-        UpdateTimerText(force: true);
         isRolling = false;
     }
 

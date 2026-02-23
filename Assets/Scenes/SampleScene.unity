@@ -2852,7 +2852,7 @@ RectTransform:
   m_GameObject: {fileID: 565187106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1300277165}
@@ -2881,6 +2881,10 @@ MonoBehaviour:
   rollIntervalSeconds: 10
   rollAnimationSeconds: 1.5
   diceSides: 20
+  spinSpeedStart: 2600
+  spinSpeedEnd: 140
+  shakeStrength: 22
+  bounceScale: 0.22
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   critColor: {r: 1, g: 0.85, b: 0.1, a: 1}
   fumbleColor: {r: 0.9, g: 0.25, b: 0.25, a: 1}
