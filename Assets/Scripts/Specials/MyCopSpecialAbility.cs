@@ -99,6 +99,7 @@ public class MyCopSpecialAbility : SpecialAbilityBase
             StartCoroutine(SpinAndRecover(rb, pc, anim, lockedZ, dir));
 
             pc.ApplyDamage("head", "special", selfPlayerController);
+            ScreenNotificationSystem.ShowForPlayer(pc, ScreenNotificationSystem.NotificationType.Healthsplit);
             hitApplied = true;
         }
 

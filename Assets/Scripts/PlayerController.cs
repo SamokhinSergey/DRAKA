@@ -99,6 +99,9 @@ public class PlayerController : MonoBehaviour
     public Image healthbarFillImage;
     [Tooltip("Assign: status_time_p1 or status_time_p2 GameObject")]
     public GameObject statusTimerObject;
+    [Header("Curse Timer UI")]
+    [SerializeField] private TMP_FontAsset curseTimerFont;
+    [SerializeField, Min(0f)] private float curseTimerEdgePadding = 8f;
 
     private float _originalMoveSpeed;
     private Color _originalHealthbarColor;
@@ -108,6 +111,10 @@ public class PlayerController : MonoBehaviour
     private float _yawFacingRight;
     private float _yawFacingLeft;
     private PlayerInput _playerInput;
+    private TMP_Text _curseTimerText;
+    private RectTransform _curseTimerRect;
+    private RectTransform _healthbarRect;
+    private bool _isPlayerOne;
 
 
     private bool hasTakeBigDamageParameter = false;
@@ -120,6 +127,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         _playerInput = GetComponent<PlayerInput>();
+        _isPlayerOne = gameObject.name.Contains("1");
         if (rb == null)
         {
             Debug.LogError("Rigidbody component is missing! Please add a Rigidbody to the Player GameObject.");
@@ -139,7 +147,7 @@ public class PlayerController : MonoBehaviour
         if (healthbarFillImage == null || statusTimerObject == null)
         {
             // Determine player index by game object name
-            string playerIndex = gameObject.name.Contains("1") ? "1" : "2";
+            string playerIndex = _isPlayerOne ? "1" : "2";
             string fillName    = playerIndex == "1" ? "FillP1" : "Fill";
             string timerName   = "status_time_p" + playerIndex;
 
@@ -157,6 +165,8 @@ public class PlayerController : MonoBehaviour
                     statusTimerObject = t.gameObject;
             }
         }
+
+        InitializeCurseTimerUI();
 
         
 // Some characters/controllers may not have this bool parameter.
@@ -1200,10 +1210,9 @@ private void RemoveCurse()
 
     private void UpdateCurseTimerText(int seconds)
     {
-        if (statusTimerObject == null) return;
-        var tmp = statusTimerObject.GetComponentInChildren<TMP_Text>();
-        if (tmp != null)
-            tmp.text = seconds > 0 ? seconds.ToString() : "";
+        if (_curseTimerText == null) return;
+        _curseTimerText.text = seconds > 0 ? FormatCurseTime(seconds) : "";
+        PositionCurseTimerUI();
     }
 
     private void ApplyCurseTint(bool apply)
@@ -1253,5 +1262,115 @@ public void AI_SpecialAttack()
         }
 
         specialAttackCoroutine = StartCoroutine(PerformSpecialAttack(specialAbilityAnimation.length));
+    }
+
+    private void InitializeCurseTimerUI()
+    {
+        if (healthbarFillImage != null)
+        {
+            RectTransform fillRect = healthbarFillImage.rectTransform;
+            _healthbarRect = fillRect.parent as RectTransform;
+            if (_healthbarRect == null)
+            {
+                _healthbarRect = fillRect;
+            }
+        }
+
+        if (statusTimerObject == null)
+        {
+            return;
+        }
+
+        _curseTimerRect = statusTimerObject.GetComponent<RectTransform>();
+        _curseTimerText = statusTimerObject.GetComponentInChildren<TMP_Text>(includeInactive: true);
+
+        if (_curseTimerText != null)
+        {
+            TMP_FontAsset resolvedFont = ResolveCurseTimerFont();
+            if (resolvedFont != null)
+            {
+                _curseTimerText.font = resolvedFont;
+            }
+
+            _curseTimerText.enableWordWrapping = false;
+            _curseTimerText.overflowMode = TextOverflowModes.Truncate;
+            _curseTimerText.alignment = TextAlignmentOptions.Center;
+            _curseTimerText.maskable = false;
+        }
+
+        if (_curseTimerRect != null && _healthbarRect != null && _curseTimerRect.parent != _healthbarRect)
+        {
+            _curseTimerRect.SetParent(_healthbarRect, worldPositionStays: false);
+            _curseTimerRect.localScale = Vector3.one;
+        }
+        if (_curseTimerRect != null)
+        {
+            _curseTimerRect.SetAsLastSibling();
+        }
+
+        PositionCurseTimerUI();
+    }
+
+    private TMP_FontAsset ResolveCurseTimerFont()
+    {
+        if (curseTimerFont != null)
+        {
+            return curseTimerFont;
+        }
+
+        var allFonts = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+        for (int i = 0; i < allFonts.Length; i++)
+        {
+            TMP_FontAsset font = allFonts[i];
+            if (font == null)
+            {
+                continue;
+            }
+
+            string lowerName = font.name.ToLowerInvariant();
+            if (lowerName.Contains("attack of monster"))
+            {
+                return font;
+            }
+        }
+
+        return null;
+    }
+
+    private void PositionCurseTimerUI()
+    {
+        if (_curseTimerRect == null || _healthbarRect == null)
+        {
+            return;
+        }
+
+        float barWidth = Mathf.Max(1f, _healthbarRect.rect.width);
+        float maxTimerWidth = Mathf.Max(16f, barWidth - (curseTimerEdgePadding * 2f));
+        if (_curseTimerRect.rect.width > maxTimerWidth)
+        {
+            _curseTimerRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, maxTimerWidth);
+        }
+
+        float halfBar = barWidth * 0.5f;
+        float halfTimer = Mathf.Max(1f, _curseTimerRect.rect.width * 0.5f);
+        float x = _isPlayerOne
+            ? (-halfBar + halfTimer + curseTimerEdgePadding)
+            : (halfBar - halfTimer - curseTimerEdgePadding);
+
+        float maxAbsX = Mathf.Max(0f, halfBar - halfTimer);
+        x = Mathf.Clamp(x, -maxAbsX, maxAbsX);
+
+        _curseTimerRect.anchorMin = new Vector2(0.5f, 0.5f);
+        _curseTimerRect.anchorMax = new Vector2(0.5f, 0.5f);
+        _curseTimerRect.pivot = new Vector2(0.5f, 0.5f);
+        _curseTimerRect.anchoredPosition = new Vector2(x, 0f);
+    }
+
+    private static string FormatCurseTime(int totalSeconds)
+    {
+        int clamped = Mathf.Max(0, totalSeconds);
+        int minutes = clamped / 60;
+        int seconds = clamped % 60;
+        return $"{minutes}:{seconds:00}";
     }
 }

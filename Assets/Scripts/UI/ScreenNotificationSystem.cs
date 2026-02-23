@@ -12,6 +12,22 @@ public class ScreenNotificationSystem : MonoBehaviour
         Right
     }
 
+    public enum NotificationType
+    {
+        Curse,
+        Busification,
+        Healthsplit
+    }
+
+    [System.Serializable]
+    private class NotificationPreset
+    {
+        public NotificationType type;
+        public string text;
+        public Color color = Color.white;
+        public AudioClip sound;
+    }
+
     private class NotificationItem
     {
         public RectTransform rect;
@@ -28,6 +44,9 @@ public class ScreenNotificationSystem : MonoBehaviour
     [SerializeField] private Vector2 fallbackSize = new Vector2(330f, 90f);
     [SerializeField] private float textPaddingX = 26f;
     [SerializeField] private float textPaddingY = 10f;
+    [SerializeField] private float textNoseInset = 44f;
+    [SerializeField] private float textVerticalInset = 14f;
+    [SerializeField] private float textCenterYOffset = 6f;
     [SerializeField] private float fontSize = 42f;
 
     [Header("Timing")]
@@ -38,8 +57,32 @@ public class ScreenNotificationSystem : MonoBehaviour
 
     [Header("Layout")]
     [SerializeField] private float edgePadding = 40f;
-    [SerializeField] private float centerYOffset = 0f;
+    [SerializeField] private float centerYOffset = 190f;
     [SerializeField] private float stackSpacing = 14f;
+
+    [Header("Notification Presets")]
+    [SerializeField] private NotificationPreset cursePreset = new NotificationPreset
+    {
+        type = NotificationType.Curse,
+        text = "CURSE",
+        color = Color.white
+    };
+    [SerializeField] private NotificationPreset busificationPreset = new NotificationPreset
+    {
+        type = NotificationType.Busification,
+        text = "BUSSIFICATION",
+        color = Color.white
+    };
+    [SerializeField] private NotificationPreset healthsplitPreset = new NotificationPreset
+    {
+        type = NotificationType.Healthsplit,
+        text = "HEALTHSPLIT",
+        color = Color.white
+    };
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource notificationAudioSource;
+    [SerializeField, Range(0f, 1f)] private float notificationVolume = 1f;
 
     private RectTransform _hostRect;
     private readonly List<NotificationItem> _leftItems = new List<NotificationItem>();
@@ -53,6 +96,18 @@ public class ScreenNotificationSystem : MonoBehaviour
         Show(text, isPlayerOne ? NotificationSide.Left : NotificationSide.Right);
     }
 
+    public static void ShowForPlayer(PlayerController player, NotificationType type)
+    {
+        if (player == null) return;
+
+        var system = EnsureInstance();
+        if (system == null) return;
+
+        bool isPlayerOne = player.gameObject.name.Contains("1");
+        var side = isPlayerOne ? NotificationSide.Left : NotificationSide.Right;
+        system.ShowTyped(type, side);
+    }
+
     public static void Show(string text, NotificationSide side)
     {
         if (string.IsNullOrWhiteSpace(text)) return;
@@ -60,7 +115,7 @@ public class ScreenNotificationSystem : MonoBehaviour
         var system = EnsureInstance();
         if (system == null) return;
 
-        system.Enqueue(text, side);
+        system.Enqueue(text, side, system.textColor, null);
     }
 
     private static ScreenNotificationSystem EnsureInstance()
@@ -86,6 +141,7 @@ public class ScreenNotificationSystem : MonoBehaviour
 
         _instance = this;
         TryAttachToCanvas();
+        EnsureAudioSource();
 
         if (notificationSprite == null)
         {
@@ -106,16 +162,94 @@ public class ScreenNotificationSystem : MonoBehaviour
 
         if (brandedFont == null)
         {
-            var allTexts = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            foreach (var tmp in allTexts)
+            brandedFont = ResolveAttackOfMonsterFont();
+        }
+
+        AutoAssignPresetClips();
+    }
+
+    private void EnsureAudioSource()
+    {
+        if (notificationAudioSource != null) return;
+        notificationAudioSource = GetComponent<AudioSource>();
+        if (notificationAudioSource == null)
+            notificationAudioSource = gameObject.AddComponent<AudioSource>();
+
+        notificationAudioSource.playOnAwake = false;
+        notificationAudioSource.loop = false;
+        notificationAudioSource.spatialBlend = 0f;
+    }
+
+    private void AutoAssignPresetClips()
+    {
+        if (cursePreset != null && cursePreset.sound == null)
+            cursePreset.sound = FindClipByName("curse");
+        if (busificationPreset != null && busificationPreset.sound == null)
+            busificationPreset.sound = FindClipByName("busification");
+        if (healthsplitPreset != null && healthsplitPreset.sound == null)
+            healthsplitPreset.sound = FindClipByName("healthsplit");
+    }
+
+    private AudioClip FindClipByName(string needle)
+    {
+        if (string.IsNullOrWhiteSpace(needle)) return null;
+        string lower = needle.ToLowerInvariant();
+        var allClips = Resources.FindObjectsOfTypeAll<AudioClip>();
+        foreach (var clip in allClips)
+        {
+            if (clip == null) continue;
+            if (clip.name.ToLowerInvariant().Contains(lower))
+                return clip;
+        }
+        return null;
+    }
+
+    private void ShowTyped(NotificationType type, NotificationSide side)
+    {
+        var preset = GetPreset(type);
+        if (preset == null) return;
+
+        string text = string.IsNullOrWhiteSpace(preset.text) ? type.ToString().ToUpperInvariant() : preset.text;
+        Enqueue(text, side, preset.color, preset.sound);
+    }
+
+    private NotificationPreset GetPreset(NotificationType type)
+    {
+        if (cursePreset != null && cursePreset.type == type) return cursePreset;
+        if (busificationPreset != null && busificationPreset.type == type) return busificationPreset;
+        if (healthsplitPreset != null && healthsplitPreset.type == type) return healthsplitPreset;
+        return null;
+    }
+
+    private TMP_FontAsset ResolveAttackOfMonsterFont()
+    {
+        var fontAssets = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+        foreach (var asset in fontAssets)
+        {
+            if (asset == null) continue;
+            string nameLower = asset.name.ToLowerInvariant();
+            if (nameLower.Contains("attack of monster"))
+                return asset;
+        }
+
+        var unityFonts = Resources.FindObjectsOfTypeAll<Font>();
+        foreach (var font in unityFonts)
+        {
+            if (font == null) continue;
+            string nameLower = font.name.ToLowerInvariant();
+            if (!nameLower.Contains("attack of monster")) continue;
+
+            try
             {
-                if (tmp != null && tmp.font != null)
-                {
-                    brandedFont = tmp.font;
-                    break;
-                }
+                return TMP_FontAsset.CreateFontAsset(font);
+            }
+            catch
+            {
+                // ignore and continue fallback chain
             }
         }
+
+        return TMP_Settings.defaultFontAsset;
     }
 
     private void TryAttachToCanvas()
@@ -159,10 +293,13 @@ public class ScreenNotificationSystem : MonoBehaviour
         _hostRect = rt;
     }
 
-    private void Enqueue(string text, NotificationSide side)
+    private void Enqueue(string text, NotificationSide side, Color color, AudioClip sound)
     {
         if (_hostRect == null) TryAttachToCanvas();
         if (_hostRect == null) return;
+
+        if (sound != null && notificationAudioSource != null)
+            notificationAudioSource.PlayOneShot(sound, Mathf.Clamp01(notificationVolume));
 
         var list = GetList(side);
         int slot = list.Count;
@@ -206,17 +343,22 @@ public class ScreenNotificationSystem : MonoBehaviour
         textRect.SetParent(itemRect, false);
         textRect.anchorMin = Vector2.zero;
         textRect.anchorMax = Vector2.one;
-        textRect.offsetMin = new Vector2(textPaddingX, textPaddingY);
-        textRect.offsetMax = new Vector2(-textPaddingX, -textPaddingY);
+        float leftInset = left ? textPaddingX : textPaddingX + textNoseInset;
+        float rightInset = left ? textPaddingX + textNoseInset : textPaddingX;
+        textRect.offsetMin = new Vector2(leftInset, textPaddingY + textVerticalInset);
+        textRect.offsetMax = new Vector2(-rightInset, -(textPaddingY + textVerticalInset));
+        textRect.anchoredPosition = new Vector2(0f, textCenterYOffset);
 
         var tmp = textGo.GetComponent<TextMeshProUGUI>();
         tmp.text = text;
-        tmp.color = textColor;
+        tmp.color = color;
         tmp.fontSize = fontSize;
-        tmp.alignment = TextAlignmentOptions.Midline;
+        tmp.alignment = TextAlignmentOptions.Center;
         tmp.enableAutoSizing = true;
-        tmp.fontSizeMin = 18f;
+        tmp.fontSizeMin = 12f;
         tmp.fontSizeMax = fontSize;
+        tmp.enableWordWrapping = false;
+        tmp.overflowMode = TextOverflowModes.Truncate;
         if (brandedFont != null) tmp.font = brandedFont;
 
         var item = new NotificationItem

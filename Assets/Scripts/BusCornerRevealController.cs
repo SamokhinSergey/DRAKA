@@ -903,7 +903,7 @@ public class BusCornerRevealController : MonoBehaviour
             PlayerController boardedPlayer = passenger.GetComponent<PlayerController>();
             if (boardedPlayer != null)
             {
-                ScreenNotificationSystem.ShowForPlayer(boardedPlayer, "BUSSIFICATION");
+                ScreenNotificationSystem.ShowForPlayer(boardedPlayer, ScreenNotificationSystem.NotificationType.Busification);
             }
         }
 

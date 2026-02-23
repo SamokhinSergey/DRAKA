@@ -141,14 +141,10 @@ public class CurseEffect : MonoBehaviour
         // 3. Tint healthbar green
         SetHealthbarTint(healthbarCurseColor);
 
-        // 4. Play cursed sound
-        if (audioSource != null && cursedSound != null)
-            audioSource.PlayOneShot(cursedSound);
-
-        // 5. Show timer
+        // 4. Show timer
         if (statusTimeObject != null) statusTimeObject.SetActive(true);
 
-        // 6. Countdown
+        // 5. Countdown
         float remaining = curseDuration;
         while (remaining > 0f)
         {
