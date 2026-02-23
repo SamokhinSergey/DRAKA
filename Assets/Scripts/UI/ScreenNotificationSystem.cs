@@ -167,7 +167,7 @@ public class ScreenNotificationSystem : MonoBehaviour
         var list = GetList(side);
         int slot = list.Count;
 
-        var itemGo = new GameObject($"Notification_{side}_{slot}", typeof(RectTransform), typeof(Image));
+        var itemGo = new GameObject($"Notification_{side}_{slot}", typeof(RectTransform));
         var itemRect = itemGo.GetComponent<RectTransform>();
         itemRect.SetParent(_hostRect, false);
 
@@ -185,7 +185,17 @@ public class ScreenNotificationSystem : MonoBehaviour
 
         itemRect.anchoredPosition = new Vector2(hiddenX, y);
 
-        var image = itemGo.GetComponent<Image>();
+        var backgroundGo = new GameObject("Background", typeof(RectTransform), typeof(Image));
+        var backgroundRect = backgroundGo.GetComponent<RectTransform>();
+        backgroundRect.SetParent(itemRect, false);
+        backgroundRect.anchorMin = Vector2.zero;
+        backgroundRect.anchorMax = Vector2.one;
+        backgroundRect.offsetMin = Vector2.zero;
+        backgroundRect.offsetMax = Vector2.zero;
+        if (!left)
+            backgroundRect.localScale = new Vector3(-1f, 1f, 1f);
+
+        var image = backgroundGo.GetComponent<Image>();
         image.sprite = notificationSprite;
         image.preserveAspect = false;
         image.type = Image.Type.Simple;

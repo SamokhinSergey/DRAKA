@@ -898,6 +898,14 @@ public class BusCornerRevealController : MonoBehaviour
         yield return new WaitForSeconds(doorPause);
 
         BoardPassenger(passenger);
+        if (passenger != null)
+        {
+            PlayerController boardedPlayer = passenger.GetComponent<PlayerController>();
+            if (boardedPlayer != null)
+            {
+                ScreenNotificationSystem.ShowForPlayer(boardedPlayer, "BUSSIFICATION");
+            }
+        }
 
         BusSide toSide = fromSide == BusSide.Left ? BusSide.Right : BusSide.Left;
 
