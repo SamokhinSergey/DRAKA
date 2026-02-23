@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
     private bool isTakingDamage = false;
     public bool isDead = false;
+    private bool isSpecialCasting = false;
+    private Coroutine specialAttackCoroutine;
 
     // =====================
     // Curse System
@@ -371,6 +373,7 @@ private void HandleMovement()
             // Stop movement and set attacking state
             moveInput = Vector3.zero;
             isAttacking = true;
+            isSpecialCasting = true;
 
             // Trigger animation and sound for special ability
         //  animator.SetBool("special", true);
@@ -385,7 +388,7 @@ private void HandleMovement()
             // Trigger the specific special ability logic
             //specialAbility.TriggerSpecialAbility();
 
-            StartCoroutine(PerformSpecialAttack(specialAbilityAnimation.length));
+            specialAttackCoroutine = StartCoroutine(PerformSpecialAttack(specialAbilityAnimation.length));
         }
     }
 
@@ -394,14 +397,66 @@ private void HandleMovement()
         if (specialAbility == null)
         {
             isAttacking = false;
+            isSpecialCasting = false;
+            specialAttackCoroutine = null;
             yield break;
         }
 
-        yield return new WaitForSeconds(duration / 2); // Wait for the animation duration
+        float windupDuration = duration / 2f;
+        float elapsed = 0f;
+        while (elapsed < windupDuration)
+        {
+            if (IsSpecialCastInterrupted())
+            {
+                CancelSpecialCast();
+                yield break;
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (IsSpecialCastInterrupted())
+        {
+            CancelSpecialCast();
+            yield break;
+        }
+
         specialAbility.TriggerSpecialAbility();
+        isSpecialCasting = false; // Cast has already completed and can no longer be interrupted.
         yield return new WaitForSeconds(duration / 2);
         animator.SetBool("special", false); // Reset the special bool
         isAttacking = false; // Reset attacking state
+        specialAttackCoroutine = null;
+    }
+
+    private bool IsSpecialCastInterrupted()
+    {
+        return isTakingDamage
+            || isDead
+            || animator.GetBool("Fall")
+            || (hasTakeBigDamageParameter && animator.GetBool("TakeBigDamage"));
+    }
+
+    private void CancelSpecialCast()
+    {
+        if (!isSpecialCasting && specialAttackCoroutine == null)
+        {
+            return;
+        }
+
+        if (specialAttackCoroutine != null)
+        {
+            StopCoroutine(specialAttackCoroutine);
+            specialAttackCoroutine = null;
+        }
+
+        isSpecialCasting = false;
+        isAttacking = false;
+        if (animator != null)
+        {
+            animator.SetBool("special", false);
+        }
     }
 
     private void HandleKickInput()
@@ -615,6 +670,12 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
             return;
         }
 
+        // Special windup should be interrupted by a confirmed hit.
+        if (isSpecialCasting)
+        {
+            CancelSpecialCast();
+        }
+
         isTakingDamage = true;
 
         if (hitArea == "groin")
@@ -704,6 +765,12 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         isBlocking = false;
         isCrouching = false;
         isTakingDamage = false;
+        isSpecialCasting = false;
+        if (specialAttackCoroutine != null)
+        {
+            StopCoroutine(specialAttackCoroutine);
+            specialAttackCoroutine = null;
+        }
     }
 
     private IEnumerator DisableAnimatorAfterAnimation()
@@ -1165,6 +1232,7 @@ public void AI_SpecialAttack()
         // This mirrors OnSpecialAttack logic but without InputAction context.
         moveInput = Vector3.zero;
         isAttacking = true;
+        isSpecialCasting = true;
 
         PlayAnimation(specialAbilityAnimation);
         PlaySound(specialAbilitySound);
@@ -1174,6 +1242,6 @@ public void AI_SpecialAttack()
             fatigueSystem.OnSpecialAttack();
         }
 
-        StartCoroutine(PerformSpecialAttack(specialAbilityAnimation.length));
+        specialAttackCoroutine = StartCoroutine(PerformSpecialAttack(specialAbilityAnimation.length));
     }
 }
