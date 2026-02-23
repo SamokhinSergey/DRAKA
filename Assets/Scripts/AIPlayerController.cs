@@ -77,6 +77,8 @@ public class AIPlayerController : MonoBehaviour
     [Header("Corner behavior")]
     [Tooltip("Radius around opponent to check for wall colliders. If opponent is cornered, AI steps back a little.")]
     public float wallCheckRadius = 0.65f;
+    [Tooltip("Radius around self to detect wall contact and avoid retreat-stuck at arena edge.")]
+    public float selfWallCheckRadius = 0.7f;
 
     [Header("Post-attack spacing")]
     [Tooltip("Chance to step back briefly after an attack when close.")]
@@ -370,7 +372,7 @@ private void Update()
         }
 
         // 2) If opponent is cornered (touching wall) and we are very close, step back a bit.
-        if (IsOpponentCornered() && Time.time >= _nextRetreatAllowedTime)
+        if (IsOpponentCornered() && Time.time >= _nextRetreatAllowedTime && !IsSelfCornered())
         {
             float distance = Vector3.Distance(
                 new Vector3(self.transform.position.x, 0f, self.transform.position.z),
@@ -418,6 +420,13 @@ private void UpdateMovement()
         else if (Time.time < _retreatUntilTime)
         {
             desiredMove = new Vector2(-dir3.x, -dir3.z);
+
+            // If retreat would push us deeper into wall, cancel retreat immediately.
+            if (WouldMoveDeeperIntoWall(desiredMove))
+            {
+                _retreatUntilTime = 0f;
+                desiredMove = new Vector2(dir3.x, dir3.z);
+            }
         }
         else
         {
@@ -436,6 +445,12 @@ private void UpdateMovement()
             else if (distance < tooClose)
             {
                 desiredMove = new Vector2(-dir3.x, -dir3.z);
+
+                // Do not keep "backing up" into arena edge forever.
+                if (WouldMoveDeeperIntoWall(desiredMove))
+                {
+                    desiredMove = Vector2.zero;
+                }
             }
             else
             {
@@ -544,7 +559,8 @@ private IEnumerator DecideAction()
             ? strategy.ShouldRetreat(distance, self.GetHealth(), opponent.GetHealth())
             : false;
 
-        if (shouldRetreat || (nearOpponent && Time.time >= _nextRetreatAllowedTime && Random.value < retreatChance))
+        bool canRetreatNow = !IsSelfCornered();
+        if (canRetreatNow && (shouldRetreat || (nearOpponent && Time.time >= _nextRetreatAllowedTime && Random.value < retreatChance)))
         {
             _nextRetreatAllowedTime = Time.time + retreatCooldown;
             _retreatUntilTime = Time.time + Random.Range(retreatMinDuration, retreatMaxDuration);
@@ -706,6 +722,50 @@ private IEnumerator DecideAction()
             {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    private bool IsSelfCornered()
+    {
+        Vector3 pos = self.transform.position;
+        Collider[] hits = Physics.OverlapSphere(pos, selfWallCheckRadius);
+        if (hits == null || hits.Length == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            var c = hits[i];
+            if (c != null && c.CompareTag("wall"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool WouldMoveDeeperIntoWall(Vector2 desiredMove)
+    {
+        if (!IsSelfCornered())
+        {
+            return false;
+        }
+
+        // If we're on right side and keep moving +X, or on left side and keep moving -X,
+        // that's deeper into edge.
+        float x = self.transform.position.x;
+        if (x > 0f && desiredMove.x > 0f)
+        {
+            return true;
+        }
+
+        if (x < 0f && desiredMove.x < 0f)
+        {
+            return true;
         }
 
         return false;
