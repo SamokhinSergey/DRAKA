@@ -2904,9 +2904,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1947962422316700281, guid: f5586ceaca75dfd4aafd39443122204e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dae055fbe03ac6b4ab42a930b552ef59, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 1
   m_FillAmount: 1
@@ -5281,7 +5281,7 @@ MonoBehaviour:
   busificationPreset:
     type: 1
     text: BUSSIFICATION
-    color: {r: 0.5377358, g: 0.12428801, b: 0.12428801, a: 1}
+    color: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
     sound: {fileID: 8300000, guid: b085f2182f64faf488e54397c2621c07, type: 3}
   healthsplitPreset:
     type: 2
