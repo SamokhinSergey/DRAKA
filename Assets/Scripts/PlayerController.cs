@@ -913,7 +913,11 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         }
         else
         {
-            StartCoroutine(PerformAttack(upperAttackAnimation, "upper"));
+            AnimationClip clipToUse = SelectPlayableAttackClip(upperAttackAnimation, kickAttackAnimation, lowerAttackAnimation);
+            if (clipToUse != null)
+            {
+                StartCoroutine(PerformAttack(clipToUse, "upper"));
+            }
         }
     }
 
@@ -927,17 +931,22 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
             return;
         }
 
-        AnimationClip clipToUse = lowerAttackAnimation;
-        if (!CanPlayClipOnAnimator(clipToUse))
-        {
-            // Fallback when dedicated lower-attack state is missing.
-            clipToUse = CanPlayClipOnAnimator(upperAttackAnimation) ? upperAttackAnimation : clipToUse;
-        }
+        AnimationClip clipToUse = SelectPlayableAttackClip(lowerAttackAnimation, kickAttackAnimation, upperAttackAnimation);
 
         if (clipToUse != null)
         {
             StartCoroutine(PerformAttack(clipToUse, "lower"));
         }
+    }
+
+    public void AI_KickAttack()
+    {
+        if (IsActionRestricted() || isCrouching)
+        {
+            return;
+        }
+
+        TryKickAttack();
     }
 
     private IEnumerator AI_PerformCrouchAttack()
@@ -953,12 +962,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         PlayAnimation(crouchAnimation);
         yield return null;
 
-        AnimationClip clipToUse = crouchAttackAnimation;
-        if (!CanPlayClipOnAnimator(clipToUse))
-        {
-            // Fallback if dedicated crouch-attack state is absent in Animator.
-            clipToUse = lowerAttackAnimation != null ? lowerAttackAnimation : upperAttackAnimation;
-        }
+        AnimationClip clipToUse = SelectPlayableAttackClip(crouchAttackAnimation, lowerAttackAnimation, upperAttackAnimation);
 
         if (clipToUse != null)
         {
@@ -974,6 +978,28 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
         }
 
         return animator.HasState(0, Animator.StringToHash(clip.name));
+    }
+
+    private AnimationClip SelectPlayableAttackClip(params AnimationClip[] candidates)
+    {
+        for (int i = 0; i < candidates.Length; i++)
+        {
+            AnimationClip c = candidates[i];
+            if (c != null && CanPlayClipOnAnimator(c))
+            {
+                return c;
+            }
+        }
+
+        for (int i = 0; i < candidates.Length; i++)
+        {
+            if (candidates[i] != null)
+            {
+                return candidates[i];
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -1016,7 +1042,7 @@ private IEnumerator PerformAttack(AnimationClip clip, string attackType)
     {
         if (isCursed || isDead) return;
 
-        ScreenNotificationSystem.ShowForPlayer(this, "CURSE");
+        ScreenNotificationSystem.ShowForPlayer(this, ScreenNotificationSystem.NotificationType.Curse);
 
         if (_curseCoroutine != null)
             StopCoroutine(_curseCoroutine);
@@ -1055,10 +1081,6 @@ private IEnumerator CurseRoutine()
         // Show and start countdown timer
         if (statusTimerObject != null)
             statusTimerObject.SetActive(true);
-
-        // Play curse sound
-        if (cursedSound != null && audioSource != null)
-            audioSource.PlayOneShot(cursedSound);
 
         // Countdown
         float remaining = curseDuration;

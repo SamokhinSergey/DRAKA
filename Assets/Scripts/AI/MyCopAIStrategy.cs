@@ -63,7 +63,12 @@ public class MyCopAIStrategy : AIStrategy
             if (distanceToOpponent <= aiController.attackRange)
             {
                 // Aggressive combo
-                if (Random.value < 0.7f)
+                float finisherRoll = Random.value;
+                if (finisherRoll < 0.35f)
+                {
+                    self.AI_KickAttack();
+                }
+                else if (finisherRoll < 0.8f)
                 {
                     self.AI_UpperAttack(); // Headshots for maximum damage
                 }
@@ -98,7 +103,12 @@ public class MyCopAIStrategy : AIStrategy
             else
             {
                 // Mix up attacks, favor upper for more damage
-                if (Random.value < 0.6f)
+                float meleeRoll = Random.value;
+                if (meleeRoll < 0.25f)
+                {
+                    self.AI_KickAttack();
+                }
+                else if (meleeRoll < 0.7f)
                 {
                     self.AI_UpperAttack();
                 }

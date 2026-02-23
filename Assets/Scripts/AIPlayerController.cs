@@ -90,6 +90,9 @@ public class AIPlayerController : MonoBehaviour
     [Tooltip("Chance (0..1) to use special when in range and not exhausted.")]
     [Range(0f, 1f)]
     public float specialChance = 0.25f;
+    [Tooltip("Chance (0..1) to use kick attack when in range.")]
+    [Range(0f, 1f)]
+    public float kickAttackChance = 0.25f;
 
     [Header("Bus Escape")]
     [Tooltip("Enable AI usage of bus escape mechanic.")]
@@ -119,6 +122,7 @@ public class AIPlayerController : MonoBehaviour
     private float _nextBusAttemptTime;
     private Vector3 _lastSelfPos;
     private float _postBusReorientUntil;
+    private bool _wasBusTransportingLastFrame;
 
 private void Reset()
     {
@@ -451,6 +455,19 @@ private void UpdateMovement()
             return;
         }
 
+        if (_busController == null)
+        {
+            _busController = FindAnyObjectByType<BusCornerRevealController>();
+        }
+
+        bool busTransportingNow = _busController != null && _busController.IsTransportInProgress;
+        if (_wasBusTransportingLastFrame && !busTransportingNow)
+        {
+            // Bus ride finished this frame.
+            ForcePostBusReorient();
+        }
+        _wasBusTransportingLastFrame = busTransportingNow;
+
         if (_lastSelfPos == Vector3.zero)
         {
             _lastSelfPos = self.transform.position;
@@ -461,16 +478,22 @@ private void UpdateMovement()
         float deltaX = Mathf.Abs(self.transform.position.x - _lastSelfPos.x);
         if (deltaX >= 4.0f)
         {
-            _retreatUntilTime = 0f;
-            _nextRetreatAllowedTime = Time.time + 0.7f;
-            _crouchUntilTime = 0f;
-            _smoothedMove = Vector2.zero;
-            _postBusReorientUntil = Time.time + 0.8f;
-            self.AI_StopBlock();
-            self.AI_StopCrouch();
+            ForcePostBusReorient();
         }
 
         _lastSelfPos = self.transform.position;
+    }
+
+    private void ForcePostBusReorient()
+    {
+        _retreatUntilTime = 0f;
+        _nextRetreatAllowedTime = Time.time + 0.7f;
+        _crouchUntilTime = 0f;
+        _smoothedMove = Vector2.zero;
+        _postBusReorientUntil = Time.time + 1.1f;
+        self.AI_StopBlock();
+        self.AI_StopCrouch();
+        self.AI_StopMove();
     }
 
 private IEnumerator DecideAction()
@@ -576,7 +599,12 @@ private IEnumerator DecideAction()
                 }
                 else
                 {
-                    if (roll < 0.5f)
+                    float kickRoll = Random.value;
+                    if (kickRoll < kickAttackChance)
+                    {
+                        self.AI_KickAttack();
+                    }
+                    else if (roll < 0.5f)
                     {
                         self.AI_LowerAttack();
                     }
