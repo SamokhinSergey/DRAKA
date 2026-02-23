@@ -11,6 +11,9 @@ using UnityEngine.EventSystems;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController Instance { get; private set; }
+    public bool IsRoundActive { get; private set; }
+
     [Header("Scene Control Settings")]
     public PlayerController[] players;
     public GameObject winCanvas;
@@ -49,6 +52,9 @@ public class SceneController : MonoBehaviour
 
 private void Start()
     {
+        Instance = this;
+        IsRoundActive = false;
+
         initialPositions = new Vector3[players.Length];
         for (int i = 0; i < players.Length; i++)
         {
@@ -108,6 +114,7 @@ private void Start()
 
     private void ActivatePlayerInputs()
     {
+        IsRoundActive = true;
         foreach (var player in players)
         {
             player.enabled = true;
@@ -116,6 +123,7 @@ private void Start()
 
     private void DeactivatePlayerInputs()
     {
+        IsRoundActive = false;
         foreach (var player in players)
         {
             player.enabled = false;
@@ -188,6 +196,7 @@ private void Start()
 private IEnumerator HandleRoundEnd(PlayerController winner, bool infarct)
     {
         isGameOver = true;
+        IsRoundActive = false;
 
         // Deactivate player inputs
         DeactivatePlayerInputs();
@@ -310,6 +319,7 @@ public void ResetGame()
     {
         if (isGameOver && canPressAnyKey)
         {
+            IsRoundActive = false;
             // Stop auto-progress coroutine if it's running
             if (autoProgressCoroutine != null)
             {
@@ -366,6 +376,11 @@ public void ResetGame()
 
     private void OnDisable()
     {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+
         if (anyKeyAction != null)
         {
             anyKeyAction.Disable();

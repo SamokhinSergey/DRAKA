@@ -125,6 +125,7 @@ public class AIPlayerController : MonoBehaviour
     private Vector3 _lastSelfPos;
     private float _postBusReorientUntil;
     private bool _wasBusTransportingLastFrame;
+    private SceneController _sceneController;
 
 private void Reset()
     {
@@ -196,6 +197,14 @@ private void Update()
             return;
         }
 
+        if (!IsRoundActiveForAI())
+        {
+            self.AI_StopMove();
+            self.AI_StopBlock();
+            self.AI_StopCrouch();
+            return;
+        }
+
         if (self.IsDead() || opponent.IsDead())
         {
             self.AI_StopMove();
@@ -236,6 +245,26 @@ private void Update()
             _nextDecisionTime = Time.time + decisionCooldown;
             StartCoroutine(DecideAction());
         }
+    }
+
+    private bool IsRoundActiveForAI()
+    {
+        if (_sceneController == null)
+        {
+            _sceneController = SceneController.Instance;
+            if (_sceneController == null)
+            {
+                _sceneController = FindAnyObjectByType<SceneController>();
+            }
+        }
+
+        if (_sceneController == null)
+        {
+            // Fallback: if scene controller is absent, don't block AI.
+            return true;
+        }
+
+        return _sceneController.IsRoundActive;
     }
 
     private void UpdateBusEscape()

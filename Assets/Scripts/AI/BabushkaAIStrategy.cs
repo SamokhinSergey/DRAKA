@@ -30,8 +30,14 @@ public class BabushkaAIStrategy : AIStrategy
     [Tooltip("Increased special ability chance when at good distance")]
     [Range(0f, 1f)]
     public float salivaRangeSpecialChance = 0.5f;
+    [Tooltip("Hard fatigue cap (percent) above which saliva special is forbidden.")]
+    [Range(0f, 100f)]
+    public float maxFatigueForSpecialPercent = 45f;
+    [Tooltip("Minimum delay between saliva specials (seconds).")]
+    public float salivaSpecialCooldown = 2.4f;
 
     private FatigueSystem fatigueSystem;
+    private float nextSpecialAllowedAt;
 
     private void Start()
     {
@@ -141,9 +147,10 @@ public override bool DecideAction(float distanceToOpponent)
         if (distanceToOpponent >= salivaMinDistance && distanceToOpponent <= salivaPreferredDistance)
         {
             // Good range for saliva - use it freely
-            if (Random.value < salivaRangeSpecialChance)
+            if (CanUseSpecial(fatiguePercent) && Random.value < salivaRangeSpecialChance)
             {
                 self.AI_SpecialAttack();
+                nextSpecialAllowedAt = Time.time + Mathf.Max(0.1f, salivaSpecialCooldown);
                 return true;
             }
         }
@@ -197,15 +204,15 @@ public override float GetPreferredDistance()
     }
 
 public override float GetSpecialAbilityChance(float distanceToOpponent, float currentHealth, float opponentHealth)
-    {
+{
         if (fatigueSystem == null) return 0f;
 
         float fatiguePercent = (fatigueSystem.maxFatigue > 0) 
             ? (fatigueSystem.currentFatigue / fatigueSystem.maxFatigue) * 100f 
             : 0f;
 
-        // CRITICAL: Never use special when fatigue is 70% or higher
-        if (fatiguePercent >= 70f)
+        // Never use special when fatigue is high or cooldown is active.
+        if (!CanUseSpecial(fatiguePercent))
         {
             return 0f;
         }
@@ -229,6 +236,27 @@ public override float GetSpecialAbilityChance(float distanceToOpponent, float cu
 
         // Too far, very low chance
         return aiController.specialChance * 0.2f;
+    }
+
+    private bool CanUseSpecial(float fatiguePercent)
+    {
+        if (Time.time < nextSpecialAllowedAt)
+        {
+            return false;
+        }
+
+        if (fatiguePercent >= maxFatigueForSpecialPercent)
+        {
+            return false;
+        }
+
+        // Legacy safety net from old tuning.
+        if (fatiguePercent >= 70f)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override bool ShouldRetreat(float distanceToOpponent, float currentHealth, float opponentHealth)
