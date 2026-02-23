@@ -412,7 +412,8 @@ private void HandleMovement()
                 yield break;
             }
 
-            elapsed += Time.deltaTime;
+            float animSpeed = (animator != null && animator.speed > 0f) ? animator.speed : 1f;
+            elapsed += Time.deltaTime * animSpeed;
             yield return null;
         }
 
@@ -424,7 +425,16 @@ private void HandleMovement()
 
         specialAbility.TriggerSpecialAbility();
         isSpecialCasting = false; // Cast has already completed and can no longer be interrupted.
-        yield return new WaitForSeconds(duration / 2);
+
+        float recoveryDuration = duration / 2f;
+        float recoveryElapsed = 0f;
+        while (recoveryElapsed < recoveryDuration)
+        {
+            float animSpeed = (animator != null && animator.speed > 0f) ? animator.speed : 1f;
+            recoveryElapsed += Time.deltaTime * animSpeed;
+            yield return null;
+        }
+
         animator.SetBool("special", false); // Reset the special bool
         isAttacking = false; // Reset attacking state
         specialAttackCoroutine = null;
