@@ -35,7 +35,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private Transform mycopHeadPoint;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Texture2D[] throwTextures;
-    [SerializeField] private float throwFlightDuration = 0.55f;
+    [SerializeField] private float throwSpeedUnitsPerSecond = 6f;
     [SerializeField] private float throwArcHeight = 0.45f;
     [SerializeField] private float throwSpinSpeedMin = 900f;
     [SerializeField] private float throwSpinSpeedMax = 1800f;
@@ -254,6 +254,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
         float elapsed = 0f;
         Vector3 startPos = spawnPoint.position;
+        float distance = Vector3.Distance(startPos, targetPos);
+        float throwFlightDuration = Mathf.Clamp(
+            distance / Mathf.Max(0.01f, throwSpeedUnitsPerSecond),
+            0.2f,
+            2.5f);
+
         while (elapsed < throwFlightDuration)
         {
             elapsed += Time.deltaTime;
