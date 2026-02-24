@@ -51,6 +51,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     private Vector2 baseAnchoredPosition;
     private int lastShownSeconds = -1;
     private RectTransform rectTransform;
+    private bool forceHighRollAfterSpecial;
 
     private void Awake()
     {
@@ -97,6 +98,22 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
     private void Update()
     {
+        if (!CanRunTimer())
+        {
+            queuedRoll = false;
+
+            if (isRolling && mycopPlayer != null && mycopPlayer.isDead)
+            {
+                StopAllCoroutines();
+                isRolling = false;
+                transform.localScale = baseScale;
+                transform.localRotation = baseRotation;
+                if (rectTransform != null)
+                    rectTransform.anchoredPosition = baseAnchoredPosition;
+            }
+            return;
+        }
+
         countdown -= Time.deltaTime;
         if (countdown <= 0f)
         {
@@ -111,6 +128,14 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             queuedRoll = false;
             StartCoroutine(RollRoutine());
         }
+    }
+
+    public void NotifyMyCopSpecialHit()
+    {
+        forceHighRollAfterSpecial = true;
+        countdown = 1f;
+        lastShownSeconds = -1;
+        UpdateTimerText(force: true);
     }
 
     private IEnumerator RollRoutine()
@@ -139,7 +164,14 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             yield return null;
         }
 
-        int finalValue = Random.Range(1, diceSides + 1);
+        int minRollValue = 1;
+        if (forceHighRollAfterSpecial)
+        {
+            minRollValue = Mathf.Clamp(15, 1, diceSides);
+            forceHighRollAfterSpecial = false;
+        }
+
+        int finalValue = Random.Range(minRollValue, diceSides + 1);
         Color resultColor = GetColorForRoll(finalValue);
 
         SetDiceValue(finalValue, resultColor);
@@ -355,6 +387,17 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             TryAddSpawnPoint(found, "Player2/Obj_spawn_point/Obj_spawn_point_3");
             spawnPoints = found.ToArray();
         }
+    }
+
+    private bool CanRunTimer()
+    {
+        if (mycopPlayer != null && mycopPlayer.isDead)
+            return false;
+
+        if (SceneController.Instance != null && !SceneController.Instance.IsRoundActive)
+            return false;
+
+        return true;
     }
 
     private static void TryAddSpawnPoint(List<Transform> list, string path)

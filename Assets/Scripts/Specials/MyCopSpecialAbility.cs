@@ -28,10 +28,12 @@ public class MyCopSpecialAbility : SpecialAbilityBase
     private AudioDistortionFilter impactDistortionFilter;
     private Coroutine resetDistortionCoroutine;
     private PlayerController selfPlayerController;
+    private MyCopDebuffDiceUI myCopDebuffDiceUI;
 
     private void Awake()
     {
         selfPlayerController = GetComponent<PlayerController>();
+        myCopDebuffDiceUI = FindFirstObjectByType<MyCopDebuffDiceUI>();
 
         Camera cam = Camera.main;
         if (cam != null)
@@ -105,6 +107,10 @@ public class MyCopSpecialAbility : SpecialAbilityBase
 
         if (hitApplied)
         {
+            if (myCopDebuffDiceUI == null)
+                myCopDebuffDiceUI = FindFirstObjectByType<MyCopDebuffDiceUI>();
+
+            myCopDebuffDiceUI?.NotifyMyCopSpecialHit();
             PlayImpactFeedback();
         }
     }
