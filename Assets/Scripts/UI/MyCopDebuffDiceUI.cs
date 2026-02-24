@@ -42,6 +42,10 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private float throwObjectScale = 0.245f;
     [SerializeField] private float throwDelayAfterHitSeconds = 0.35f;
     [SerializeField] private int throwSortingOrder = 20;
+    [SerializeField] private Color rollingColor = Color.white;
+    [SerializeField] private Color specialTimerColor = new Color(1f, 0.28f, 0.28f, 1f);
+    [SerializeField] private float specialTimerShakeAmplitude = 8f;
+    [SerializeField] private float specialTimerShakeFrequency = 36f;
 
     private float countdown;
     private bool isRolling;
@@ -52,6 +56,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     private int lastShownSeconds = -1;
     private RectTransform rectTransform;
     private bool forceHighRollAfterSpecial;
+    private RectTransform timerRectTransform;
+    private Vector2 timerBaseAnchoredPosition;
+    private Color timerBaseColor = Color.white;
+    private bool specialTimerVisualActive;
+    private float specialTimerShakeTime;
+    private bool wasRoundActive;
 
     private void Awake()
     {
@@ -76,6 +86,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
         if (timerText == null)
             Debug.LogWarning("[MyCopDebuffDiceUI] Timer text is not assigned. Assign MyCopDebuffTimerText in scene.");
+        else
+        {
+            timerRectTransform = timerText.rectTransform;
+            timerBaseAnchoredPosition = timerRectTransform.anchoredPosition;
+            timerBaseColor = timerText.color;
+        }
     }
 
     private void Start()
@@ -92,15 +108,22 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         if (diceImage != null)
             diceImage.color = lowColor;
 
+        wasRoundActive = IsRoundActive();
         lastShownSeconds = -1;
         UpdateTimerText(force: true);
     }
 
     private void Update()
     {
+        bool roundActiveNow = IsRoundActive();
+        if (roundActiveNow && !wasRoundActive)
+            ResetForNewRound();
+        wasRoundActive = roundActiveNow;
+
         if (!CanRunTimer())
         {
             queuedRoll = false;
+            ApplySpecialTimerVisual();
 
             if (isRolling && mycopPlayer != null && mycopPlayer.isDead)
             {
@@ -122,6 +145,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         }
 
         UpdateTimerText();
+        ApplySpecialTimerVisual();
 
         if (queuedRoll && !isRolling)
         {
@@ -133,9 +157,12 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     public void NotifyMyCopSpecialHit()
     {
         forceHighRollAfterSpecial = true;
-        countdown = 1f;
+        countdown = 3f;
+        specialTimerVisualActive = true;
+        specialTimerShakeTime = 0f;
         lastShownSeconds = -1;
         UpdateTimerText(force: true);
+        ApplySpecialTimerVisual();
     }
 
     private IEnumerator RollRoutine()
@@ -145,7 +172,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         while (elapsed < rollAnimationSeconds)
         {
             int flickerValue = Random.Range(1, diceSides + 1);
-            SetDiceValue(flickerValue, lowColor);
+            SetDiceValue(flickerValue, rollingColor);
 
             float t = elapsed / rollAnimationSeconds;
             float damp = 1f - t;
@@ -176,6 +203,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
         SetDiceValue(finalValue, resultColor);
         TriggerDebuffEffect(finalValue);
+        EndSpecialTimerVisual();
         transform.localScale = baseScale;
         transform.localRotation = baseRotation;
         if (rectTransform != null)
@@ -220,7 +248,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
     private void TriggerDebuffEffect(int rollValue)
     {
-        if (rollValue > 15 && mycopPlayer != null)
+        if (rollValue >= 15 && mycopPlayer != null)
         {
             ScreenNotificationSystem.ShowForPlayer(
                 mycopPlayer,
@@ -398,6 +426,45 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    private void ResetForNewRound()
+    {
+        countdown = rollIntervalSeconds;
+        queuedRoll = false;
+        forceHighRollAfterSpecial = false;
+        EndSpecialTimerVisual();
+        lastShownSeconds = -1;
+        UpdateTimerText(force: true);
+    }
+
+    private bool IsRoundActive()
+    {
+        return SceneController.Instance == null || SceneController.Instance.IsRoundActive;
+    }
+
+    private void ApplySpecialTimerVisual()
+    {
+        if (timerText == null || timerRectTransform == null)
+            return;
+
+        if (!specialTimerVisualActive)
+            return;
+
+        timerText.color = specialTimerColor;
+        specialTimerShakeTime += Time.deltaTime;
+        float sx = Mathf.Sin(specialTimerShakeTime * specialTimerShakeFrequency) * specialTimerShakeAmplitude;
+        float sy = Mathf.Cos(specialTimerShakeTime * specialTimerShakeFrequency * 0.67f) * (specialTimerShakeAmplitude * 0.35f);
+        timerRectTransform.anchoredPosition = timerBaseAnchoredPosition + new Vector2(sx, sy);
+    }
+
+    private void EndSpecialTimerVisual()
+    {
+        specialTimerVisualActive = false;
+        if (timerText != null)
+            timerText.color = timerBaseColor;
+        if (timerRectTransform != null)
+            timerRectTransform.anchoredPosition = timerBaseAnchoredPosition;
     }
 
     private static void TryAddSpawnPoint(List<Transform> list, string path)
