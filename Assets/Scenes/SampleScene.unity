@@ -2928,11 +2928,12 @@ MonoBehaviour:
   - {fileID: 2800000, guid: b2128eabb4bd60842b70ee8f5132ce0c, type: 3}
   - {fileID: 2800000, guid: c8433011d275b8c4d89266fb4487c332, type: 3}
   - {fileID: 2800000, guid: c4621532eaf718e4589826d30d2a2afe, type: 3}
-  throwFlightDuration: 0.55
+  throwSpeedUnitsPerSecond: 6
   throwArcHeight: 0.45
   throwSpinSpeedMin: 900
   throwSpinSpeedMax: 1800
-  throwObjectScale: 0.35
+  throwObjectScale: 0.245
+  throwDelayAfterHitSeconds: 0.35
   throwSortingOrder: 20
 --- !u!114 &565187109
 MonoBehaviour:
@@ -5617,6 +5618,11 @@ MonoBehaviour:
     text: HEALTHSPLIT
     color: {r: 1, g: 1, b: 1, a: 1}
     sound: {fileID: 8300000, guid: 88077cd4dd9491d45a740b865edbeb52, type: 3}
+  nationlovePreset:
+    type: 3
+    text: NATIONLOVE
+    color: {r: 1, g: 1, b: 1, a: 1}
+    sound: {fileID: 8300000, guid: 410421575d947a741b8cc19b862417e0, type: 3}
   notificationAudioSource: {fileID: 0}
   notificationVolume: 1
 --- !u!1 &1447409083

@@ -39,8 +39,8 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private float throwArcHeight = 0.45f;
     [SerializeField] private float throwSpinSpeedMin = 900f;
     [SerializeField] private float throwSpinSpeedMax = 1800f;
-    [SerializeField] private float throwObjectScale = 0.35f;
-    [SerializeField] private float throwDelayAfterHitSeconds = 0.75f;
+    [SerializeField] private float throwObjectScale = 0.245f;
+    [SerializeField] private float throwDelayAfterHitSeconds = 0.35f;
     [SerializeField] private int throwSortingOrder = 20;
 
     private float countdown;
