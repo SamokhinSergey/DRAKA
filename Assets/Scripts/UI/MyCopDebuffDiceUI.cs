@@ -40,6 +40,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private float throwSpinSpeedMin = 900f;
     [SerializeField] private float throwSpinSpeedMax = 1800f;
     [SerializeField] private float throwObjectScale = 0.35f;
+    [SerializeField] private float throwDelayAfterHitSeconds = 0.75f;
     [SerializeField] private int throwSortingOrder = 20;
 
     private float countdown;
@@ -187,6 +188,13 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
     private void TriggerDebuffEffect(int rollValue)
     {
+        if (rollValue > 15 && mycopPlayer != null)
+        {
+            ScreenNotificationSystem.ShowForPlayer(
+                mycopPlayer,
+                ScreenNotificationSystem.NotificationType.Nationlove);
+        }
+
         int throwCount = 0;
         if (rollValue >= 20) throwCount = 3;
         else if (rollValue >= 18) throwCount = 2;
@@ -199,8 +207,21 @@ public class MyCopDebuffDiceUI : MonoBehaviour
             return;
 
         List<Transform> selectedPoints = SelectUniqueSpawnPoints(throwCount);
-        for (int i = 0; i < selectedPoints.Count; i++)
-            StartCoroutine(ThrowObjectRoutine(selectedPoints[i]));
+        StartCoroutine(ThrowSequenceRoutine(selectedPoints));
+    }
+
+    private IEnumerator ThrowSequenceRoutine(List<Transform> points)
+    {
+        if (points == null || points.Count == 0)
+            yield break;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            yield return ThrowObjectRoutine(points[i]);
+
+            if (i < points.Count - 1 && throwDelayAfterHitSeconds > 0f)
+                yield return new WaitForSeconds(throwDelayAfterHitSeconds);
+        }
     }
 
     private List<Transform> SelectUniqueSpawnPoints(int count)

@@ -16,7 +16,8 @@ public class ScreenNotificationSystem : MonoBehaviour
     {
         Curse,
         Busification,
-        Healthsplit
+        Healthsplit,
+        Nationlove
     }
 
     [System.Serializable]
@@ -57,6 +58,7 @@ public class ScreenNotificationSystem : MonoBehaviour
 
     [Header("Layout")]
     [SerializeField] private float edgePadding = 40f;
+    [SerializeField] private float edgeFlushOffset = 18f;
     [SerializeField] private float centerYOffset = 190f;
     [SerializeField] private float stackSpacing = 14f;
 
@@ -77,6 +79,12 @@ public class ScreenNotificationSystem : MonoBehaviour
     {
         type = NotificationType.Healthsplit,
         text = "HEALTHSPLIT",
+        color = Color.white
+    };
+    [SerializeField] private NotificationPreset nationlovePreset = new NotificationPreset
+    {
+        type = NotificationType.Nationlove,
+        text = "NATIONLOVE",
         color = Color.white
     };
 
@@ -188,6 +196,8 @@ public class ScreenNotificationSystem : MonoBehaviour
             busificationPreset.sound = FindClipByName("busification");
         if (healthsplitPreset != null && healthsplitPreset.sound == null)
             healthsplitPreset.sound = FindClipByName("healthsplit");
+        if (nationlovePreset != null && nationlovePreset.sound == null)
+            nationlovePreset.sound = FindClipByName("nationlove");
     }
 
     private AudioClip FindClipByName(string needle)
@@ -218,6 +228,7 @@ public class ScreenNotificationSystem : MonoBehaviour
         if (cursePreset != null && cursePreset.type == type) return cursePreset;
         if (busificationPreset != null && busificationPreset.type == type) return busificationPreset;
         if (healthsplitPreset != null && healthsplitPreset.type == type) return healthsplitPreset;
+        if (nationlovePreset != null && nationlovePreset.type == type) return nationlovePreset;
         return null;
     }
 
@@ -316,7 +327,8 @@ public class ScreenNotificationSystem : MonoBehaviour
         itemRect.anchorMax = itemRect.anchorMin;
         itemRect.pivot = new Vector2(left ? 0f : 1f, 0.5f);
 
-        float shownX = left ? edgePadding : -edgePadding;
+        // Compensate transparent margins in the sprite so it visually touches the screen edge.
+        float shownX = left ? -edgeFlushOffset : edgeFlushOffset;
         float hiddenX = left ? -size.x - edgePadding : size.x + edgePadding;
         float y = SlotToY(size.y, slot);
 
