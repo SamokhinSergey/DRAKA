@@ -34,7 +34,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
     [SerializeField] private PlayerController attackerPlayer;
     [SerializeField] private Transform mycopHeadPoint;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private Sprite[] throwSprites;
+    [SerializeField] private Texture2D[] throwTextures;
     [SerializeField] private float throwFlightDuration = 0.55f;
     [SerializeField] private float throwArcHeight = 0.45f;
     [SerializeField] private float throwSpinSpeedMin = 900f;
@@ -195,7 +195,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         if (throwCount <= 0)
             return;
 
-        if (mycopPlayer == null || throwSprites == null || throwSprites.Length == 0 || spawnPoints == null || spawnPoints.Length == 0)
+        if (mycopPlayer == null || throwTextures == null || throwTextures.Length == 0 || spawnPoints == null || spawnPoints.Length == 0)
             return;
 
         List<Transform> selectedPoints = SelectUniqueSpawnPoints(throwCount);
@@ -229,7 +229,15 @@ public class MyCopDebuffDiceUI : MonoBehaviour
         if (spawnPoint == null)
             yield break;
 
-        Sprite sprite = throwSprites[Random.Range(0, throwSprites.Length)];
+        Texture2D texture = throwTextures[Random.Range(0, throwTextures.Length)];
+        if (texture == null)
+            yield break;
+
+        Sprite sprite = Sprite.Create(
+            texture,
+            new Rect(0f, 0f, texture.width, texture.height),
+            new Vector2(0.5f, 0.5f),
+            100f);
         if (sprite == null)
             yield break;
 
@@ -259,6 +267,7 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 
         ApplyHeadLikeDamageToMycop();
         Destroy(flyingObject);
+        Destroy(sprite);
     }
 
     private void ApplyHeadLikeDamageToMycop()
@@ -331,24 +340,24 @@ public class MyCopDebuffDiceUI : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (throwSprites != null && throwSprites.Length > 0)
+        if (throwTextures != null && throwTextures.Length > 0)
             return;
 
-        string[] guids = AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Textures/Mycop_debuf" });
+        string[] guids = AssetDatabase.FindAssets("t:Texture2D", new[] { "Assets/Textures/Mycop_debuf" });
         if (guids.Length == 0)
             return;
 
-        List<Sprite> sprites = new List<Sprite>(guids.Length);
+        List<Texture2D> textures = new List<Texture2D>(guids.Length);
         for (int i = 0; i < guids.Length; i++)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
-            if (sprite != null)
-                sprites.Add(sprite);
+            Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+            if (texture != null)
+                textures.Add(texture);
         }
 
-        if (sprites.Count > 0)
-            throwSprites = sprites.ToArray();
+        if (textures.Count > 0)
+            throwTextures = textures.ToArray();
     }
 #endif
 
