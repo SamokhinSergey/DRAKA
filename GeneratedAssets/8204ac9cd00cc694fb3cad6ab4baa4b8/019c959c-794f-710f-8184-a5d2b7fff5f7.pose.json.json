@@ -1,0 +1,11 @@
+{
+    "asset": "170513d1d08423d45bd0771dd5054523",
+    "fileName": "019c959c-794f-710f-8184-a5d2b7fff5f7.pose.json",
+    "prompt": "Looping idle animation.\nCharacter stands in extreme backward lean pose.\nKnees are bent and slightly collapsed inward.\nHips pushed forward.\nTorso arched backward forming a curved S-shape.\nShoulders dropped and relaxed.\nNeck fully extended backward.\nHead tilted up, face looking straight toward the sky.\nMouth slightly open.\nArms hanging down loosely, slightly away from body due to imbalance.\nHands relaxed with fingers slightly curled.\nBody weight uneven, unstable balance.\nSubtle shaking in knees.\nSmall involuntary twitching in hands and shoulders.\nSlow heavy breathing visible in chest.\nHead makes tiny unstable micro-movements but always remains looking upward.\nEntire body keeps the backward curved shape during whole animation.\nDo not straighten posture.\nLoopable idle animation.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1329651422,
+    "w3CTraceId": "1b5d7914eee9e30cda40b966e37a8325",
+    "isTrimmed": false
+}

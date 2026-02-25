@@ -1,0 +1,11 @@
+{
+    "asset": "170513d1d08423d45bd0771dd5054523",
+    "fileName": "019c9588-c80a-746b-8132-ff73ba1b0c53.pose.json",
+    "prompt": "Looping idle animation. Character stands leaning backward like in reference. Arms hang down freely, slightly twitching. Head slowly sways and nods. Subtle body sway, slow breathing. Movements are sluggish, unstable, sedated. No steps, no gestures. Small, jittery micro-movements. Game-ready idle animation.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 671394895,
+    "w3CTraceId": "e8ce02beb35745312b796a44b3952175",
+    "isTrimmed": false
+}

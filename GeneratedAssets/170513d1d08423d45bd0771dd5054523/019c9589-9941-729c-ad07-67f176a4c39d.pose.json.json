@@ -1,0 +1,11 @@
+{
+    "asset": "170513d1d08423d45bd0771dd5054523",
+    "fileName": "019c9589-9941-729c-ad07-67f176a4c39d.pose.json",
+    "prompt": "Idle animation of a skinny drug addict character standing in a backward-leaning pose. Arms hang loosely down, hands relaxed. Subtle, slow twitching in the arms and shoulders. Head slightly tilts back and gently sways left and right. Body weight shifts minimally. Breathing is slow and heavy. The movement should feel sluggish, unstable, and sedated, like a person under methadone. No aggressive motion, no walking, no gestures. Loopable idle animation. Realistic timing, small amplitude movements, slightly uncoordinated. Stylized game character, matching the provided reference pose.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 956050433,
+    "w3CTraceId": "c76eff18e465c88aacdd44051d87f0ad",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "170513d1d08423d45bd0771dd5054523",
+    "fileName": "019c958b-1639-7639-ab32-ae53f71e98b1.pose.json",
+    "prompt": "Looping idle animation.\nCharacter stands with a pronounced backward spine arch (lumbar hyperextension).\nHips pushed slightly forward, chest lifted upward, shoulders pulled slightly back.\nUpper body leaning backward at about 15–20 degrees.\nHead tilted back, chin slightly raised.\nArms hang loosely straight down, elbows relaxed, fingers slightly curled.\nSmall involuntary arm twitches.\nHead slowly sways left and right while remaining tilted back.\nSubtle unstable body sway around the hips as pivot point.\nSlow heavy breathing visible in chest movement.\nSedated, sluggish, methadone-like state.\nNo steps, no gestures, no forward leaning.\nMaintain backward arch during entire loop.\nSeamless loop animation.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2018105883,
+    "w3CTraceId": "5dc89acb8fce358aefa75aa9f5515a53",
+    "isTrimmed": false
+}
