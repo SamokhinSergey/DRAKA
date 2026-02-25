@@ -1650,7 +1650,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450557137}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b2f0ac52ff87244a68d170361c753e, type: 3}
   m_Name: 
@@ -2456,7 +2456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480056351}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b2f0ac52ff87244a68d170361c753e, type: 3}
   m_Name: 
@@ -2935,6 +2935,10 @@ MonoBehaviour:
   throwObjectScale: 0.245
   throwDelayAfterHitSeconds: 0.35
   throwSortingOrder: 20
+  rollingColor: {r: 1, g: 1, b: 1, a: 1}
+  specialTimerColor: {r: 1, g: 0.28, b: 0.28, a: 1}
+  specialTimerShakeAmplitude: 8
+  specialTimerShakeFrequency: 36
 --- !u!114 &565187109
 MonoBehaviour:
   m_ObjectHideFlags: 0
