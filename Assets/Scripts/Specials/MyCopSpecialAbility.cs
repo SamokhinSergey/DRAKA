@@ -30,8 +30,21 @@ public class MyCopSpecialAbility : SpecialAbilityBase
     private PlayerController selfPlayerController;
     private MyCopDebuffDiceUI myCopDebuffDiceUI;
 
+    private void OnValidate()
+    {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+    }
+
     private void Awake()
     {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
         selfPlayerController = GetComponent<PlayerController>();
         myCopDebuffDiceUI = FindFirstObjectByType<MyCopDebuffDiceUI>();
 
@@ -83,7 +96,9 @@ public class MyCopSpecialAbility : SpecialAbilityBase
 
             Rigidbody rb = col.GetComponent<Rigidbody>();
             PlayerController pc = col.GetComponent<PlayerController>();
-            Animator anim = col.GetComponent<Animator>();
+            Animator anim = (pc != null && pc.animator != null && pc.animator.enabled)
+                ? pc.animator
+                : col.GetComponentInChildren<Animator>();
 
             if (rb == null || pc == null || anim == null) continue;
 

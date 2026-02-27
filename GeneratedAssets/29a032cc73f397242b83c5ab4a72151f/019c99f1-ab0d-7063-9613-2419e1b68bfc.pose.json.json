@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99f1-ab0d-7063-9613-2419e1b68bfc.pose.json",
+    "prompt": "машет рукой \n ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 253649857,
+    "w3CTraceId": "22aaa34715fb8587f534f7fe7ea08fc0",
+    "isTrimmed": false
+}

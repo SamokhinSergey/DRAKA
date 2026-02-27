@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99ef-beb1-76df-813a-da59285ddae8.pose.json",
+    "prompt": "Man  stands bent his knees, threw his head back and looked up, arms are broken and hanging ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1702871747,
+    "w3CTraceId": "73df608650f59ee53ea98da9d6062ed6",
+    "isTrimmed": false
+}

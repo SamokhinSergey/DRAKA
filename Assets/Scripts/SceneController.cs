@@ -172,7 +172,7 @@ private void Start()
             {
                 player.isDead = true;
                 player.enabled = false;
-                var animator = player.GetComponent<Animator>();
+                var animator = ResolveAnimator(player);
                 if (animator != null)
                 {
                     animator.SetTrigger("Fall");
@@ -223,7 +223,7 @@ private IEnumerator HandleRoundEnd(PlayerController winner, bool infarct)
             // Wait for player animations to finish
             foreach (var player in players)
             {
-                var animator = player.GetComponent<Animator>();
+                var animator = ResolveAnimator(player);
                 if (animator != null && player.deadAnimation != null)
                 {
                     yield return new WaitForSeconds(player.deadAnimation.length / 2);
@@ -341,7 +341,7 @@ public void ResetGame()
                     players[i].fatigueSystem.ResetFatigue();
                 }
 
-                var animator = players[i].GetComponent<Animator>();
+                var animator = ResolveAnimator(players[i]);
                 if (animator != null)
                 {
                     animator.enabled = true;
@@ -393,7 +393,7 @@ public void ResetGame()
     }
 
 
-private void EnableUINavigation()
+    private void EnableUINavigation()
     {
         // Disable anyKeyAction to prevent it from consuming input
         if (anyKeyAction != null && anyKeyAction.enabled)
@@ -423,6 +423,13 @@ private void EnableUINavigation()
                 uiModule.enabled = true;
             }
         }
+    }
+
+    private static Animator ResolveAnimator(PlayerController player)
+    {
+        if (player == null) return null;
+        if (player.animator != null && player.animator.enabled) return player.animator;
+        return player.GetComponentInChildren<Animator>();
     }
 }
 

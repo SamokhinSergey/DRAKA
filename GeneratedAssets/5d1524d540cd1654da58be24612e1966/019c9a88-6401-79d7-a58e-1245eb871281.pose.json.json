@@ -1,0 +1,11 @@
+{
+    "asset": "5d1524d540cd1654da58be24612e1966",
+    "fileName": "019c9a88-6401-79d7-a58e-1245eb871281.pose.json",
+    "prompt": "walk on side, 2D view",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1163772308,
+    "w3CTraceId": "fbbf67da77ae4be1f78ed50eb8ad43a0",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99eb-46a8-74ef-ad70-9f558805d31c.pose.json",
+    "prompt": "Man  bent his knees, threw his head back and looked up. IDLE loop animation for a fighting game, side view.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 940580364,
+    "w3CTraceId": "b39461bf47ff1e71a8a8ce396610c8a2",
+    "isTrimmed": false
+}

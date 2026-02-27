@@ -123,11 +123,59 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Set to true if this character died because fatigue reached 100%.")]
     public bool diedByInfarction = false;
 
+    private void OnValidate()
+    {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                animator = GetComponentInChildren<Animator>();
+            }
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        if (specialAbility == null)
+        {
+            specialAbility = GetComponent<SpecialAbilityBase>();
+        }
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         _playerInput = GetComponent<PlayerInput>();
         _isPlayerOne = gameObject.name.Contains("1");
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        // Prefer an active animator with a controller, even if it's on a child model object.
+        if (animator == null || !animator.enabled || animator.runtimeAnimatorController == null)
+        {
+            var childAnimator = GetComponentInChildren<Animator>();
+            if (childAnimator != null && childAnimator.enabled && childAnimator.runtimeAnimatorController != null)
+            {
+                animator = childAnimator;
+            }
+        }
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        if (specialAbility == null)
+        {
+            specialAbility = GetComponent<SpecialAbilityBase>();
+        }
+
         if (rb == null)
         {
             Debug.LogError("Rigidbody component is missing! Please add a Rigidbody to the Player GameObject.");

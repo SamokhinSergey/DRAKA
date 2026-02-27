@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99ea-e9c0-7d78-ac69-8973721dd4a8.pose.json",
+    "prompt": "The drug addict bent his knees, threw his head back and looked up. IDLE loop animation for a fighting game, side view.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 413746034,
+    "w3CTraceId": "7ffe5fbe02981fb7c6a3deb4bdbd385b",
+    "isTrimmed": false
+}

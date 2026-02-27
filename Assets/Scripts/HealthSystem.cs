@@ -13,8 +13,21 @@ public class HealthSystem : MonoBehaviour
     public PlayerController playerController; // Reference to the PlayerController script
     public Image healthBarFill; // Reference to the health bar fill image
 
+    private void OnValidate()
+    {
+        if (playerController == null)
+        {
+            playerController = GetComponent<PlayerController>();
+        }
+    }
+
     private void Start()
     {
+        if (playerController == null)
+        {
+            playerController = GetComponent<PlayerController>();
+        }
+
         // Initialize health bar fill to full
         if (healthBarFill != null)
         {

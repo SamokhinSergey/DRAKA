@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99e0-d95a-7b65-8fab-55eb81193939.pose.json",
+    "prompt": "A man stands with his knees half-bent, his back thrown back, his arms hanging down and DON MOVE, his hands slowely shaking. IDLE loop animation for a fighting game, side view.HE IS NOT DANCING IDLE loop animation for a fighting game, side view.",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1404522088,
+    "w3CTraceId": "bf4d7399298cf9c8256fc98b3730cc06",
+    "isTrimmed": false
+}

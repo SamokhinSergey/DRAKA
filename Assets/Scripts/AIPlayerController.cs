@@ -169,6 +169,14 @@ private void Reset()
                 strategy = gameObject.AddComponent<MyCopAIStrategy>();
             }
         }
+        else if (characterName.Contains("drone"))
+        {
+            strategy = GetComponent<MyCopAIStrategy>();
+            if (strategy == null)
+            {
+                strategy = gameObject.AddComponent<MyCopAIStrategy>();
+            }
+        }
 
         // Initialize strategy references
         if (strategy != null)
@@ -177,6 +185,34 @@ private void Reset()
             strategy.self = self;
             strategy.opponent = opponent;
         }
+    }
+
+    private PlayerController FindOpponentController()
+    {
+        var allPlayers = FindObjectsByType<PlayerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        PlayerController fallback = null;
+        bool selfIsPlayerOne = self != null && self.gameObject.name.Contains("Player1");
+        string preferredName = selfIsPlayerOne ? "Player2" : "Player1";
+
+        foreach (var pc in allPlayers)
+        {
+            if (pc == null || pc == self)
+            {
+                continue;
+            }
+
+            if (pc.gameObject.name.Contains(preferredName))
+            {
+                return pc;
+            }
+
+            if (fallback == null)
+            {
+                fallback = pc;
+            }
+        }
+
+        return fallback;
     }
 
 private void Update()
@@ -244,6 +280,61 @@ private void Update()
         {
             _nextDecisionTime = Time.time + decisionCooldown;
             StartCoroutine(DecideAction());
+        }
+    }
+
+    private void OnValidate()
+    {
+        if (self == null)
+        {
+            self = GetComponent<PlayerController>();
+        }
+
+        if (playerInput == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+        }
+
+        if (opponent == null)
+        {
+            opponent = FindOpponentController();
+        }
+
+        if (strategy == null && self != null)
+        {
+            AutoAssignStrategy();
+        }
+        else if (strategy != null)
+        {
+            strategy.aiController = this;
+            strategy.self = self;
+            strategy.opponent = opponent;
+        }
+    }
+
+    private void Awake()
+    {
+        if (self == null)
+        {
+            self = GetComponent<PlayerController>();
+        }
+
+        if (playerInput == null)
+        {
+            playerInput = GetComponent<PlayerInput>();
+        }
+
+        opponent = FindOpponentController();
+
+        if (strategy == null && self != null)
+        {
+            AutoAssignStrategy();
+        }
+        else if (strategy != null)
+        {
+            strategy.aiController = this;
+            strategy.self = self;
+            strategy.opponent = opponent;
         }
     }
 

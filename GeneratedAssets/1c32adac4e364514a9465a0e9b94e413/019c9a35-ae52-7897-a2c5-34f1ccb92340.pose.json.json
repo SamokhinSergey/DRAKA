@@ -1,0 +1,11 @@
+{
+    "asset": "1c32adac4e364514a9465a0e9b94e413",
+    "fileName": "019c9a35-ae52-7897-a2c5-34f1ccb92340.pose.json",
+    "prompt": "made it idle ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1417778309,
+    "w3CTraceId": "899a0c688969b8fe10096cf6d9616e9b",
+    "isTrimmed": false
+}

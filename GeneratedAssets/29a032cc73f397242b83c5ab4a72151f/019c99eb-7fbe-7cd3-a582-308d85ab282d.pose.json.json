@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99eb-7fbe-7cd3-a582-308d85ab282d.pose.json",
+    "prompt": "Man  bent his knees, threw his head back and looked up. ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 608067311,
+    "w3CTraceId": "52a7eec99762bdebfc31f4abbd610b83",
+    "isTrimmed": false
+}

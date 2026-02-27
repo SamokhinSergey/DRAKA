@@ -1,0 +1,11 @@
+{
+    "asset": "29a032cc73f397242b83c5ab4a72151f",
+    "fileName": "019c99f0-f741-7afd-8483-f99deae3530c.pose.json",
+    "prompt": "The man stands still (HIS LEGS AND ARMS ARE STILL!), his knees are bent, and he looks up ",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 26822169,
+    "w3CTraceId": "014e1b63b3e928bf0f9d1677d8f3eb38",
+    "isTrimmed": false
+}
